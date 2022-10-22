@@ -1,29 +1,33 @@
 import React, { useState } from 'react';
 import './Modal.css'
 
-function checkEmail(email) {
-    const reg_email = /^([0-9a-zA-Z_.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-    return reg_email.test(email);
-}
-
-function EmailUpdate() {
-    const [Email, setEmail] = useState("");
-    const handleChange = ({target: {value}}) => setEmail(value);
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        if (!checkEmail(Email)) {
-            alert("이메일 양식에 맞춰주세요");
+function EmailUpdate({setSignUpOpen, setJoinOpen}) {
+    const [email, setEmail] = useState("");
+    const checkEmail = (str) => {
+        if (!str) return true;
+        let reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+        return reg_email.test(str);
+    }
+    const emailChange = (e) => {
+        setEmail(e.target.value);
+    }
+    const emailSubmit = (e) => {
+        console.log({email}, " submit!");
+        e.preventDefault();
+        if (email && checkEmail(email)) {
+            setSignUpOpen(false);
+            setJoinOpen(true);
         }
     };
     return (
         <div className="inputPanel">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={emailSubmit}>
                 <div className="inputWrap">
                         <label>이메일</label>
                         <div className="inputBody">
-                            <input type="text" name="userEmail" value={Email} onChange={handleChange} placeholder="이메일을 입력해 주세요."/>
+                            <input type="text" className={checkEmail(email)? "notError":"inputError"} name="email" onChange={emailChange} value={email} placeholder="이메일을 입력해 주세요."/>
                         </div>
-                    <div className="modalError" id="emailError"></div>
+                    {!checkEmail(email) && <div className="modalError">올바른 이메일 형식을 입력해주세요.</div>}
                 </div>
                 <div id="inputPanelButtons">
                     <button id="mailLogin" type="submit">
@@ -87,8 +91,101 @@ function EmailUpdate() {
     );
 }
 
+function CheckBox({agreePrivacy, setAgreePrivacy}) {
+    const [agreeEvent, setAgreeEvent] = useState(false);
+    const handleAllAgree = (checked) => {
+        if(checked) {
+            setAgreePrivacy(true);
+            setAgreeEvent(true);
+        }
+        else{
+            setAgreePrivacy(false);
+            setAgreeEvent(false);
+        }
+    };
+
+    return(
+        <form name="checkForm">
+            <div className="agreeWrap">
+                <div className="allCheckWrap">
+                    <div className="labelStyle">
+                        <input type="checkbox" name="agreeAll" onChange={(e) => handleAllAgree(e.target.checked)}
+                            checked={agreePrivacy && agreeEvent ? true : false}
+                        /> 전체 동의
+                    </div>
+                </div>
+                <div className="checkWrap">
+                    <div className="labelStyle">
+                        <input type="checkbox" name="agreePrivacy" onChange={(e) => e.target.checked? setAgreePrivacy(true):setAgreePrivacy(false)}
+                            checked={agreePrivacy ? true : false}
+                        /> 개인정보 수집 및 이용 동의 (필수)
+                        <a href="https://help.wanted.co.kr/hc/ko/articles/360040127872" rel="noopener noreferrer" target="_blank" className="agreeLink">자세히</a>
+                    </div>
+                </div>
+                <div className="checkWrap"> 
+                    <div className="labelStyle">
+                        <input type="checkbox" name="agreeEvent" onChange={(e) => e.target.checked? setAgreeEvent(true):setAgreeEvent(false)}
+                            checked={agreeEvent ? true : false}
+                        /> 이벤트 소식 등 알림 정보 받기
+                        <a href="https://help.wanted.co.kr/hc/ko/articles/360040540111" rel="noopener noreferrer" target="_blank" className="agreeLink">자세히</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    );
+}
+
 function Modal({signUpOpen, setSignUpOpen}) {
-    const[joinOpen, setJoinOpen] = useState(false);
+    const [joinOpen, setJoinOpen] = useState("");
+    const [agreePrivacy, setAgreePrivacy] = useState("");
+    const [Korea,setKorea] = useState(true);
+
+    const [name, setName] = useState("");
+    const [mobile, setMobile] = useState("");
+    const [mobileCode, setMobileCode] = useState("");
+    const [PW, setPW] = useState("");
+    const [PWAgain, setPWAgain] = useState("");
+    // Name
+    const nameChange = (e) => {
+        setName(e.target.value);
+    }
+    const checkName = (str) => {
+        if (!str) return true;
+        return name? true:false;
+    }
+    //Mobile
+    const mobileChange = (e) => {
+        setMobile(e.target.value);
+    }
+    const checkMobile = (str) => {
+        if (!str) return true;
+        let reg_mobile_number1 = /^01[1,6,7,8,9]([0-9]{7,8})$/;
+        let reg_mobile_number2 = /^010([0-9]{8})$/;
+        return reg_mobile_number1.test(str) || reg_mobile_number2.test(str);
+    }
+    //Password
+    const PWChange = (e) => {
+        setPW(e.target.value);
+    }
+    const checkPW = (str) => {
+        if (!str) return true;
+        let reg_password = /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+        return reg_password.test(str);
+    }
+    //Password again
+    const PWAgainChange = (e) => {
+        setPWAgain(e.target.value);
+    }
+    const checkPWAgain = (str) => {
+        if (!str) return true;
+        if(PW == str) return true;
+        else return false;
+    }
+    const handlePrivacy = (e) => {
+        e.preventDefault();
+        alert("회원가입이 완료되었습니다.");
+        setJoinOpen(false);
+    };
     return(
         <>
             {signUpOpen && !joinOpen && (
@@ -107,110 +204,102 @@ function Modal({signUpOpen, setSignUpOpen}) {
                                 <h1>직장인을 위한<br/>커리어 플랫폼, 원티드!</h1>
                                 <h2>커리어 성장과 행복을 위한 여정<br/> 지금 원티드에서 시작하세요.</h2>
                             </div>
-                            <EmailUpdate />
+                            <EmailUpdate setSignUpOpen={setSignUpOpen} setJoinOpen={setJoinOpen}/>
                         </div>
                     </div>
-                    <div className="modalOverlay" id="signUpOverlay" onClick={() => setSignUpOpen(false)}></div>
+                    <div className="modalOverlay"onClick={() => setSignUpOpen(false)}></div>
                 </div>
             )}
             {joinOpen && (
-            <div class="modal" id="joinModal">
-                <div class="modalCnt">
-                    <div class="modalHeader">
+            <div className="modal" id="joinModal">
+                <div className="modalCnt">
+                    <div className="modalHeader">
                         회원가입
-                        <button class='modalCloseButton' id='joinCloseButton' type="button" onClick={()=> setJoinOpen(false)}>
+                        <button className='modalCloseButton' id='joinCloseButton' type="button" onClick={()=> setJoinOpen(false)}>
                             <svg width="24" height="24" viewBox="0 0 24 24" color="#999">
                                 <path fill="currentColor" d="M17.97 19.03a.75.75 0 001.06-1.06l-6.5-6.5a.75.75 0 00-1.06 0l-6.5 6.5a.75.75 0 001.06 1.06L12 13.06l5.97 5.97zM12 10.94L6.03 4.97a.75.75 0 00-1.06 1.06l6.5 6.5a.75.75 0 001.06 0l6.5-6.5a.75.75 0 00-1.06-1.06L12 10.94z"></path>
                             </svg>
                         </button>
                     </div>
-                    <div class="modalBody" id="joinModalBody">
-                        <div class="inputPanel">
-                            <form name="joinForm">
-                                <div class="inputWrap">
-                                    <label>이름</label>
-                                    <div class="inputBody">
-                                        <input name="name" class="joinInput" type="text" placeholder="이름을 입력해 주세요."/>
-                                    </div>
-                                    <div class="modalError" id="nameError"></div>
-                                </div>
-                                <div class="inputWrap">
-                                    <label>휴대폰 번호</label>
-                                    <div class="inputBody">
-                                        <div class="mobileInputSelect">
-                                            <span id="fillRule">대한민국 +82</span>
-                                            <select name="country">
-                                                <option defaultValue="+82">+82 South Korea</option>
-                                                <option value="+81">+81 Japan</option><option value="+886">+886 Taiwan</option><option value="+852">+852 Hong Kong</option><option value="+65">+65 Singapore</option><option value="+93">+93 Afghanistan</option><option value="+355">+355 Albania</option><option value="+213">+213 Algeria</option><option value="+244">+244 Angola</option><option value="+54">+54 Argentina</option><option value="+374">+374 Armenia</option><option value="+297">+297 Aruba</option><option value="+61">+61 Australia</option>
-                                                <option value="+43">+43 Austria</option><option value="+994">+994 Azerbaijan</option><option value="+973">+973 Bahrain</option><option value="+880">+880 Bangladesh</option><option value="+375">+375 Belarus</option><option value="+32">+32 Belgium</option><option value="+501">+501 Belize</option><option value="+229">+229 Benin</option><option value="+975">+975 Bhutan</option><option value="+591">+591 Bolivia</option><option value="+267">+267 Botswana</option><option value="+55">+55 Brazil</option><option value="+673">+673 Brunei</option><option value="+359">+359 Bulgaria</option><option value="+226">+226 Burkina Faso</option><option value="+855">+855 Cambodia</option><option value="+237">+237 Cameroon</option><option value=" +1"> +1 Canada</option><option value="+56">+56 Chile</option><option value="+86">+86 China</option><option value="+61">+61 Christmas Island</option><option value="+61">+61 Cocos Islands</option><option value="+57">+57 Colombia</option><option value="+269">+269 Comoros</option><option value="+506">+506 Costa Rica</option><option value="+385">+385 Croatia</option><option value="+53">+53 Cuba</option><option value="+599">+599 Curacao</option><option value="+357">+357 Cyprus</option><option value="+420">+420 Czech Republic</option><option value="+45">+45 Denmark</option><option value="+253">+253 Djibouti</option><option value="+593">+593 Ecuador</option>
-                                                <option value="+20">+20 Egypt</option><option value="+503">+503 El Salvador</option><option value="+240">+240 Equatorial Guinea</option><option value="+372">+372 Estonia</option><option value="+251">+251 Ethiopia</option><option value="+298">+298 Faroe Islands</option><option value="+679">+679 Fiji</option><option value="+358">+358 Finland</option><option value="+33">+33 France</option><option value="+689">+689 French Polynesia</option><option value="+220">+220 Gambia</option><option value="+995">+995 Georgia</option><option value="+49">+49 Germany</option><option value="+233">+233 Ghana</option><option value="+30">+30 Greece</option><option value="+299">+299 Greenland</option><option value="+502">+502 Guatemala</option><option value="+224">+224 Guinea</option><option value="+592">+592 Guyana</option><option value="+509">+509 Haiti</option><option value="+504">+504 Honduras</option><option value="+36">+36 Hungary</option><option value="+354">+354 Iceland</option><option value="+91">+91 India</option><option value="+62">+62 Indonesia</option><option value="+98">+98 Iran</option><option value="+964">+964 Iraq</option><option value="+353">+353 Ireland</option><option value="+972">+972 Israel</option><option value="+39">+39 Italy</option><option value="+962">+962 Jordan</option><option value="+7">+7 Kazakhstan</option><option value="+254">+254 Kenya</option><option value="+383">+383 Kosovo</option><option value="+965">+965 Kuwait</option><option value="+996">+996 Kyrgyzstan</option><option value="+856">+856 Laos</option><option value="+371">+371 Latvia</option><option value="+961">+961 Lebanon</option><option value="+218">+218 Libya</option><option value="+423">+423 Liechtenstein</option><option value="+370">+370 Lithuania</option><option value="+352">+352 Luxembourg</option><option value="+853">+853 Macau</option><option value="+389">+389 Macedonia</option><option value="+261">+261 Madagascar</option><option value="+265">+265 Malawi</option><option value="+60">+60 Malaysia</option>
-                                                <option value="+960">+960 Maldives</option><option value="+223">+223 Mali</option><option value="+356">+356 Malta</option><option value="+692">+692 Marshall Islands</option><option value="+222">+222 Mauritania</option><option value="+230">+230 Mauritius</option><option value="+52">+52 Mexico</option><option value="+373">+373 Moldova</option><option value="+976">+976 Mongolia</option><option value="+382">+382 Montenegro</option><option value="+212">+212 Morocco</option><option value="+258">+258 Mozambique</option><option value="+95">+95 Myanmar</option><option value="+264">+264 Namibia</option><option value="+977">+977 Nepal</option><option value="+31">+31 Netherlands</option><option value="+687">+687 New Caledonia</option><option value="+64">+64 New Zealand</option><option value="+505">+505 Nicaragua</option><option value="+227">+227 Niger</option><option value="+234">+234 Nigeria</option><option value="+47">+47 Norway</option><option value="+968">+968 Oman</option><option value="+92">+92 Pakistan</option><option value="+680">+680 Palau</option><option value="+970">+970 Palestine</option><option value="+507">+507 Panama</option><option value="+675">+675 Papua New Guinea</option><option value="+595">+595 Paraguay</option><option value="+51">+51 Peru</option><option value="+63">+63 Philippines</option><option value="+48">+48 Poland</option><option value="+351">+351 Portugal</option><option value="+974">+974 Qatar</option><option value="+262">+262 Reunion</option><option value="+40">+40 Romania</option><option value="+7">+7 Russia</option><option value="+250">+250 Rwanda</option><option value="+685">+685 Samoa</option><option value="+966">+966 Saudi Arabia</option><option value="+221">+221 Senegal</option><option value="+381">+381 Serbia</option><option value="+248">+248 Seychelles</option>
-                                                <option value="+232">+232 Sierra Leone</option><option value="+421">+421 Slovakia</option><option value="+386">+386 Slovenia</option><option value="+677">+677 Solomon Islands</option><option value="+252">+252 Somalia</option><option value="+27">+27 South Africa</option><option value="+211">+211 South Sudan</option><option value="+34">+34 Spain</option>
-                                                <option value="+94">+94 Sri Lanka</option><option value="+249">+249 Sudan</option><option value="+597">+597 Suriname</option><option value="+46">+46 Sweden</option><option value="+41">+41 Switzerland</option><option value="+963">+963 Syria</option><option value="+992">+992 Tajikistan</option><option value="+255">+255 Tanzania</option><option value="+66">+66 Thailand</option><option value="+228">+228 Togo</option><option value="+676">+676 Tonga</option><option value="+216">+216 Tunisia</option><option value="+90">+90 Turkey</option><option value="+993">+993 Turkmenistan</option><option value="+256">+256 Uganda</option><option value="+380">+380 Ukraine</option><option value="+971">+971 United Arab Emirates</option><option value="+44">+44 United Kingdom</option><option value="+1">+1 United States</option><option value="+598">+598 Uruguay</option><option value="+998">+998 Uzbekistan</option><option value="+678">+678 Vanuatu</option><option value="+58">+58 Venezuela</option><option value="+84">+84 Vietnam</option><option value="+967">+967 Yemen</option><option value="+260">+260 Zambia</option><option value="+263">+263 Zimbabwe</option>
-                                            </select>
-                                            <span>&gt;</span>
+                    <form onSubmit={handlePrivacy}>
+                        <div className="modalBody" id="joinModalBody">
+                            <div className="inputPanel">
+                                <form name="joinForm">
+                                    <div className="inputWrap">
+                                        <label>이름</label>
+                                        <div className="inputBody">
+                                            <input name="name" value={name} className={checkName(name)? "notError":"inputError"} type="text" placeholder="이름을 입력해 주세요." onChange={nameChange}/>
                                         </div>
-                                        <div class="mobileInput">
-                                            <input name="mobileNumber" class="joinInput" placeholder="(예시) 01034567890"/>
-                                            <button id="mobileCodeButton" class="KoreaOnly" type="button" disabled>인증번호 받기</button>
+                                        {!name && <div className="modalError">이름은 필수정보입니다.</div>}
+                                    </div>
+                                    <div className="inputWrap">
+                                        <label>휴대폰 번호</label>
+                                        <div className="inputBody">
+                                            <div className="mobileInputSelect">
+                                                {Korea && <span id="selected">대한민국 +82</span>}
+                                                <select defaultValue="+82" name="country" onChange={(e) => {
+                                                    console.log(e.target.value);
+                                                    if (e.target.value === "+82") setKorea(true);
+                                                    else setKorea(false);
+                                                }}>
+                                                    <option value="+82">+82 South Korea</option>
+                                                    <option value="+81">+81 Japan</option><option value="+886">+886 Taiwan</option><option value="+852">+852 Hong Kong</option><option value="+65">+65 Singapore</option><option value="+93">+93 Afghanistan</option><option value="+355">+355 Albania</option><option value="+213">+213 Algeria</option><option value="+244">+244 Angola</option><option value="+54">+54 Argentina</option><option value="+374">+374 Armenia</option><option value="+297">+297 Aruba</option><option value="+61">+61 Australia</option>
+                                                    <option value="+43">+43 Austria</option><option value="+994">+994 Azerbaijan</option><option value="+973">+973 Bahrain</option><option value="+880">+880 Bangladesh</option><option value="+375">+375 Belarus</option><option value="+32">+32 Belgium</option><option value="+501">+501 Belize</option><option value="+229">+229 Benin</option><option value="+975">+975 Bhutan</option><option value="+591">+591 Bolivia</option><option value="+267">+267 Botswana</option><option value="+55">+55 Brazil</option><option value="+673">+673 Brunei</option><option value="+359">+359 Bulgaria</option><option value="+226">+226 Burkina Faso</option><option value="+855">+855 Cambodia</option><option value="+237">+237 Cameroon</option><option value=" +1"> +1 Canada</option><option value="+56">+56 Chile</option><option value="+86">+86 China</option><option value="+61">+61 Christmas Island</option><option value="+61">+61 Cocos Islands</option><option value="+57">+57 Colombia</option><option value="+269">+269 Comoros</option><option value="+506">+506 Costa Rica</option><option value="+385">+385 Croatia</option><option value="+53">+53 Cuba</option>
+                                                    <option value="+599">+599 Curacao</option><option value="+357">+357 Cyprus</option><option value="+420">+420 Czech Republic</option><option value="+45">+45 Denmark</option><option value="+253">+253 Djibouti</option><option value="+593">+593 Ecuador</option>
+                                                    <option value="+20">+20 Egypt</option><option value="+503">+503 El Salvador</option><option value="+240">+240 Equatorial Guinea</option><option value="+372">+372 Estonia</option><option value="+251">+251 Ethiopia</option><option value="+298">+298 Faroe Islands</option><option value="+679">+679 Fiji</option><option value="+358">+358 Finland</option><option value="+33">+33 France</option><option value="+689">+689 French Polynesia</option><option value="+220">+220 Gambia</option><option value="+995">+995 Georgia</option><option value="+49">+49 Germany</option><option value="+233">+233 Ghana</option><option value="+30">+30 Greece</option><option value="+299">+299 Greenland</option><option value="+502">+502 Guatemala</option><option value="+224">+224 Guinea</option><option value="+592">+592 Guyana</option><option value="+509">+509 Haiti</option><option value="+504">+504 Honduras</option><option value="+36">+36 Hungary</option><option value="+354">+354 Iceland</option>
+                                                    <option value="+91">+91 India</option><option value="+62">+62 Indonesia</option><option value="+98">+98 Iran</option><option value="+964">+964 Iraq</option><option value="+353">+353 Ireland</option><option value="+972">+972 Israel</option><option value="+39">+39 Italy</option><option value="+962">+962 Jordan</option><option value="+7">+7 Kazakhstan</option><option value="+254">+254 Kenya</option><option value="+383">+383 Kosovo</option><option value="+965">+965 Kuwait</option><option value="+996">+996 Kyrgyzstan</option><option value="+856">+856 Laos</option><option value="+371">+371 Latvia</option><option value="+961">+961 Lebanon</option><option value="+218">+218 Libya</option><option value="+423">+423 Liechtenstein</option><option value="+370">+370 Lithuania</option><option value="+352">+352 Luxembourg</option><option value="+853">+853 Macau</option><option value="+389">+389 Macedonia</option><option value="+261">+261 Madagascar</option><option value="+265">+265 Malawi</option><option value="+60">+60 Malaysia</option>
+                                                    <option value="+960">+960 Maldives</option><option value="+223">+223 Mali</option><option value="+356">+356 Malta</option><option value="+692">+692 Marshall Islands</option><option value="+222">+222 Mauritania</option><option value="+230">+230 Mauritius</option><option value="+52">+52 Mexico</option><option value="+373">+373 Moldova</option><option value="+976">+976 Mongolia</option><option value="+382">+382 Montenegro</option><option value="+212">+212 Morocco</option><option value="+258">+258 Mozambique</option><option value="+95">+95 Myanmar</option><option value="+264">+264 Namibia</option><option value="+977">+977 Nepal</option><option value="+31">+31 Netherlands</option><option value="+687">+687 New Caledonia</option><option value="+64">+64 New Zealand</option><option value="+505">+505 Nicaragua</option><option value="+227">+227 Niger</option><option value="+234">+234 Nigeria</option><option value="+47">+47 Norway</option><option value="+968">+968 Oman</option><option value="+92">+92 Pakistan</option><option value="+680">+680 Palau</option><option value="+970">+970 Palestine</option><option value="+507">+507 Panama</option><option value="+675">+675 Papua New Guinea</option>
+                                                    <option value="+595">+595 Paraguay</option><option value="+51">+51 Peru</option><option value="+63">+63 Philippines</option><option value="+48">+48 Poland</option><option value="+351">+351 Portugal</option><option value="+974">+974 Qatar</option><option value="+262">+262 Reunion</option><option value="+40">+40 Romania</option><option value="+7">+7 Russia</option><option value="+250">+250 Rwanda</option><option value="+685">+685 Samoa</option><option value="+966">+966 Saudi Arabia</option><option value="+221">+221 Senegal</option><option value="+381">+381 Serbia</option><option value="+248">+248 Seychelles</option>
+                                                    <option value="+232">+232 Sierra Leone</option><option value="+421">+421 Slovakia</option><option value="+386">+386 Slovenia</option><option value="+677">+677 Solomon Islands</option><option value="+252">+252 Somalia</option><option value="+27">+27 South Africa</option><option value="+211">+211 South Sudan</option><option value="+34">+34 Spain</option>
+                                                    <option value="+94">+94 Sri Lanka</option><option value="+249">+249 Sudan</option><option value="+597">+597 Suriname</option><option value="+46">+46 Sweden</option><option value="+41">+41 Switzerland</option><option value="+963">+963 Syria</option><option value="+992">+992 Tajikistan</option><option value="+255">+255 Tanzania</option><option value="+66">+66 Thailand</option><option value="+228">+228 Togo</option><option value="+676">+676 Tonga</option><option value="+216">+216 Tunisia</option><option value="+90">+90 Turkey</option><option value="+993">+993 Turkmenistan</option><option value="+256">+256 Uganda</option><option value="+380">+380 Ukraine</option><option value="+971">+971 United Arab Emirates</option><option value="+44">+44 United Kingdom</option><option value="+1">+1 United States</option><option value="+598">+598 Uruguay</option><option value="+998">+998 Uzbekistan</option><option value="+678">+678 Vanuatu</option><option value="+58">+58 Venezuela</option><option value="+84">+84 Vietnam</option><option value="+967">+967 Yemen</option><option value="+260">+260 Zambia</option><option value="+263">+263 Zimbabwe</option>
+                                                </select>
+                                                <span>&gt;</span>
+                                            </div>
+                                            <div className="mobileInput">
+                                                <input name="mobile" value={mobile} className={checkMobile(mobile)? "notError":"inputError"} onChange={mobileChange} placeholder="(예시) 01034567890"/>
+                                                {Korea && <button id="mobileCodeButton" type="button" disabled>인증번호 받기</button>}
+                                            </div>
+                                            {Korea && (
+                                                <div className="mobileCode">
+                                                    <input value={mobileCode}name="mobileCode" placeholder="인증번호를 입력해 주세요." disabled/>
+                                                    <button type="button" id="mobileCodeSubmit" disabled>확인</button>
+                                                </div>
+                                            )}
                                         </div>
-                                        <div class="mobileCode KoreaOnly">
-                                            <input name="mobileCode" class="joinInput" placeholder="인증번호를 입력해 주세요." disabled/>
-                                            <button type="button" id="mobileCodeSubmit" disabled>확인</button>
+                                        <div id="codeGuide" className="inputGuide"></div>
+                                        <span id="timeCode"></span>
+                                        {!mobile && <div className="modalError">휴대폰 번호는 필수정보 입니다.</div>}
+                                        {!checkMobile(mobile) && <div className="modalError">올바른 전화번호를 입력해 주세요.</div>}
+                                    </div>
+                                    <div className="inputWrap">
+                                        <label>비밀번호</label>
+                                        <div className="inputBody">
+                                            <input name="password" value={PW} className={checkPW(PW) ? "notError":"inputError"} type="password" onChange={PWChange} placeholder="비밀번호를 입력해 주세요."/>
+                                            <div className="inputGuide">영문 대소문자, 숫자, 특수문자를 3가지 이상으로 조합하여 8자 이상 입력해 주세요.</div>
                                         </div>
+                                        {!checkPW(PW) && <div className="modalError">비밀번호 조건을 확인해주세요.</div>}
                                     </div>
-                                    <div id="codeGuide" class="inputGuide"></div>
-                                    <span id="timeCode"></span>
-                                    <div class="modalError" id="mobileInputError"></div>
-                                </div>
-                                <div class="inputWrap">
-                                    <label>비밀번호</label>
-                                    <div class="inputBody">
-                                        <input name="password" class="joinInput" type="password"  placeholder="비밀번호를 입력해 주세요."/>
-                                        <div class="inputGuide">영문 대소문자, 숫자, 특수문자를 3가지 이상으로 조합하여 8자 이상 입력해 주세요.</div>
-                                    </div>
-                                    <div class="modalError" id="pwError"></div>
-                                </div>
-                                <div class="inputWrap">
-                                    <label>비밀번호 확인</label>
-                                    <div class="inputBody">
-                                        <input name="passwordAgain" class="joinInput" type="password" placeholder="비밀번호를 다시 한번 입력해 주세요."/>
-                                    </div>
-                                    <div class="modalError" id="pwAgainError"></div>
-                                </div>
-                            </form>
-                            <form name="checkForm">
-                                <div class="agreeWrap">
-                                    <div class="allCheckWrap">
-                                        <div class="labelStyle">
-                                            <input type="checkbox" name="agreeAll"/>전체 동의
+                                    <div className="inputWrap">
+                                        <label>비밀번호 확인</label>
+                                        <div className="inputBody">
+                                            <input name="passwordAgain" value={PWAgain} className={checkPWAgain(PWAgain)? "notError":"inputError"} type="password" onChange={PWAgainChange} placeholder="비밀번호를 다시 한번 입력해 주세요."/>
                                         </div>
+                                        {!checkPWAgain(PWAgain) && <div className="modalError">비밀번호를 다시 확인해주세요.</div>}
                                     </div>
-                                    <div class="checkWrap">
-                                        <div class="labelStyle">
-                                            <input type="checkbox" name="agreePrivacy"/>개인정보 수집 및 이용 동의 (필수)
-                                            <a href="https://help.wanted.co.kr/hc/ko/articles/360040127872" rel="noopener noreferrer" target="_blank" class="agreeLink">자세히</a>
-                                        </div>
-                                    </div>
-                                    <div class="checkWrap"> 
-                                        <div class="labelStyle">
-                                            <input type="checkbox" name="agreeEventEmail"/>이벤트 소식 등 알림 정보 받기
-                                            <a href="https://help.wanted.co.kr/hc/ko/articles/360040540111" rel="noopener noreferrer" target="_blank" class="agreeLink">자세히</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
+                                <CheckBox agreePrivacy={agreePrivacy} setAgreePrivacy={setAgreePrivacy} />
+                            </div>
                         </div>
-                    </div>
-                    <div class="modalFooter">
-                        <div class="modalFooterWrap">
-                            <button type="submit" id="modalFooterButton" disabled>
-                                회원가입하기
-                            </button>
+                        <div className="modalFooter">
+                            <div className="modalFooterWrap">
+                                <button type="submit" className="modalFooterButton" disabled={agreePrivacy? false:true}>
+                                    회원가입하기
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
-                <div class="modalOverlay" id="joinOverlay"></div>
+                <div className="modalOverlay"></div>
             </div>
             )}
         </>
