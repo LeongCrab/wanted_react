@@ -346,8 +346,10 @@
   line-height: 22px;
   color: #333;
 }
+.warning_header_content > .closeBtn{
+  transform: rotate(0.5turn);
+}
 .warning_body{
-  display: none;
   padding: 13px 30px 30px;
   border-top: 1px solid #ececec;
 }
@@ -361,13 +363,14 @@
 }
 /*aside*/
 .jobProcessCnt{
-  position: fixed;
+  display: inline-block;
+  position: sticky;
   width: 340px;
-  right: calc((100% - 1060px)/2);
-  top: 70px; /*수정*/
+  margin-left: 20px;
+  top: 70px;
 }
 .jobProcessCnt > header{
-  width: 340px;
+  width: 100%;
   border: 1px solid #e1e2e3;
   background-color: #fff;
   padding: 24px 20px;

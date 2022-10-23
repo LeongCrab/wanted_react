@@ -146,36 +146,25 @@ function Modal({signUpOpen, setSignUpOpen}) {
     const [PW, setPW] = useState("");
     const [PWAgain, setPWAgain] = useState("");
     // Name
-    const nameChange = (e) => {
-        setName(e.target.value);
-    }
     const checkName = (str) => {
         if (!str) return true;
         return name? true:false;
     }
     //Mobile
-    const mobileChange = (e) => {
-        setMobile(e.target.value);
-    }
     const checkMobile = (str) => {
         if (!str) return true;
         let reg_mobile_number1 = /^01[1,6,7,8,9]([0-9]{7,8})$/;
         let reg_mobile_number2 = /^010([0-9]{8})$/;
         return reg_mobile_number1.test(str) || reg_mobile_number2.test(str);
     }
+
     //Password
-    const PWChange = (e) => {
-        setPW(e.target.value);
-    }
     const checkPW = (str) => {
         if (!str) return true;
         let reg_password = /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
         return reg_password.test(str);
     }
     //Password again
-    const PWAgainChange = (e) => {
-        setPWAgain(e.target.value);
-    }
     const checkPWAgain = (str) => {
         if (!str) return true;
         if(PW == str) return true;
@@ -183,8 +172,10 @@ function Modal({signUpOpen, setSignUpOpen}) {
     }
     const handlePrivacy = (e) => {
         e.preventDefault();
-        alert("회원가입이 완료되었습니다.");
-        setJoinOpen(false);
+        if(name && checkMobile(mobile) && checkPW(PW) && checkPWAgain(PWAgain)) {
+            alert("회원가입이 완료되었습니다.");
+            setJoinOpen(false);
+        }
     };
     return(
         <>
@@ -228,7 +219,7 @@ function Modal({signUpOpen, setSignUpOpen}) {
                                     <div className="inputWrap">
                                         <label>이름</label>
                                         <div className="inputBody">
-                                            <input name="name" value={name} className={checkName(name)? "notError":"inputError"} type="text" placeholder="이름을 입력해 주세요." onChange={nameChange}/>
+                                            <input name="name" value={name} className={checkName(name)? "notError":"inputError"} type="text" placeholder="이름을 입력해 주세요." onChange={(e) =>{setName(e.target.value)}}/>
                                         </div>
                                         {!name && <div className="modalError">이름은 필수정보입니다.</div>}
                                     </div>
@@ -256,13 +247,13 @@ function Modal({signUpOpen, setSignUpOpen}) {
                                                 <span>&gt;</span>
                                             </div>
                                             <div className="mobileInput">
-                                                <input name="mobile" value={mobile} className={checkMobile(mobile)? "notError":"inputError"} onChange={mobileChange} placeholder="(예시) 01034567890"/>
-                                                {Korea && <button id="mobileCodeButton" type="button" disabled>인증번호 받기</button>}
+                                                <input name="mobile" value={mobile} className={checkMobile(mobile)? "notError":"inputError"} onChange={(e) =>{setMobile(e.target.value)}} placeholder="(예시) 01034567890"/>
+                                                {Korea && <button id="mobileCodeButton" type="button" disabled={checkMobile(mobile)? false:true}>인증번호 받기</button>}
                                             </div>
                                             {Korea && (
                                                 <div className="mobileCode">
-                                                    <input value={mobileCode}name="mobileCode" placeholder="인증번호를 입력해 주세요." disabled/>
-                                                    <button type="button" id="mobileCodeSubmit" disabled>확인</button>
+                                                    <input value={mobileCode} name="mobileCode" placeholder="인증번호를 입력해 주세요." onChange={(e) =>{setMobileCode(e.target.value)}} disabled={checkMobile(mobile)? false:true}/>
+                                                    <button type="button" id="mobileCodeSubmit" disabled={checkMobile(mobile)? false:true}>확인</button>
                                                 </div>
                                             )}
                                         </div>
@@ -274,7 +265,7 @@ function Modal({signUpOpen, setSignUpOpen}) {
                                     <div className="inputWrap">
                                         <label>비밀번호</label>
                                         <div className="inputBody">
-                                            <input name="password" value={PW} className={checkPW(PW) ? "notError":"inputError"} type="password" onChange={PWChange} placeholder="비밀번호를 입력해 주세요."/>
+                                            <input name="password" value={PW} className={checkPW(PW) ? "notError":"inputError"} type="password" onChange={(e) =>{setPW(e.target.value)}} placeholder="비밀번호를 입력해 주세요."/>
                                             <div className="inputGuide">영문 대소문자, 숫자, 특수문자를 3가지 이상으로 조합하여 8자 이상 입력해 주세요.</div>
                                         </div>
                                         {!checkPW(PW) && <div className="modalError">비밀번호 조건을 확인해주세요.</div>}
@@ -282,7 +273,7 @@ function Modal({signUpOpen, setSignUpOpen}) {
                                     <div className="inputWrap">
                                         <label>비밀번호 확인</label>
                                         <div className="inputBody">
-                                            <input name="passwordAgain" value={PWAgain} className={checkPWAgain(PWAgain)? "notError":"inputError"} type="password" onChange={PWAgainChange} placeholder="비밀번호를 다시 한번 입력해 주세요."/>
+                                            <input name="passwordAgain" value={PWAgain} className={checkPWAgain(PWAgain)? "notError":"inputError"} type="password" onChange={(e) =>{setPWAgain(e.target.value)}} placeholder="비밀번호를 다시 한번 입력해 주세요."/>
                                         </div>
                                         {!checkPWAgain(PWAgain) && <div className="modalError">비밀번호를 다시 확인해주세요.</div>}
                                     </div>

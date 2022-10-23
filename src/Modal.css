@@ -278,7 +278,6 @@ input{
     margin-top: 10px;
 }
 #mobileCodeSubmit{
-    opacity: 0;
     z-index: 4;
     position: absolute;
     top: 50%;

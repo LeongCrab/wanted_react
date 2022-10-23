@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import './MainPage.css';
@@ -13,6 +14,34 @@ function TopBannerItem({href, src, bannerHeader, bannerBody}) {
         <h3>{bannerBody}</h3>
         <hr />
         <a href={href}>바로 가기 &gt;</a>
+      </div>
+    </div>
+  );
+}
+
+function CareerTagList() {
+  const [clicked, setClicked] = useState(0);
+  const tagList = ["회사생활", "조직문화", "취업/이직", "IT/기술", "라이프스타일", "리더십", "인간관계", "커리어고민", "디자인", "콘텐츠 제작", "마케팅", "서비스기획", "경영/전략", "노무", "개발", "데이터", "UX/UI", "MD", "HR", "브랜딩"];
+  
+  const prev = (e) => {
+    console.log('left');
+  };
+  const next = (e) => {
+    console.log("right");
+  };
+  return(
+    <div id="careerTagList">
+      <div className="scrollWrap">
+        <div className="scrollSnap" id="career_scrollSnap">
+          <div className="scroll_slides" id="career_slides">
+            {tagList.map((tag, i) => (
+              <button type="button" key={tag + i} onClick={() => setClicked(i)} className={"careerTag" + (clicked == i ? "_selected" : "")}>{tag}</button>
+            ))}
+          </div>
+          <button type="button" onClick={prev} className="arrowButton arrowLeft">&lt;</button>
+          <button type="button" onClick={next} className="arrowButton arrowRight">&gt;</button>
+        </div>
+        <button type="button" className="tagMoreButton">. . .</button>
       </div>
     </div>
   );
@@ -112,37 +141,7 @@ function MainPage() {
                   <img src="./img/questionMark.png" style={{width:24, height:24}} alt="No img" />
                 </button>
               </div>
-              <div id="careerTagList">
-                <div className="scrollWrap">
-                  <div className="scrollSnap" id="career_scrollSnap">
-                    <div className="scroll_slides" id="career_slides">
-                      <button type="button" className="careerTag_selected">회사생활</button>
-                      <button type="button" className="careerTag">조직문화</button>
-                      <button type="button" className="careerTag">취업/이직</button>
-                      <button type="button" className="careerTag">IT/기술</button>
-                      <button type="button" className="careerTag">라이프스타일</button>
-                      <button type="button" className="careerTag">리더십</button>
-                      <button type="button" className="careerTag">인간관계</button>
-                      <button type="button" className="careerTag">커리어고민</button>
-                      <button type="button" className="careerTag">디자인</button>
-                      <button type="button" className="careerTag">콘텐츠 제작</button>
-                      <button type="button" className="careerTag">마케팅</button>
-                      <button type="button" className="careerTag">서비스기획</button>
-                      <button type="button" className="careerTag">경영/전략</button>
-                      <button type="button" className="careerTag">노무</button>
-                      <button type="button" className="careerTag">개발</button>
-                      <button type="button" className="careerTag">데이터</button>
-                      <button type="button" className="careerTag">UX/UI</button>
-                      <button type="button" className="careerTag">MD</button>
-                      <button type="button" className="careerTag">HR</button>
-                      <button type="button" className="careerTag">브랜딩</button>
-                    </div>
-                    <button type="button" className="arrowButton arrowLeft">&lt;</button>
-                    <button type="button" className="arrowButton arrowRight">&gt;</button>
-                  </div>
-                  <button type="button" className="tagMoreButton">. . .</button>
-                </div>
-              </div>
+              <CareerTagList />
               <ul>
                 <CareerCard href="https://www.wanted.co.kr/career-video/201" 
                 img="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fwanted.video.kr.kollus.com%2Fkr%2Fsnapshot%2Fwanted%2F20220204%2F6%2F92347876.jpg&w=500&q=75" 

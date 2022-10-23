@@ -4,13 +4,13 @@ import BlueBeaker from './BlueBeaker';
 
 function App() {
   return (
-    <MainPage />
+    <BlueBeaker />
   );
 }
-{/*
+
+export default App;
+/*
     <MainPage />
     <JobList />
     <BlueBeaker />
-*/}
-
-export default App;
+*/
