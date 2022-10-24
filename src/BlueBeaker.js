@@ -5,6 +5,49 @@ import JobCard from './JobCard';
 import Footer from './Footer';
 import './BlueBeaker.css';
 
+function JobImage(){
+  const [slideX, setSlideX] = useState(0);
+  const size = 700;
+  console.log(size);
+  const style = {
+    transform: `translateX(${slideX}px)`,
+    transition: "0.5s ease",
+  };
+  const toPrev = () => {
+    setSlideX(slideX + size);
+    if (slideX + size >= 0){
+      setSlideX(0);
+    }
+  };
+  const toNext = () => {
+    setSlideX(slideX - size);
+    if (slideX - size <= -2100){
+      setSlideX(-2100);
+    }
+  };
+  return(
+    <section className="jobImage" >
+      <button className="jobImage_arrow jobImage_arrow_left" onClick={toPrev}>&lt;</button>
+      <button className="jobImage_arrow jobImage_arrow_right" onClick={toNext}>&gt;</button>
+      <div className="jobImage_slides" style={style}>
+        <div className="jobImage_slide">
+          <img src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F22333%2Feh1mycy7nnltf5ah__1080_790.jpg&amp;w=1000&amp;q=75" alt="블루비커 - 웹 프론트엔드 개발자(React)" />
+        </div>
+        <div className="jobImage_slide">
+          <img src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F22333%2Fdvcf627tgxatpg7v__1080_790.jpg&amp;w=1000&amp;q=75" alt="블루비커 - 웹 프론트엔드 개발자(React)"/>
+        </div>
+        <div className="jobImage_slide">
+          <img src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F22333%2F6kxgpommhvckijjr__1080_790.jpg&amp;w=1000&amp;q=75" alt="블루비커 - 웹 프론트엔드 개발자(React)"/>
+        </div>
+        <div className="jobImage_slide">
+          <img src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F22333%2Fvym9cwwcigp2tzbi__1080_790.jpg&amp;w=1000&amp;q=75" alt="블루비커 - 웹 프론트엔드 개발자(React)"/>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
 function Tag({href, content}){
   return(
     <li>
@@ -109,24 +152,7 @@ function BlueBeaker() {
         <div className="jobDetailWrap">
           <div className="jobDetail_relativeWrap">
             <div className="jobContent">
-              <section className="jobImage">
-                <button className="jobImage_arrow jobImage_arrow_left">&lt;</button>
-                <button className="jobImage_arrow jobImage_arrow_right">&gt;</button>
-                <div className="jobImage_slides">
-                  <div className="jobImage_slide">
-                    <img src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F22333%2Feh1mycy7nnltf5ah__1080_790.jpg&amp;w=1000&amp;q=75" alt="블루비커 - 웹 프론트엔드 개발자(React)" />
-                  </div>
-                  <div className="jobImage_slide">
-                    <img src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F22333%2Fdvcf627tgxatpg7v__1080_790.jpg&amp;w=1000&amp;q=75" alt="블루비커 - 웹 프론트엔드 개발자(React)"/>
-                  </div>
-                  <div className="jobImage_slide">
-                    <img src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F22333%2F6kxgpommhvckijjr__1080_790.jpg&amp;w=1000&amp;q=75" alt="블루비커 - 웹 프론트엔드 개발자(React)"/>
-                  </div>
-                  <div className="jobImage_slide">
-                    <img src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F22333%2Fvym9cwwcigp2tzbi__1080_790.jpg&amp;w=1000&amp;q=75" alt="블루비커 - 웹 프론트엔드 개발자(React)"/>
-                  </div>
-                </div>
-              </section>
+              <JobImage />
               <section className="jobHeader">
                 <h2>웹 프론트엔드 개발자(React)</h2>
                 <div>

@@ -142,27 +142,19 @@
     gap: 8px;
 }
 .scrollSnap{
-    max-width: calc(100% - 40px - 8px);
+    max-width: calc(100% - 48px);
     position: relative;
     display: flex;
+    overflow: hidden;
 }
 .scroll_slides{
     gap: 8px;
     display: flex;
     padding-bottom: 0.5px;
-    scroll-snap-type: x mandatory;
-    overscroll-behavior: contain;
     flex-direction: row;
     align-items: center;
-    overflow-x: scroll;
-    overflow-y: hidden;
     z-index: 1;
 }
-
-.scroll_slides::-webkit-scrollbar{
-    display: none;
-}
-
 .careerTag{
     background: #fff;
     padding: 9px 22px;
@@ -217,9 +209,6 @@
     text-align: center;
     background-color: white;
     z-index: 2;
-}
-#career_scrollSnap > .arrowLeft{
-    visibility: hidden;
 }
 .arrowLeft{
     left: 0;

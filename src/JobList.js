@@ -53,7 +53,7 @@ function JobList() {
                     <div id="filter">
                         <div id="filterWrap">
                             <div className="buttonGroup">
-                                <button className="filterButton" onclick="selectArea()">
+                                <button className="filterButton">
                                     <span className="buttonTitle">
                                         지역
                                         <span className="filterCount">1</span>
@@ -61,7 +61,7 @@ function JobList() {
                                     <span className="buttonDisplay">한국</span>
                                 </button>
                                 <div>
-                                    <button className="filterButton" onclick="selectCareer()">
+                                    <button className="filterButton" >
                                         <span className="buttonTitle">경력</span>
                                         <span className="buttonDisplay">신입</span>
                                         <svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="https://www.w3.org/2000/svg">
@@ -70,7 +70,7 @@ function JobList() {
                                     </button>
                                 </div>
                                 <div>
-                                    <button className="filterButton" onclick="selectTechStack()">
+                                    <button className="filterButton" >
                                         <span className="buttonTitle">
                                             기술스택
                                         </span>

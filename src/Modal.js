@@ -139,17 +139,14 @@ function Modal({signUpOpen, setSignUpOpen}) {
     const [joinOpen, setJoinOpen] = useState("");
     const [agreePrivacy, setAgreePrivacy] = useState("");
     const [Korea,setKorea] = useState(true);
-
+    const [existName, setExistName] = useState(true);
+    const [existMobile, setExistMobile] = useState(true);
+    const [codeBtn, setCodeBtn] = useState(false);
     const [name, setName] = useState("");
     const [mobile, setMobile] = useState("");
     const [mobileCode, setMobileCode] = useState("");
     const [PW, setPW] = useState("");
     const [PWAgain, setPWAgain] = useState("");
-    // Name
-    const checkName = (str) => {
-        if (!str) return true;
-        return name? true:false;
-    }
     //Mobile
     const checkMobile = (str) => {
         if (!str) return true;
@@ -157,7 +154,6 @@ function Modal({signUpOpen, setSignUpOpen}) {
         let reg_mobile_number2 = /^010([0-9]{8})$/;
         return reg_mobile_number1.test(str) || reg_mobile_number2.test(str);
     }
-
     //Password
     const checkPW = (str) => {
         if (!str) return true;
@@ -167,16 +163,23 @@ function Modal({signUpOpen, setSignUpOpen}) {
     //Password again
     const checkPWAgain = (str) => {
         if (!str) return true;
-        if(PW == str) return true;
+        if(PW === str) return true;
         else return false;
     }
-    const handlePrivacy = (e) => {
+    const handleJoin = (e) => {
         e.preventDefault();
-        if(name && checkMobile(mobile) && checkPW(PW) && checkPWAgain(PWAgain)) {
+        if(!name){
+            setExistName(false);
+        }
+        else if(!mobile){
+            setExistMobile(false);
+        }
+        else if(checkMobile(mobile) && checkPW(PW) && checkPWAgain(PWAgain)){
             alert("회원가입이 완료되었습니다.");
             setJoinOpen(false);
         }
     };
+
     return(
         <>
             {signUpOpen && !joinOpen && (
@@ -212,16 +215,16 @@ function Modal({signUpOpen, setSignUpOpen}) {
                             </svg>
                         </button>
                     </div>
-                    <form onSubmit={handlePrivacy}>
+                    <form onSubmit={handleJoin}>
                         <div className="modalBody" id="joinModalBody">
                             <div className="inputPanel">
                                 <form name="joinForm">
                                     <div className="inputWrap">
                                         <label>이름</label>
                                         <div className="inputBody">
-                                            <input name="name" value={name} className={checkName(name)? "notError":"inputError"} type="text" placeholder="이름을 입력해 주세요." onChange={(e) =>{setName(e.target.value)}}/>
+                                            <input name="name" value={name} className={existName? "notError":"inputError"} type="text" placeholder="이름을 입력해 주세요." onChange={(e) =>{setName(e.target.value); setExistName(true)}}/>
                                         </div>
-                                        {!name && <div className="modalError">이름은 필수정보입니다.</div>}
+                                        {!existName && <div className="modalError">이름은 필수정보입니다.</div>}
                                     </div>
                                     <div className="inputWrap">
                                         <label>휴대폰 번호</label>
@@ -247,19 +250,21 @@ function Modal({signUpOpen, setSignUpOpen}) {
                                                 <span>&gt;</span>
                                             </div>
                                             <div className="mobileInput">
-                                                <input name="mobile" value={mobile} className={checkMobile(mobile)? "notError":"inputError"} onChange={(e) =>{setMobile(e.target.value)}} placeholder="(예시) 01034567890"/>
-                                                {Korea && <button id="mobileCodeButton" type="button" disabled={checkMobile(mobile)? false:true}>인증번호 받기</button>}
+                                                <input name="mobile" value={mobile} className={(existMobile && checkMobile(mobile))? "notError":"inputError"} onChange={(e) =>{setMobile(e.target.value); setExistMobile(true)}} placeholder="(예시) 01034567890"/>
+                                                {Korea && <button id="mobileCodeButton" type="button" disabled={((existMobile && checkMobile(mobile)) && !codeBtn)? false:true} onClick={() => setCodeBtn(true)}>인증번호 받기</button>}
                                             </div>
                                             {Korea && (
                                                 <div className="mobileCode">
-                                                    <input value={mobileCode} name="mobileCode" placeholder="인증번호를 입력해 주세요." onChange={(e) =>{setMobileCode(e.target.value)}} disabled={checkMobile(mobile)? false:true}/>
-                                                    <button type="button" id="mobileCodeSubmit" disabled={checkMobile(mobile)? false:true}>확인</button>
+                                                    <input value={mobileCode} name="mobileCode" placeholder="인증번호를 입력해 주세요." onChange={(e) => setMobileCode(e.target.value)} disabled={codeBtn? false:true}/>
+                                                    {codeBtn && (
+                                                        <button type="button" id="mobileCodeSubmit" onClick={() => setCodeBtn(false)} disabled={mobileCode? false:true}>확인</button>
+                                                    )}
                                                 </div>
                                             )}
                                         </div>
                                         <div id="codeGuide" className="inputGuide"></div>
                                         <span id="timeCode"></span>
-                                        {!mobile && <div className="modalError">휴대폰 번호는 필수정보 입니다.</div>}
+                                        {!existMobile && <div className="modalError">휴대폰 번호는 필수정보 입니다.</div>}
                                         {!checkMobile(mobile) && <div className="modalError">올바른 전화번호를 입력해 주세요.</div>}
                                     </div>
                                     <div className="inputWrap">

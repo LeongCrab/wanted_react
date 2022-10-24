@@ -90,3 +90,7 @@ hr{
     flex-shrink: 0;
     background-color: #ececec;
 }
+
+select{
+    outline: none;
+}

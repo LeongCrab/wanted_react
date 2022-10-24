@@ -21,25 +21,41 @@ function TopBannerItem({href, src, bannerHeader, bannerBody}) {
 
 function CareerTagList() {
   const [clicked, setClicked] = useState(0);
+  const [slideX, setSlideX] = useState(0);
+  const [prevBtn, setPrevBtn] = useState(false);
+  const [nextBtn, setNextBtn] = useState(true);
   const tagList = ["회사생활", "조직문화", "취업/이직", "IT/기술", "라이프스타일", "리더십", "인간관계", "커리어고민", "디자인", "콘텐츠 제작", "마케팅", "서비스기획", "경영/전략", "노무", "개발", "데이터", "UX/UI", "MD", "HR", "브랜딩"];
-  
-  const prev = (e) => {
-    console.log('left');
+  const style = {
+    transform: `translateX(${slideX}px)`,
+    transition: "0.5s ease",
   };
-  const next = (e) => {
-    console.log("right");
+  const toPrev = () => {
+    setNextBtn(true);
+    setSlideX(slideX + 300);
+    if (slideX + 300 >= 0){
+      setPrevBtn(false);
+      setSlideX(0);
+    }
+  };
+  const toNext = () => {
+    setPrevBtn(true);
+    setSlideX(slideX - 300);
+    if (slideX - 300 <= -1110){
+      setNextBtn(false);
+      setSlideX(-1110);
+    }
   };
   return(
     <div id="careerTagList">
       <div className="scrollWrap">
-        <div className="scrollSnap" id="career_scrollSnap">
-          <div className="scroll_slides" id="career_slides">
+        <div className="scrollSnap">
+          <div className="scroll_slides" style={style}>
             {tagList.map((tag, i) => (
-              <button type="button" key={tag + i} onClick={() => setClicked(i)} className={"careerTag" + (clicked == i ? "_selected" : "")}>{tag}</button>
+              <button type="button" key={tag + i} onClick={() => setClicked(i)} className={"careerTag" + (clicked === i ? "_selected" : "")}>{tag}</button>
             ))}
           </div>
-          <button type="button" onClick={prev} className="arrowButton arrowLeft">&lt;</button>
-          <button type="button" onClick={next} className="arrowButton arrowRight">&gt;</button>
+          {prevBtn && (<button type="button" onClick={toPrev} className="arrowButton arrowLeft">&lt;</button>)}
+          {nextBtn && (<button type="button" onClick={toNext} className="arrowButton arrowRight">&gt;</button>)}
         </div>
         <button type="button" className="tagMoreButton">. . .</button>
       </div>
