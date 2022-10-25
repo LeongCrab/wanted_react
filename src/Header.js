@@ -11,7 +11,7 @@ function NavBtn({href, category, tag}) {
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submenuOpen, setSubmenuOpen] = useState(false);
-  const [signUpOpen, setSignUpOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(0);
   
   function Menu() {
     const categoryList = ["직군 전체", "개발", ["경영",<span>.</span>,"비즈니스"], ["마케팅",<span>.</span>,"광고"], "디자인", "영업", ["고객서비스",<span>.</span>,"리테일"], "게임 제작", "HR", "미디어", ["엔지니어링",<span>.</span>,"설계"], "금융", ["제조",<span>.</span>,"생산"], ["물류",<span>.</span>,"무역"], ["의료",<span>.</span>,"제약",<span>.</span>,"바이오"], "교육", ["법률",<span>.</span>,"법집행기관"], ["식",<span>.</span>,"음료"], ["건설",<span>.</span>,"시설"] , ["공공",<span>.</span>,"복지"] , "프리랜서"];
@@ -74,7 +74,7 @@ function Header() {
                 </g>
               </svg>
             </button>
-            <button type="button" className="signUpButton" id="signUpBtn" onClick={() => setSignUpOpen(true)}>회원가입/로그인</button>
+            <button type="button" className="signUpButton" id="signUpBtn" onClick={() => setModalOpen(1)}>회원가입/로그인</button>
             <div className="verticalLine"></div>
             <a href="https://www.wanted.co.kr/dashboard">
               <button type="button" className="enterpriseButton">기업 서비스</button>
@@ -82,7 +82,7 @@ function Header() {
           </div>
         </div>
       </div>
-      <Modal signUpOpen={signUpOpen} setSignUpOpen={setSignUpOpen}/>
+      <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}/>
     </>
   );
 }

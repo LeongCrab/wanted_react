@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Modal.css'
 
-function EmailUpdate({setSignUpOpen, setJoinOpen}) {
+function EmailUpdate({setModalOpen}) {
     const [email, setEmail] = useState("");
     const checkEmail = (str) => {
         if (!str) return true;
@@ -15,8 +15,7 @@ function EmailUpdate({setSignUpOpen, setJoinOpen}) {
         console.log({email}, " submit!");
         e.preventDefault();
         if (email && checkEmail(email)) {
-            setSignUpOpen(false);
-            setJoinOpen(true);
+            setModalOpen(2);
         }
     };
     return (
@@ -135,8 +134,7 @@ function CheckBox({agreePrivacy, setAgreePrivacy}) {
     );
 }
 
-function Modal({signUpOpen, setSignUpOpen}) {
-    const [joinOpen, setJoinOpen] = useState("");
+function Modal({modalOpen, setModalOpen}) {
     const [agreePrivacy, setAgreePrivacy] = useState("");
     const [Korea,setKorea] = useState(true);
     const [existName, setExistName] = useState(true);
@@ -176,18 +174,18 @@ function Modal({signUpOpen, setSignUpOpen}) {
         }
         else if(checkMobile(mobile) && checkPW(PW) && checkPWAgain(PWAgain)){
             alert("회원가입이 완료되었습니다.");
-            setJoinOpen(false);
+            setModalOpen(0);
         }
     };
 
     return(
         <>
-            {signUpOpen && !joinOpen && (
-                <div className="modal" id="signUpModal">
+            {modalOpen === 1 && (
+                <div className="modal">
                     <div className="modalCnt">
                         <div className="modalHeader">
                             <img src="./img/wanted_BI_logotype.png" alt="No Logo" style={{height: 16, width:70}} />
-                            <button className='modalCloseButton' id='signUpCloseButton' type="button" onClick={() => setSignUpOpen(false)}>
+                            <button className='modalCloseButton' id='signUpCloseButton' type="button" onClick={() => setModalOpen(0)}>
                                 <svg width="24" height="24" viewBox="0 0 24 24" color="#999">
                                     <path fill="currentColor" d="M17.97 19.03a.75.75 0 001.06-1.06l-6.5-6.5a.75.75 0 00-1.06 0l-6.5 6.5a.75.75 0 001.06 1.06L12 13.06l5.97 5.97zM12 10.94L6.03 4.97a.75.75 0 00-1.06 1.06l6.5 6.5a.75.75 0 001.06 0l6.5-6.5a.75.75 0 00-1.06-1.06L12 10.94z"></path>
                                 </svg>
@@ -198,18 +196,18 @@ function Modal({signUpOpen, setSignUpOpen}) {
                                 <h1>직장인을 위한<br/>커리어 플랫폼, 원티드!</h1>
                                 <h2>커리어 성장과 행복을 위한 여정<br/> 지금 원티드에서 시작하세요.</h2>
                             </div>
-                            <EmailUpdate setSignUpOpen={setSignUpOpen} setJoinOpen={setJoinOpen}/>
+                            <EmailUpdate setModalOpen={setModalOpen} />
                         </div>
                     </div>
-                    <div className="modalOverlay"onClick={() => setSignUpOpen(false)}></div>
+                    <div className="modalOverlay"onClick={() => setModalOpen(0)}></div>
                 </div>
             )}
-            {joinOpen && (
-            <div className="modal" id="joinModal">
+            {modalOpen === 2 && (
+            <div className="modal joinModal">
                 <div className="modalCnt">
                     <div className="modalHeader">
                         회원가입
-                        <button className='modalCloseButton' id='joinCloseButton' type="button" onClick={()=> setJoinOpen(false)}>
+                        <button className='modalCloseButton' id='joinCloseButton' type="button" onClick={()=> setModalOpen(0)}>
                             <svg width="24" height="24" viewBox="0 0 24 24" color="#999">
                                 <path fill="currentColor" d="M17.97 19.03a.75.75 0 001.06-1.06l-6.5-6.5a.75.75 0 00-1.06 0l-6.5 6.5a.75.75 0 001.06 1.06L12 13.06l5.97 5.97zM12 10.94L6.03 4.97a.75.75 0 00-1.06 1.06l6.5 6.5a.75.75 0 001.06 0l6.5-6.5a.75.75 0 00-1.06-1.06L12 10.94z"></path>
                             </svg>

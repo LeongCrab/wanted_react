@@ -42,7 +42,7 @@ input{
     background-color: #fff;
     position: absolute;
 }
- .modalCnt::-webkit-scrollbar{
+.modalCnt::-webkit-scrollbar{
     display: none;
  }
 .modalHeader{
@@ -56,7 +56,7 @@ input{
     font-weight: 600;
     word-wrap: break-word;
 }
-#joinModal .modalHeader{
+.joinModal .modalHeader{
     border-bottom: 0;
 }
 .modalHeader button{
