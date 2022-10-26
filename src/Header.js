@@ -14,7 +14,7 @@ function Header() {
   const [modalOpen, setModalOpen] = useState(0);
   
   function Menu() {
-    const categoryList = ["직군 전체", "개발", ["경영",<span>.</span>,"비즈니스"], ["마케팅",<span>.</span>,"광고"], "디자인", "영업", ["고객서비스",<span>.</span>,"리테일"], "게임 제작", "HR", "미디어", ["엔지니어링",<span>.</span>,"설계"], "금융", ["제조",<span>.</span>,"생산"], ["물류",<span>.</span>,"무역"], ["의료",<span>.</span>,"제약",<span>.</span>,"바이오"], "교육", ["법률",<span>.</span>,"법집행기관"], ["식",<span>.</span>,"음료"], ["건설",<span>.</span>,"시설"] , ["공공",<span>.</span>,"복지"] , "프리랜서"];
+    const categoryList = ["직군 전체", "개발", "경영·비즈니스", "마케팅·광고", "디자인", "영업", "고객서비스·리테일", "게임 제작", "HR", "미디어", "엔지니어링·설계", "금융", "제조·생산", "물류·무역", "의료·제약·바이오", "교육", "법률·법집행기관", "식·음료", "건설·시설" , "공공·복지" , "프리랜서"];
 
     return(
       <div className="menuWrap">
@@ -82,7 +82,7 @@ function Header() {
           </div>
         </div>
       </div>
-      <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}/>
+      {modalOpen && <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}/>}
     </>
   );
 }

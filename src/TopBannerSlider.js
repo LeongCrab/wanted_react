@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./TopBannerSlider.css";
+import TopBanner from "./data/TopBanner.json";
 
 export default function TopBannerSlider () {
   const sliderRef = useRef();
@@ -43,18 +44,9 @@ export default function TopBannerSlider () {
       <button type="button" className="topBanner_arrow topBanner_arrow_left" onClick={() => sliderRef.current.slickPrev()}>&lt;</button>
       <button type="button" className="topBanner_arrow topBanner_arrow_right" onClick={() => sliderRef.current.slickNext()}>&gt;</button>
       <Slider ref={sliderRef} {...settings}>
-        <div>
-          <TopBannerItem href="https://www.wanted.co.kr/events/wantedgigs_find" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fbanners%2F1843%2F6e4ca95f.jpg&w=1060&q=100" bannerHeader="원티드긱스 &lt;개발자의 달&gt;" bannerBody="프리랜서 개발자를 위한 이벤트" />
-        </div>
-        <div>
-          <TopBannerItem href="https://www.wanted.co.kr/events/wantedcon29" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fbanners%2F1837%2F4259e885.jpg&w=1060&q=100" bannerHeader="HR 리더들의 진짜 HR 이야기" bannerBody="HR 리더들의 효율적인 업무 비결" />
-        </div>
-        <div>
-          <TopBannerItem href="https://www.wanted.co.kr/events/Lead_coaching2210" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fbanners%2F1835%2F487d8bb0.jpg&w=1060&q=100" bannerHeader="Startup Lead Group Coaching" bannerBody="팀장을 위한 그룹코칭" />
-        </div>
-        <div>
-          <TopBannerItem href="https://www.wanted.co.kr/events/gdsc-jobfair-live-2022" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fbanners%2F1844%2F3d999be3.jpg&w=1060&q=100" bannerHeader="[FREE] GDSC Job Fair Live" bannerBody="국내 최고 스타트업 채용소식을 볼 수 있는 기회!" />
-        </div>
+      {TopBanner.topBannerItems.map(item => (
+          <TopBannerItem key={item.id} href={item.href} src={item.src} bannerHeader={item.bannerHeader} bannerBody={item.bannerBody} />
+        ))}
       </Slider>
     </div>
   );

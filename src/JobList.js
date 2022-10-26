@@ -1,15 +1,68 @@
+import React, { useState} from 'react';
 import Header from './Header';
 import JobCard from './JobCard';
 import './JobList.css';
 
-function JobTag({content, src, bgcolor}){
+function JobTagSlider({}){
+    const [slideX, setSlideX] = useState(0);
+    const [prevBtn, setPrevBtn] = useState(false);
+    const [nextBtn, setNextBtn] = useState(true);
+    const style = {
+        transform: `translateX(${slideX}px)`,
+        transition: "0.5s ease",
+    };
+    const toPrev = () => {
+        setNextBtn(true);
+        setSlideX(slideX + 300);
+        if (slideX + 300 >= 0){
+            setPrevBtn(false);
+            setSlideX(0);
+        }
+    };
+      const toNext = () => {
+        setPrevBtn(true);
+        setSlideX(slideX - 300);
+        if (slideX - 300 <= -1000){
+            setNextBtn(false);
+            setSlideX(-1000);
+        }
+    };
+    function JobTag({content, src, backgroundColor}){
+        return(
+            <button className="jobTag" style={{backgroundColor: `RGB(${backgroundColor})`}}>
+                {content}
+                <img src={src} alt={content} />
+            </button>
+        );
+    }
+
     return(
-        <button className="jobTag" style={{backgroundColor: `RGB(${bgcolor})`}}>
-            {content}
-            <img src={src} alt={content} />
-        </button>
+        <div className="tagWrap">
+            {prevBtn && (<button type="button" onClick={toPrev} className="arrowButton arrowLeft">&lt;</button>)}
+            {nextBtn && (<button type="button" onClick={toNext} className="arrowButton arrowRight">&gt;</button>)}
+            <div className="tagFilter" style={style}>
+                <JobTag content="연봉이 최고의 복지" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ftags%2F634f02e0-9f6e-11ec-b909-0242ac120002.png&amp;w=50&amp;q=75" backgroundColor="242, 251, 245" />
+                <JobTag content="재택근무" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ftags%2F5d873f3a-9f6e-11ec-b909-0242ac120002.png&amp;w=50&amp;q=75" backgroundColor="243, 249, 254" />
+                <JobTag content="퇴사율 10% 이하" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ftags%2F7d3cdb3c-9f6e-11ec-b909-0242ac120002.png&amp;w=50&amp;q=75" backgroundColor="243, 242, 251" />
+                <JobTag content="급성장 중" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ftags%2F37dacf86-9f6e-11ec-b909-0242ac120002.png&amp;w=50&amp;q=75" backgroundColor="246, 248, 238" />
+                <JobTag content="병역특례" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ftags%2F6eda33d2-9f6e-11ec-b909-0242ac120002.png&amp;w=50&amp;q=75" backgroundColor="247, 242, 249" />
+                <JobTag content="50인 이하" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ftags%2F3a965d18-c524-11ec-901c-acde48001122.png&amp;w=50&amp;q=75" backgroundColor="238, 250, 249" />
+                <JobTag content="50인 이상" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ftags%2F4cec3244-c524-11ec-901c-acde48001122.png&amp;w=50&amp;q=75" backgroundColor="239, 241, 251" />
+                <JobTag content="업력 5년 이상" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ftags%2F45bb9794-c524-11ec-901c-acde48001122.png&w=50&q=75" backgroundColor="242, 251, 245" />
+                <JobTag content="유연근무" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ftags%2F827f6146-9f6e-11ec-b909-0242ac120002.png&w=50&q=75" backgroundColor="243, 249, 254" />
+                <JobTag content="자유로운 휴가" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ftags%2F68dadb80-9f6e-11ec-b909-0242ac120002.png&w=50&q=75" backgroundColor="243, 242, 251" />
+                <JobTag content="일한만큼 받는 보상" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ftags%2F472333e8-9f6e-11ec-b909-0242ac120002.png&w=50&q=75" backgroundColor="246, 248, 238" />
+                <JobTag content="수평적 문화" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ftags%2F78563d98-9f6e-11ec-b909-0242ac120002.png&w=50&q=75" backgroundColor="247, 242, 249" />
+                <JobTag content="요즘 뜨는 산업" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ftags%2F4e1b135a-9f6e-11ec-b909-0242ac120002.png&w=50&q=75" backgroundColor="238, 250, 249" />
+                <JobTag content="식사·간식 제공" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ftags%2F53ca893e-9f6e-11ec-b909-0242ac120002.png&w=50&q=75" backgroundColor="239, 241, 251" />
+                
+            </div>
+        </div>
+        
     );
 }
+
+
 function FeaturedCard({href, src, logo, header, body}){
     return(
         <a className="featuredCard" href={href}>
@@ -89,16 +142,8 @@ function JobList() {
                             </select>
                         </div>
                         <hr />
-                        <div id="tagFilter">
-                            <JobTag content="연봉이 최고의 복지" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ftags%2F634f02e0-9f6e-11ec-b909-0242ac120002.png&amp;w=50&amp;q=75" bgcolor="242, 251, 245" />
-                            <JobTag content="재택근무" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ftags%2F5d873f3a-9f6e-11ec-b909-0242ac120002.png&amp;w=50&amp;q=75" bgcolor="243, 249, 254" />
-                            <JobTag content="퇴사율 10% 이하" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ftags%2F7d3cdb3c-9f6e-11ec-b909-0242ac120002.png&amp;w=50&amp;q=75" bgcolor="243, 242, 251" />
-                            <JobTag content="급성장 중" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ftags%2F37dacf86-9f6e-11ec-b909-0242ac120002.png&amp;w=50&amp;q=75" bgcolor="246, 248, 238" />
-                            <JobTag content="병역특례" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ftags%2F6eda33d2-9f6e-11ec-b909-0242ac120002.png&amp;w=50&amp;q=75" bgcolor="247, 242, 249" />
-                            <JobTag content="50인 이하" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ftags%2F3a965d18-c524-11ec-901c-acde48001122.png&amp;w=50&amp;q=75" bgcolor="238, 250, 249" />
-                            <JobTag content="50인 이상" src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ftags%2F4cec3244-c524-11ec-901c-acde48001122.png&amp;w=50&amp;q=75" bgcolor="239, 241, 251" />
-                        </div>
-                        <hr />
+                        <JobTagSlider />
+                        <hr className="filter_lastHr" />
                     </div>
                     <div id="jobList">
                         <div id="bookmark">

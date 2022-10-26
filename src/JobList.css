@@ -148,17 +148,38 @@
     position: relative;
     text-align: left;
 }
-#filter hr{
-    max-width: 1060px;
-    margin: 25px auto;
-    background-color: rgba(236,236,236,.7);
-    height: 1px;
-    flex-shrink: 0;
-    border: none;
+
+.tagWrap{
+    flex-direction: row;
+    position: relative;
+    width: 100%;
+    overflow:hidden;
 }
-#tagFilter{
+.arrowButton{
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    align-items: center;
+    border: 1px solid #e1e2e3;
+    box-shadow: 0 4px 4px rgb(0 0 0 / 5%);
+    color: #939393;
+    border-radius: 50%;
+    text-align: center;
+    background-color: white;
+    z-index: 2;
+}
+.arrowLeft{
+    left: 0;
+}
+.arrowRight{
+    right: 0;
+}
+.tagFilter{
+    width: inherit;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    gap: 8px;
+    align-items: center;
 }
 .jobTag{
     position: relative;
@@ -166,14 +187,14 @@
     padding: 8px 14px;
     border-radius: 20px;
     display: inline-flex; 
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    margin-right: 8px;
     font-size: 13px;
     line-height: 16px;
     font-weight: 400;
     color: #333;
     border: 1px solid transparent;
+    flex-shrink: 0;
 }
 .jobTag img{
     width: 16px;
@@ -261,12 +282,15 @@ filter hr:last-child{
     text-align: left;
 }
 #filter hr{
+    width: 100%;
     max-width: 1060px;
     margin: 25px auto;
-    background-color: rgba(236,236,236,.7);
     height: 1px;
     flex-shrink: 0;
     border: none;
+}
+#filter > .filter_lastHr{
+    margin: 25px 0 38px;
 }
 #tagFilter{
     display: flex;

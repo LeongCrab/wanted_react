@@ -1,0 +1,168 @@
+{
+    "tagList": ["회사생활", "조직문화", "취업/이직", "IT/기술", "라이프스타일", "리더십", "인간관계", "커리어고민", "디자인", "콘텐츠 제작", "마케팅", "서비스기획", "경영/전략", "노무", "개발", "데이터", "UX/UI", "MD", "HR", "브랜딩"],
+    "careerCardList":[
+        {
+            "id": 0,
+            "href": "https://www.wanted.co.kr/career-video/201",
+            "img": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fwanted.video.kr.kollus.com%2Fkr%2Fsnapshot%2Fwanted%2F20220204%2F6%2F92347876.jpg&w=500&q=75",
+            "title": "성장하는 인하우스 디자이너 되기 - 사이드 프로젝트편" ,
+            "content": "본업 못지 않게 열심히 사이드 프로젝트를 하는 분들이 있습니다. 이분들은 과연 어떤 갈증이 있었기에 사이드 프로젝트를 하게 되었을까요? 그리고 사이드 프로젝트를 진행하면 어떤 점이 좋을까요? 사이드 프로젝트의 장점과, 프로젝트를 진행하며 느낀 점에 대해서 솔직하게 이야기를 나눠봤습니다." ,
+            "author": "캐치패션 최규성, 제주맥주 안소현, 샵백 나예성, 차봇 모빌리티 이은지"
+        },
+        {
+            "id": 1,
+            "href": "https://www.wanted.co.kr/career-video/210",
+            "img": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fwanted.video.kr.kollus.com%2Fkr%2Fsnapshot%2Fwanted%2F20220204%2F6%2F10465818.jpg&w=500&q=75" ,
+            "title": "경영기획&amp;전략기획 지침서 08 - 기획러의 이직과 커리어패스",
+            "content": "경영 기획, 전략 직무의 사람들은 어떻게 커리어를 쌓아가고 있을까요?경영 기획 직군은 멋있어 보이는 동시에, 구체적으로 어떤 일을 하는지 외부에서 알기 어려운 직무이기도 한데요.금융/화악/화장품 등 다양한 산업군에서 경영기획 업무로 커리어를 쌓고 있는 네 분의 연사님을 모시고 기획인의 이직과 커리어패스에 대해 솔직한 이야기를 나눴습니다." ,
+            "author": "조로, 라이언, 메이, 앨리스"
+        },
+        {
+            "id": 2,
+            "href": "https://www.wanted.co.kr/career-video/86",
+            "img": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fwanted.video.kr.kollus.com%2Fkr%2Fsnapshot%2Fwanted%2F20210915%2F2%2F16220799.jpg&w=500&q=75" ,
+            "title": "돌댕이 리더십 부수기 - 피승재" ,
+            "content": "코로나 19로 모든 직장인들이 힘든 시간을 가지고 있습니다.대한민국 리더도 역시 힘든 시간을 가지고 있습니다.MZ세대와 기성세대의 다리 역할을 해야 하는 지금 우리의 리더의 모습을 바라보고 특히, 한국 애브비에서 진행한 힐링 리더십에 대한 소개를 드리고자 합니다." ,
+            "author": "한국 애브비 피승재"
+        },
+        {
+            "id": 3,
+            "href": "https://www.wanted.co.kr/career-video/137",
+            "img": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fwanted.video.kr.kollus.com%2Fkr%2Fsnapshot%2Fwanted%2F20211124%2F7%2F27374484.jpg&w=500&q=75",
+            "title": "XYZ가 함께 행복하게 일하는 법" ,
+            "content": "XYZ 각 세대를 대표하는 75년생 X, 85년생 Y, 95년생 Z가 회사와 조직 생활을 중심으로 서로의 차이를 이해하고, 함께 신뢰, 존중하며 성공적인 내 일(‘미래’ 그리고 ‘나의 일’)에 대해 이야기 합니다. 각 세대의 특성을 알아보고 세대별로 추구하는 리더십과 팔로워십, 그리고 함께 어울려 만들어가는 조직 문화가 어떤 것인지 확인해보세요!" ,
+            "author": "최원설, 이재하, 고은비"
+        },
+        {
+            "id": 4,
+            "href": "https://brunch.co.kr/@vicotorlee/179" ,
+            "img": "https://image.wanted.co.kr/optimize?src=http%3A%2F%2Ft1.daumcdn.net%2Fbrunch%2Fservice%2Fuser%2F246x%2Fimage%2Fk1QGoMDua3otuviA0T8vPb5jMqw.png&w=500&q=75" ,
+            "title": "포트폴리오 사이트 개선하기" ,
+            "content": "최근에 웹 매거진 Montage.gif를 만들어서 포트폴리오 사이트를 업데이트했다. 근데 업데이트하면서 지금 쓰고 있는 포트폴리오 사이트가 거의 2년이나 되었다는 사실을 알게 됐다.  연말이기도 하여 2년 동안 써온 포트폴리오 사이트를 둘러봤다. 그간 나름 잘 써왔는데 분명 아쉬운 부분도 있었다.  그래서 새해 기념으로 포트폴리오 사이트를 개선해봐야겠다는" ,
+            "icon": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Ft1.daumcdn.net%2Fbrunch%2Fstatic%2Ficon%2Fios%2Ficon120.png&w=60&q=90" ,
+            "author": "이준우"
+        },
+        {
+            "id": 5,
+            "href": "https://www.wanted.co.kr/career-video/288" ,
+            "img": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fwanted.video.kr.kollus.com%2Fkr%2Fsnapshot%2Fwanted%2F20220703%2F14%2F51209230.jpg&w=500&q=75" ,
+            "title": "Talk : 면접을부탁해 - 전체직군" ,
+            "content": "다수의 면접에 참여하면서 알게 된 합격하는 vs 불합격하는 면접자의 차이,면접관이 궁금해하는 점 등 면접자가 면접을 준비할 때 도움이 될만한 이야기를 공유합니다." ,
+            "author": "원티드랩 이하나"
+        },
+        {
+            "id": 6,
+            "href": "https://www.youtube.com/watch?v=1bcmmc2rTBE",
+            "img": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fi.ytimg.com%2Fvi%2F1bcmmc2rTBE%2Fhqdefault.jpg%3Fsqp%3D-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg%3D%3D%26rs%3DAOn4CLBUsMnUeSTKHgkoMhEqrwmFAOSFpQ&w=500&q=75",
+            "title": "주니어 개발자 ‘실제’ 이력서 첨삭해 보았습니다 | 개발자 특집 5편",
+            "icon": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fwanted-public.s3.ap-northeast-2.amazonaws.com%2Fyoutube_opengraph.png&w=60&q=90",
+            "author": "eo"
+        },
+        {
+            "id": 7,
+            "href": "https://www.wanted.co.kr/career-video/37",
+            "img": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fwanted.video.kr.kollus.com%2Fkr%2Fsnapshot%2Fwanted%2F20210308%2F4%2F00307525.jpg&w=500&q=75" ,
+            "title": "서류전형, 실제로 그러할까? - 임휘진",
+            "content": "머리로는 이해했지만, 막상 활용하기에는 어려웠던 이력서 작성 노하우들...커리어를 고민하는 또 한 사람의 직장인으로서, 그리고 호기심 많은 데이터분석가로서, '잘 쓴' 이력서에서는 그 노하우들이 어떻게 구현되었는지 늘 궁금했습니다.오늘은 이력서 분석 콘텐츠의 두 번째 영상으로 서류전형의 비밀에 대해 살펴봤습니다.이 영상의 여러분의 서류 합격률을 높이는 데 도움이 되기를 바랍니다.",
+            "author": "원티드랩 임휘진"
+        }
+    ],
+    "articleCardList": [
+        {
+            "id": 0,
+            "href": "https://www.wanted.co.kr/events/22_09_s14_b01",
+            "src" : "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fevents%2F2427%2F9d71c6cc.jpg&w=800&q=75",
+            "title": "애써 모셔온 시니어, 우리 조직엔 안 맞는 사람?",
+            "tags": "#HR #조직문화 #리더십"
+        },
+        {
+            "id": 1,
+            "href": "https://www.wanted.co.kr/events/monthlypick10",
+            "src" : "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fevents%2F2432%2Fbf1903f2.jpg&w=800&q=75",
+            "title": "선선한 가을 날씨에 어울릴 아티클 추천 리스트",
+            "tags": "#마케팅·광고 #커리어고민 #시리즈"
+        },
+        {
+            "id": 2,
+            "href": "https://www.wanted.co.kr/events/22_10_s01_b02",
+            "src" : "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fevents%2F2440%2F22cd7b04.jpg&w=800&q=75",
+            "title": "냉정하지만, 프리랜서는 종이로 평가할 수밖에 없어요",
+            "tags": "#프리랜서 #커리어고민 #취업/이직"
+        },
+        {
+            "id": 3,
+            "href": "https://www.wanted.co.kr/events/22_09_s18_b01",
+            "src" : "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fevents%2F2438%2F9890601e.jpg&w=800&q=75",
+            "title": "CX 팀 조직 구조 설계부터 채용 공고 작성법까지",
+            "tags": "#프리랜서 #커리어고민 #취업/이직"
+        }
+    ],
+    "VODCardList":[
+        {
+            "id": 0,
+            "href": "https://www.wanted.co.kr/wantedplus/video/qn0639PI",
+            "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fwanted.video.kr.kollus.com%2Fkr%2Fsnapshot%2Fwanted%2F20210713%2F1%2F22621559.jpg&w=800&q=75",
+            "time": "1:25:16",
+            "author": "인터비즈 팀장클럽 김진영",
+            "title": "팀장으로 산다는 건",
+            "series": "팀장으로 산다는 건 : Live Talk #30"
+        },
+        {
+            "id": 1,
+            "href": "https://www.wanted.co.kr/wantedplus/video/PQh4w9cI",
+            "src": "https://image.wanted.co.kr/optimize?src=http%3A%2F%2Fwanted.video.kr.kollus.com%2Fkr%2Fsnapshot%2Fwanted%2F20210413%2F2%2F39565343.jpg&w=800&q=75",
+            "time": "24:02",
+            "author": "전) 원티드랩 최보명",
+            "title": "포트폴리오를 부탁해",
+            "series": "[무료] 포트폴리오를 부탁해 by 원티드"
+        },
+        {
+            "id": 2,
+            "href": "https://www.wanted.co.kr/wantedplus/video/j8urU6y3",
+            "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fwanted.video.kr.kollus.com%2Fkr%2Fsnapshot%2Fwanted%2F20210618%2F2%2F34753914.jpg&w=800&q=75",
+            "time": "1:34:40",
+            "author": "노무법인 예담HR컨설팅 장내석",
+            "title": "회사를 구하는 인사",
+            "series": "회사를 구하는 인사 : Live Talk #27"
+        },
+        {
+            "id": 3,
+            "href": "https://www.wanted.co.kr/wantedplus/video/BCkWLkZC",
+            "src": "https://image.wanted.co.kr/optimize?src=http%3A%2F%2Fwanted.video.kr.kollus.com%2Fkr%2Fsnapshot%2Fwanted%2F20211111%2F10%2F24788089.jpg&w=800&q=75",
+            "time": "58:29",
+            "author": "피플펀드 권순관, 드림어스 제정민",
+            "title": "신입 개발자의 취업 성공기",
+            "series": "신입 개발자의 취업 성공기 : Live Talk #50"
+        }
+    ],
+    "eventCardList" :[
+        {
+            "id": 0,
+            "href": "https://www.wanted.co.kr/events/talk85",
+            "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fevents%2F2406%2F6aae1a5c.jpg&w=1200&q=100",
+            "tags": [
+                {"id": "Online", "content": "온라인"},
+                {"id": "VOD", "content": "VOD"}
+            ],
+            "title": "[무료] 인간관계, 회사생활, 커리어고민 1분만에 해결하기",
+            "date": ""
+        },
+        {
+            "id": 1,
+            "href": "https://www.wanted.co.kr/events/wantedsalon221026",
+            "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fevents%2F2421%2F7065bb13.jpg&w=1200&q=100",
+            "tags": [
+                {
+                    "id": "Online",
+                    "content": "온라인"
+                },
+                {
+                    "id": "VOD",
+                    "content": "VOD"
+                }
+            ],
+            "title": "10월 원티드살롱(평가보상편)",
+            "date": ""
+        }
+    ]
+}

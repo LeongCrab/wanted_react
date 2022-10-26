@@ -1,0 +1,39 @@
+{
+    "topBannerItems":[
+        {
+            "id": 0,
+            "href": "https://www.wanted.co.kr/events/wantedgigs_find",
+            "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fbanners%2F1843%2F6e4ca95f.jpg&w=1060&q=100",
+            "bannerHeader": "원티드긱스 <개발자의 달>",
+            "bannerBody": "프리랜서 개발자를 위한 이벤트"
+        },
+        {
+            "id": 1,
+            "href": "https://www.wanted.co.kr/events/wantedcon29",
+            "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fbanners%2F1837%2F4259e885.jpg&w=1060&q=100",
+            "bannerHeader": "HR 리더들의 진짜 HR 이야기",
+            "bannerBody": "HR 리더들의 효율적인 업무 비결"
+        },
+        {
+            "id": 2,
+            "href": "https://www.wanted.co.kr/events/Lead_coaching2210",
+            "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fbanners%2F1835%2F487d8bb0.jpg&w=1060&q=100",
+            "bannerHeader": "Startup Lead Group Coaching",
+            "bannerBody": "팀장을 위한 그룹코칭"
+        },
+        {
+            "id": 3,
+            "href": "https://www.wanted.co.kr/events/gdsc-jobfair-live-2022",
+            "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fbanners%2F1844%2F3d999be3.jpg&w=1060&q=100",
+            "bannerHeader": "[FREE] GDSC Job Fair Live",
+            "bannerBody": "국내 최고 스타트업 채용소식을 볼 수 있는 기회!"
+        },
+        {
+            "id": 4,
+            "href": "https://www.wanted.co.kr/events/jobs_contents",
+            "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fbanners%2F1862%2F4d8d83ed.jpg&w=1060&q=100",
+            "bannerHeader": "이력서, 포트폴리오, 면접을 부탁해",
+            "bannerBody": "취업&이직에 필요한 모든 것!"
+        }
+    ]
+}
