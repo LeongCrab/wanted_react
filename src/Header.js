@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import './Header.css';
 import Modal from './Modal';
 import SearchBar from './SearchBar';
+import HeaderData from "./data/Header.json";
 
 function NavBtn({href, category, tag}) {
   return(
@@ -11,31 +12,31 @@ function NavBtn({href, category, tag}) {
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menu, setMenu] = useState("");
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(0);
   const [searchOpen, setSearchOpen] = useState(false);
   
   function Menu() {
-    const categoryList = ["직군 전체", "개발", "경영·비즈니스", "마케팅·광고", "디자인", "영업", "고객서비스·리테일", "게임 제작", "HR", "미디어", "엔지니어링·설계", "금융", "제조·생산", "물류·무역", "의료·제약·바이오", "교육", "법률·법집행기관", "식·음료", "건설·시설" , "공공·복지" , "프리랜서"];
-
     return(
       <div className="menuWrap">
         <ul onMouseOver={() => setMenuOpen(true)} onMouseLeave={() => {setMenuOpen(false); setSubmenuOpen(false)}}>
-            {categoryList.map(category => (
-              <li key={category} onMouseEnter={() => {setSubmenuOpen(true)}}>{category}</li>
+            {HeaderData.categoryList.map(category => (
+              <li key={category} onMouseEnter={() => {setMenu(category); setSubmenuOpen(true)}}>{category}</li>
             ))}
         </ul>
       </div>
     );
   }
+
   function SubMenu() {
-    const subCategoryList = ["개발 전체", "웹 개발자", "서버 개발자", "소프트웨어 엔지니어", "프론트엔드 개발자", "자바 개발자", "안드로이드 개발자", "C,C++ 개발자", "파이썬 개발자", "iOS 개발자", "Node.js 개발자", "데이터 엔지니어", "DevOps / 시스템 관리자", "시스템,네트워크 관리자", "머신러닝 엔지니어", "개발 매니저", "데이터 사이언티스트", "기술 지원", "임베디드 개발자", "PHP 개발자", "블록체인 플랫폼 엔지니어", "하드웨어 엔지니어", "웹 퍼블리셔", "DBA", ".NET 개발자", "영상, 음성 엔지니어", "크로스플랫폼 앱 개발자", "그래픽스 엔지니어"];
+    const mainCategory = HeaderData.category.find(cat => cat.id === menu);
 
     return(
       <div className="submenuWrap">
-        <ul onMouseOver={() => setSubmenuOpen(true)} onMouseLeave={() => setSubmenuOpen(false)}>
-          {subCategoryList.map(subCategory => (
-            <li key={subCategory}>{subCategory}</li>
+        <ul className={"width-"+(mainCategory.num < 17? "200px":mainCategory.num < 34? "400px":"600px" )} onMouseOver={() => setSubmenuOpen(true)} onMouseLeave={() => setSubmenuOpen(false)}>
+          {[...Array(parseInt(mainCategory.num))].map((n, idx) => (
+            <li key={mainCategory.id + (idx + 1)}>{mainCategory.id + (idx + 1)}</li>
           ))}
         </ul>
       </div>
@@ -84,7 +85,7 @@ function Header() {
           </div>
         </div>
       </div>
-      {modalOpen && <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}/>}
+      {(modalOpen === 1 || modalOpen === 2) && <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}/>}
       {searchOpen && <SearchBar setSearchOpen={setSearchOpen} />}
     </>
   );

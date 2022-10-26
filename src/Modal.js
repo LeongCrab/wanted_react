@@ -231,7 +231,6 @@ function Modal({modalOpen, setModalOpen}) {
                                         <div className="mobileInputSelect">
                                             {Korea && <span id="selected">대한민국 +82</span>}
                                             <select defaultValue="+82" name="country" onChange={(e) => {
-                                                console.log(e.target.value);
                                                 if (e.target.value === "+82") setKorea(true);
                                                 else setKorea(false);
                                             }}>
@@ -300,4 +299,4 @@ function Modal({modalOpen, setModalOpen}) {
     );
 }
 
-export default Modal
+export default Modal;

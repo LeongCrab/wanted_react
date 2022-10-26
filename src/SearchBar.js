@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './SearchBar.css';
 
 function SearchBar({setSearchOpen}){
     const [search, setSearch] = useState("");
-    const onSubmit = () =>{
-        console.log(search, "searched");
+    const navigate = useNavigate();
+    const onSubmit = (e) => {
+        e.preventDefault();
+        navigate(`/tag_search?tag=${search}`);
     }
     return(
         <>

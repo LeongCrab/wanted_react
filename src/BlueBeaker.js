@@ -8,7 +8,6 @@ import './BlueBeaker.css';
 function JobImage(){
   const [slideX, setSlideX] = useState(0);
   const size = 700;
-  console.log(size);
   const style = {
     transform: `translateX(${slideX}px)`,
     transition: "0.5s ease",
