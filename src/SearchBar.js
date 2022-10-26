@@ -19,11 +19,11 @@ function SearchBar({setSearchOpen}){
                             <h4 className="resultLabel">추천태그로 검색해보세요</h4>
                             <a href="https://www.wanted.co.kr/tag_search" >기업태그 홈 이동하기 &gt;</a>
                             <div className="tagList">
-                                <button type="button" className="tag">#단체보험</button>
-                                <button type="button" className="tag">#연봉상위2~5%</button>
-                                <button type="button" className="tag">#퇴사율5%이하</button>
-                                <button type="button" className="tag">#설립3년이하</button>
-                                <button type="button" className="tag">#자율복장</button>
+                                <button type="button">#단체보험</button>
+                                <button type="button">#연봉상위2~5%</button>
+                                <button type="button">#퇴사율5%이하</button>
+                                <button type="button">#설립3년이하</button>
+                                <button type="button">#자율복장</button>
                             </div>
                         </div>
                     </div>
