@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Header.css';
 import Modal from './Modal';
+import SearchBar from './SearchBar';
 
 function NavBtn({href, category, tag}) {
   return(
@@ -12,6 +13,7 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(0);
+  const [searchOpen, setSearchOpen] = useState(false);
   
   function Menu() {
     const categoryList = ["직군 전체", "개발", "경영·비즈니스", "마케팅·광고", "디자인", "영업", "고객서비스·리테일", "게임 제작", "HR", "미디어", "엔지니어링·설계", "금융", "제조·생산", "물류·무역", "의료·제약·바이오", "교육", "법률·법집행기관", "식·음료", "건설·시설" , "공공·복지" , "프리랜서"];
@@ -64,7 +66,7 @@ function Header() {
             <NavBtn href="https://www.wanted.co.kr/aiscore/resume" category="AI 합격예측" tag="Beta" />
           </div>
           <div className="headerItem">
-            <button type="button" className="searchButton">
+            <button type="button" className="searchButton" onClick={()=> setSearchOpen(true)}>
               <svg xmlns="https://www.w3.org/2000/svg" xmlnsXlink="https://www.w3.org/1999/xlink" width="18" height="18" viewBox="0 0 18 18">
                 <defs>
                   <path id="qt2dnsql4a" d="M15.727 17.273a.563.563 0 10.796-.796l-4.875-4.875-.19-.165a.563.563 0 00-.764.028 5.063 5.063 0 111.261-2.068.562.562 0 101.073.338 6.188 6.188 0 10-1.943 2.894l4.642 4.644z"></path>
@@ -83,6 +85,7 @@ function Header() {
         </div>
       </div>
       {modalOpen && <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}/>}
+      {searchOpen && <SearchBar setSearchOpen={setSearchOpen} />}
     </>
   );
 }

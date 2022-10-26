@@ -133,8 +133,8 @@ function EventCardList(){
       <img src={src} style={{width: 522, height: 273}} alt="No img"/>
       <div className="eventContent">
         <div className="eventTag">
-          {tags.map(tag => (
-            <span className={`eventTag${tag.id}`}>{tag.content}</span>
+          {tags.map((tag,idx) => (
+            <span key={idx} className={`eventTag${tag.id}`}>{tag.content}</span>
           ))}
         </div>
         <div className="eventTitle">{title}</div>

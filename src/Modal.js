@@ -9,9 +9,6 @@ function EmailUpdate({setModalOpen}) {
         let reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
         return reg_email.test(str);
     }
-    const emailChange = (e) => {
-        setEmail(e.target.value);
-    }
     const emailSubmit = (e) => {
         console.log({email}, " submit!");
         e.preventDefault();
@@ -25,7 +22,7 @@ function EmailUpdate({setModalOpen}) {
                 <div className="inputWrap">
                         <label>이메일</label>
                         <div className="inputBody">
-                            <input type="text" className={checkEmail(email)? "notError":"inputError"} name="email" onChange={emailChange} value={email} placeholder="이메일을 입력해 주세요."/>
+                            <input type="text" className={checkEmail(email)? "notError":"inputError"} name="email" onChange={(e) => setEmail(e.target.value)} value={email} placeholder="이메일을 입력해 주세요."/>
                         </div>
                     {!checkEmail(email) && <div className="modalError">올바른 이메일 형식을 입력해주세요.</div>}
                 </div>
