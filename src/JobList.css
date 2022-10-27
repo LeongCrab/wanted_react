@@ -150,7 +150,6 @@
 }
 
 .tagWrap{
-    flex-direction: row;
     position: relative;
     width: 100%;
     overflow:hidden;
@@ -159,14 +158,13 @@
     width: 32px;
     height: 32px;
     position: absolute;
-    align-items: center;
     border: 1px solid #e1e2e3;
     box-shadow: 0 4px 4px rgb(0 0 0 / 5%);
     color: #939393;
     border-radius: 50%;
-    text-align: center;
     background-color: white;
     z-index: 2;
+    top: 0px;
 }
 .arrowLeft{
     left: 0;
@@ -311,6 +309,9 @@ filter hr:last-child{
     color: #333;
     border: 1px solid transparent;
 }
+.jobTag:hover{
+    border-color: #36f;
+}
 .jobTag img{
     width: 16px;
     height: 16px;
@@ -346,7 +347,7 @@ filter hr:last-child{
 #bookmark svg{
     margin-left: 2px;
 }
-#featured{
+.featured{
     font-size: 22px;
     font-weight: 600;
     line-height: normal;
@@ -354,9 +355,9 @@ filter hr:last-child{
     color: #333;
     margin: 20px 0 14px;
 }
-#featuredWrap{
+.featuredWrap{
     max-width: 1060px;
-    margin-bottom: 40px;
+    margin: 0 0 40px -5px;
     position: relative;
     display: flex;
     flex-direction: row;

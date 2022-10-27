@@ -131,13 +131,16 @@
 }
 .submenuWrap > ul{
     position: inherit;
-    max-height: calc(100vh - 60px);
+    height: calc(100vh - 90px);
     display: flex;
     flex-flow: column wrap;
     justify-content: flex-start;
     align-items: flex-start;
     background-color: #e8f6fd;
     flex-grow: 1;
+}
+.width-0px{
+    width: 0px;
 }
 .width-200px{
     width: 200px;

@@ -4,6 +4,8 @@ import Header from './Header';
 import JobCard from './JobCard';
 import Footer from './Footer';
 import './BlueBeaker.css';
+import JobCardListData from './data/JobCardList.json';
+import BlueBeakerData from './data/BlueBeaker.json';
 
 function JobImage(){
   const [slideX, setSlideX] = useState(0);
@@ -29,33 +31,38 @@ function JobImage(){
       <button className="jobImage_arrow jobImage_arrow_left" onClick={toPrev}>&lt;</button>
       <button className="jobImage_arrow jobImage_arrow_right" onClick={toNext}>&gt;</button>
       <div className="jobImage_slides" style={style}>
-        <div className="jobImage_slide">
-          <img src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F22333%2Feh1mycy7nnltf5ah__1080_790.jpg&amp;w=1000&amp;q=75" alt="블루비커 - 웹 프론트엔드 개발자(React)" />
-        </div>
-        <div className="jobImage_slide">
-          <img src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F22333%2Fdvcf627tgxatpg7v__1080_790.jpg&amp;w=1000&amp;q=75" alt="블루비커 - 웹 프론트엔드 개발자(React)"/>
-        </div>
-        <div className="jobImage_slide">
-          <img src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F22333%2F6kxgpommhvckijjr__1080_790.jpg&amp;w=1000&amp;q=75" alt="블루비커 - 웹 프론트엔드 개발자(React)"/>
-        </div>
-        <div className="jobImage_slide">
-          <img src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F22333%2Fvym9cwwcigp2tzbi__1080_790.jpg&amp;w=1000&amp;q=75" alt="블루비커 - 웹 프론트엔드 개발자(React)"/>
-        </div>
+        {BlueBeakerData.jobImage.map(image => (
+          <div className="jobImage_slide">
+            <img key={image.id} src={image.src} alt={image.alt + image.id} />
+          </div>
+        ))}
       </div>
     </section>
   );
 }
 
+function TagList(){
+  function Tag({href, content}){
+    return(
+      <li>
+        <a href={href}>
+          #{content}
+        </a>
+      </li>
+    );
+  }
 
-function Tag({href, content}){
   return(
-    <li>
-      <a href={href}>
-        #{content}
-      </a>
-    </li>
+    <div className="tags">
+      <ul>
+        {BlueBeakerData.tagList.map(tag => (
+          <Tag key={tag.id} href={tag.href} content={tag.content} />
+        ))}
+      </ul>
+    </div>
   );
 }
+
 function Warning() {
   const [body, setBody] = useState(false);
 
@@ -141,6 +148,16 @@ function JobProcess() {
   );
 }
 
+function JobCardList() {
+  return(
+    <ul className="jobCardList">
+      {JobCardListData.jobCardList.map(jobCard => (
+        <JobCard key={jobCard.id} href={jobCard.href} src={jobCard.src} position={jobCard.position} name={jobCard.name} label={jobCard.label} location={jobCard.location} country={jobCard.country} reward={jobCard.reward} />
+      ))}
+    </ul>
+);
+}
+
 function BlueBeaker() {
 
   return (
@@ -168,19 +185,7 @@ function BlueBeaker() {
                     </div>
                   </div>
                   <span className="locationCnt">서울<span className="jobHeader_dot">.</span>한국</span>
-                  <div className="tags">
-                    <ul>
-                      <Tag href="https://www.wanted.co.kr/tag_search?tag=%EC%9D%B8%EC%9B%90%EA%B8%89%EC%84%B1%EC%9E%A5" content="인원급성장" />
-                      <Tag href="https://www.wanted.co.kr/tag_search?tag=50%EB%AA%85%EC%9D%B4%ED%95%98" content="50명이하" />
-                      <Tag href="https://www.wanted.co.kr/tag_search?tag=%EC%84%A4%EB%A6%BD3%EB%85%84%EC%9D%B4%ED%95%98" content="설립3년이하" />
-                      <Tag href="https://www.wanted.co.kr/tag_search?tag=%EC%8A%A4%ED%86%A1%EC%98%B5%EC%85%98" content="스톡옵션" />
-                      <Tag href="https://www.wanted.co.kr/tag_search?tag=%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85" content="스타트업" />
-                      <Tag href="https://www.wanted.co.kr/tag_search?tag=%EC%9B%8C%ED%81%AC%EC%83%B5" content="워크샵" />
-                      <Tag href="https://www.wanted.co.kr/tag_search?tag=%EA%B0%84%EC%8B%9D" content="간식" />
-                      <Tag href="https://www.wanted.co.kr/tag_search?tag=%EA%B1%B4%EA%B0%95%EA%B2%80%EC%A7%84" content="건강검진" />
-                      <Tag href="https://www.wanted.co.kr/tag_search?tag=IT%2C%20%EC%BB%A8%ED%85%90%EC%B8%A0" content="IT, 컨텐츠" />
-                    </ul>
-                  </div>
+                  <TagList />
                 </div>
               </section>
               <div className="descriptionWrap">
@@ -238,32 +243,7 @@ function BlueBeaker() {
           </div>
           <div className="jobAssociated">
             <h5 className="jobAssociated_title">이 포지션을 찾고 계셨나요?</h5>
-            <ul className="jobCardList">
-              <JobCard href="https://www.wanted.co.kr/wd/91370" 
-              src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F19077%2F6qu0vur51f7mcof7__1080_790.jpg&w=1000&q=75" 
-              position ="신약연구(바이오) 연구원" name="크리스탈지노믹스" label="응답률 매우 높음" location="경기" country="한국" reward="1,000,000"/>
-              <JobCard href="https://www.wanted.co.kr/wd/80693" 
-              src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F19077%2F6qu0vur51f7mcof7__1080_790.jpg&w=1000&q=75" 
-              position ="의약화학 연구원" name="크리스탈지노믹스" label="응답률 매우 높음" location="경기" country="한국" reward="1,000,000"/>
-              <JobCard href="https://www.wanted.co.kr/wd/130144" 
-              src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F30722%2Fgyznvv4pwyjeuszp__1080_790.jpg&w=1000&q=75"
-              position ="법무팀 사원" name="태강대부" label="응답률 매우 높음" location="서울" country="한국" reward="1,000,000"/>
-              <JobCard href="https://www.wanted.co.kr/wd/126533" 
-              src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F35428%2F6ba26d5ggqdwbh5l__1080_790.jpg&w=1000&q=75"
-              position ="F&B 크루" name="엠오디 호텔카푸치노(코오롱그룹 호텔사업부)" label="응답률 매우 높음" location="서울" country="한국" reward="1,000,000"/>
-              <JobCard href="https://www.wanted.co.kr/wd/69881" 
-              src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F5466%2Fkhpxo8tk1emf8z1p__1080_790.jpg&w=1000&q=75"
-              position ="콘텐츠 디자이너" name="러닝스푼즈" label="응답률 매우 높음" location="서울" country="한국" reward="1,000,000"/>
-              <JobCard href="https://www.wanted.co.kr/wd/130924" 
-              src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F31170%2Frrjdg2wrtwbsypjv__1080_790.png&w=1000&q=75"
-              position ="그래픽 디자이너" name="아우스월드와이드" label="응답률 매우 높음" location="서울" country="한국" reward="1,000,000"/>
-              <JobCard href="https://www.wanted.co.kr/wd/132153" 
-              src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F31829%2Fjnpo0nc96whq3m5x__1080_790.jpg&w=1000&q=75"
-              position ="F/W 개발 엔지니어 (for RADAR system)" name="모본" label="응답률 매우 높음" location="서울" country="한국" reward="1,000,000"/>
-                <JobCard href="https://www.wanted.co.kr/wd/103801" 
-              src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F30705%2Fci4dbkqcqia7oogu__1080_790.jpg&w=1000&q=75"
-              position ="[병역특례] 웹 개발자/SW 엔지니어 전문연구요원" name="볼트앤너트" label="응답률 매우 높음" location="서울" country="한국" reward="1,000,000"/>
-            </ul>
+            <JobCardList />
           </div>
         </div>
         <button type="button" className="ribbonBannerCnt">

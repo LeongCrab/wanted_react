@@ -25,4 +25,11 @@ function JobCard({href, src, position, name, label, location, country, reward}){
     );
 }
 
+JobCard.defaultProps = {
+    label: "응답률 매우 높음",
+    location: "서울",
+    country: "한국",
+    reward: "1,000,000"
+}
+
 export default JobCard;

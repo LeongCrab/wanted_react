@@ -34,7 +34,7 @@ function Header() {
 
     return(
       <div className="submenuWrap">
-        <ul className={"width-"+(mainCategory.num < 17? "200px":mainCategory.num < 34? "400px":"600px" )} onMouseOver={() => setSubmenuOpen(true)} onMouseLeave={() => setSubmenuOpen(false)}>
+        <ul className={"width-"+(mainCategory.num === 0? "0px":mainCategory.num < 17? "200px":mainCategory.num < 34? "400px":"600px" )} onMouseOver={() => setSubmenuOpen(true)} onMouseLeave={() => setSubmenuOpen(false)}>
           {[...Array(parseInt(mainCategory.num))].map((n, idx) => (
             <li key={mainCategory.id + (idx + 1)}>{mainCategory.id + (idx + 1)}</li>
           ))}
@@ -85,7 +85,7 @@ function Header() {
           </div>
         </div>
       </div>
-      {(modalOpen === 1 || modalOpen === 2) && <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}/>}
+      {modalOpen > 0 && <Modal modalOpen={modalOpen} setModalOpen={setModalOpen}/>}
       {searchOpen && <SearchBar setSearchOpen={setSearchOpen} />}
     </>
   );

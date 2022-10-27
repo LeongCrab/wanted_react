@@ -1,0 +1,71 @@
+{
+    "jobImage": [
+        {
+            "id": 0,
+            "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F22333%2Feh1mycy7nnltf5ah__1080_790.jpg&w=1000&q=75",
+            "alt": "블루비커 - 웹 프론트엔드 개발자(React)"
+        },
+        {
+            "id": 1,
+            "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F22333%2Fdvcf627tgxatpg7v__1080_790.jpg&w=1000&q=75",
+            "alt": "블루비커 - 웹 프론트엔드 개발자(React)"
+        },
+        {
+            "id": 2,
+            "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F22333%2F6kxgpommhvckijjr__1080_790.jpg&w=1000&q=75",
+            "alt": "블루비커 - 웹 프론트엔드 개발자(React)"
+        },
+        {
+            "id": 3,
+            "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fcompany%2F22333%2Fvym9cwwcigp2tzbi__1080_790.jpg&w=1000&q=75",
+            "alt": "블루비커 - 웹 프론트엔드 개발자(React)"
+        }
+    ],
+    "tagList": [
+        {
+            "id": 0,
+            "href": "https://www.wanted.co.kr/tag_search?tag=%EC%9D%B8%EC%9B%90%EA%B8%89%EC%84%B1%EC%9E%A5",
+            "content": "인원급성장"
+        },
+        {
+            "id": 1,
+            "href": "https://www.wanted.co.kr/tag_search?tag=50%EB%AA%85%EC%9D%B4%ED%95%98",
+            "content": "50명이하"
+        },
+        {
+            "id": 2,
+            "href": "https://www.wanted.co.kr/tag_search?tag=%EC%84%A4%EB%A6%BD3%EB%85%84%EC%9D%B4%ED%95%98",
+            "content": "설립3년이하"
+        },
+        {
+            "id": 3,
+            "href": "https://www.wanted.co.kr/tag_search?tag=%EC%8A%A4%ED%86%A1%EC%98%B5%EC%85%98",
+            "content": "스톡옵션"
+        },
+        {
+            "id": 4,
+            "href": "https://www.wanted.co.kr/tag_search?tag=%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85",
+            "content": "스타트업"
+        },
+        {
+            "id": 5,
+            "href":"https://www.wanted.co.kr/tag_search?tag=%EC%9B%8C%ED%81%AC%EC%83%B5",
+            "content": "워크샵"
+        },
+        {
+            "id": 6,
+            "href":"https://www.wanted.co.kr/tag_search?tag=%EA%B0%84%EC%8B%9D",
+            "content": "간식"
+        },
+        {
+            "id": 7,
+            "href":"https://www.wanted.co.kr/tag_search?tag=%EA%B1%B4%EA%B0%95%EA%B2%80%EC%A7%84",
+            "content": "건강검진"
+        },
+        {
+            "id": 8,
+            "href":"https://www.wanted.co.kr/tag_search?tag=IT%2C%20%EC%BB%A8%ED%85%90%EC%B8%A0",
+            "content": "IT, 컨텐츠"
+        }
+    ]
+}
