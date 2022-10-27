@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Header from './Header';
 import JobCard from './JobCard';
 import Footer from './Footer';
-import './BlueBeaker.css';
+import './css/BlueBeaker.css';
 import JobCardListData from './data/JobCardList.json';
 import BlueBeakerData from './data/BlueBeaker.json';
 

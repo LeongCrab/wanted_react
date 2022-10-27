@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import './Header.css';
+import './css/Header.css';
 import Modal from './Modal';
 import SearchBar from './SearchBar';
 import HeaderData from "./data/Header.json";

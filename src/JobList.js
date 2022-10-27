@@ -1,7 +1,7 @@
 import React, { useState} from 'react';
 import Header from './Header';
 import JobCard from './JobCard';
-import './JobList.css';
+import './css/JobList.css';
 import JobListData from './data/JobList.json';
 import JobCardListData from './data/JobCardList.json';
 

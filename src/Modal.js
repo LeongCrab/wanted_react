@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import './Modal.css'
+import './css/Modal.css'
 
 function EmailUpdate({setModalOpen}) {
     const [email, setEmail] = useState("");

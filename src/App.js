@@ -10,9 +10,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<MainPage/>} />
-        <Route path='/joblist' element={<JobList/>} />
-        <Route path='/bluebeaker' element={<BlueBeaker/>} />
+        <Route path='/' element={<MainPage />} />
+        <Route path='/joblist' element={<JobList />} />
+        <Route path='/bluebeaker' element={<BlueBeaker />} />
       </Routes>
     </BrowserRouter>
   );

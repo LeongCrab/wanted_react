@@ -1,4 +1,4 @@
-import './JobCard.css';
+import './css/JobCard.css';
 
 function JobCard({href, src, position, name, label, location, country, reward}){
     return(

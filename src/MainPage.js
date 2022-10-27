@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Header from './Header';
 import TopBannerSlider from './TopBannerSlider';
 import Footer from './Footer';
-import './MainPage.css';
+import './css/MainPage.css';
 import MainPageData from './data/MainPage.json';
 
 function CareerTagList() {
