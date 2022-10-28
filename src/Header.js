@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import './css/Header.css';
 import Modal from './Modal';
 import SearchBar from './SearchBar';
@@ -10,12 +10,11 @@ function NavBtn({href, category, tag}) {
   )
 }
 
-function Header() {
+function Header({searchOpen, setSearchOpen}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [menu, setMenu] = useState("");
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(0);
-  const [searchOpen, setSearchOpen] = useState(false);
   
   function Menu() {
     return(
@@ -45,6 +44,7 @@ function Header() {
 
   return(
     <>
+      <div className="headerDummy"/>
       <div className="header">
         <div className="headerWrap">
           <div className="headerItem">

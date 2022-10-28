@@ -2,8 +2,9 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import MainPage from './MainPage';
-import JobList from './JobList';
-import BlueBeaker from './BlueBeaker';
+import WDList from './WDList';
+import WD from './WD';
+import Search from './Search';
 
 
 function App() {
@@ -11,8 +12,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<MainPage />} />
-        <Route path='/joblist' element={<JobList />} />
-        <Route path='/bluebeaker' element={<BlueBeaker />} />
+        <Route path='/wdlist' element={<WDList />} />
+        <Route path='/wd/:companyName' element={<WD />} />
+        <Route path='/search' element={<Search />} />
+        <Route path="/*" element={<h1>존재하지 않는 페이지입니다.</h1>} />
       </Routes>
     </BrowserRouter>
   );

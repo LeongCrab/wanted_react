@@ -164,10 +164,10 @@ function InfoBtn({href, src, title}) {
 }
 
 function MainPage() {
+  const [searchOpen, setSearchOpen] = useState(false);
   return (
     <>
-      <div className="headerDummy" style={{height: 50}} />
-      <Header />
+      <Header searchOpen={searchOpen} setSearchOpen={setSearchOpen} />
       <div id="main">
         <div id="mainWrap">
           <TopBannerSlider />

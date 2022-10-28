@@ -39,6 +39,7 @@ export default function TopBannerSlider () {
     pauseOnHover: true,
     variableWidth: true,
   };
+  
   return (
     <div className="topBannerCnt">
       <button type="button" className="topBanner_arrow topBanner_arrow_left" onClick={() => sliderRef.current.slickPrev()}>&lt;</button>

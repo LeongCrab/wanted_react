@@ -84,47 +84,5 @@
             "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ftags%2F53ca893e-9f6e-11ec-b909-0242ac120002.png&w=50&q=75",
             "backgroundColor": "RGB(239, 241, 251)"
         }
-    ],
-    "featuredList": [
-        {
-            "id": 0,
-            "href": "https://www.wanted.co.kr/company/1355",
-            "src": "https://static.wanted.co.kr/images/company/1355/16906_2_0.__1080_790.jpg",
-            "logo": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fwdes%2F0_5_01c06ee3-c3ec-4c81-8f3f-ab7418f1d75a.jpg&w=100&q=75",
-            "header": "탭조이코리아(Tapjoy)",
-            "body": 8
-        },
-        {
-            "id": 1,
-            "href": "https://www.wanted.co.kr/company/2299",
-            "src": "https://static.wanted.co.kr/images/company/2299/csrdy9zbgjy5ne6d__1080_790.jpg",
-            "logo": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fwdes%2F0_5.e44c0a94.jpg&w=100&q=75",
-            "header": "스페이스오디티(Space Oddity)",
-            "body": 5
-        },
-        {
-            "id": 2,
-            "href": "https://www.wanted.co.kr/company/35903",
-            "src": "https://static.wanted.co.kr/images/company/35903/xbk7aqiygykq2crq__1080_790.jpg",
-            "logo": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fwdes%2F0_5.5654364d.jpg&w=100&q=75",
-            "header": "롱기스트",
-            "body": 3
-        },
-        {
-            "id": 3,
-            "href": "https://www.wanted.co.kr/company/3430",
-            "src": "https://static.wanted.co.kr/images/company/3430/4l6jjlieocixrohk__1080_790.jpg",
-            "logo": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fwdes%2F0_5.568317ca.png&w=100&q=75",
-            "header": "스윗코리아",
-            "body": 7
-        },
-        {
-            "id": 4,
-            "href": "https://www.wanted.co.kr/company/2237",
-            "src": "https://static.wanted.co.kr/images/company/2237/zya13wpnohi0uffa__1080_790.jpg",
-            "logo": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fwdes%2F0_5.ad446faf.jpg&w=100&q=75",
-            "header": "스페이스워크",
-            "body": 7
-        }
     ]
 }

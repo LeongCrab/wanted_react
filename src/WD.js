@@ -1,169 +1,167 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
+import './css/WD.css';
 import Header from './Header';
 import JobCard from './JobCard';
 import Footer from './Footer';
-import './css/BlueBeaker.css';
 import JobCardListData from './data/JobCardList.json';
 import BlueBeakerData from './data/BlueBeaker.json';
 
-function JobImage(){
-  const [slideX, setSlideX] = useState(0);
-  const size = 700;
-  const style = {
-    transform: `translateX(${slideX}px)`,
-    transition: "0.5s ease",
-  };
-  const toPrev = () => {
-    setSlideX(slideX + size);
-    if (slideX + size >= 0){
-      setSlideX(0);
-    }
-  };
-  const toNext = () => {
-    setSlideX(slideX - size);
-    if (slideX - size <= -2100){
-      setSlideX(-2100);
-    }
-  };
-  return(
-    <section className="jobImage" >
-      <button className="jobImage_arrow jobImage_arrow_left" onClick={toPrev}>&lt;</button>
-      <button className="jobImage_arrow jobImage_arrow_right" onClick={toNext}>&gt;</button>
-      <div className="jobImage_slides" style={style}>
-        {BlueBeakerData.jobImage.map(image => (
-          <div className="jobImage_slide">
-            <img key={image.id} src={image.src} alt={image.alt + image.id} />
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function TagList(){
-  function Tag({href, content}){
+function WD() {
+  const [searchOpen, setSearchOpen] = useState(false);
+  const { companyName } = useParams();
+  function JobImage(){
+    const [slideX, setSlideX] = useState(0);
+    const size = BlueBeakerData.jobImage.length - 1;
+    const style = {
+      transform: `translateX(${slideX}px)`,
+      transition: "0.5s ease",
+    };
+    const toPrev = () => {
+      setSlideX(slideX + 700);
+      if (slideX + 700 >= 0)
+        setSlideX(0);
+    };
+    const toNext = () => {
+      setSlideX(slideX - 700);
+      if (slideX - 700 <= -700 * size)
+        setSlideX(-700 * size);
+    };
     return(
-      <li>
-        <a href={href}>
-          #{content}
-        </a>
-      </li>
-    );
-  }
-
-  return(
-    <div className="tags">
-      <ul>
-        {BlueBeakerData.tagList.map(tag => (
-          <Tag key={tag.id} href={tag.href} content={tag.content} />
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function Warning() {
-  const [body, setBody] = useState(false);
-
-  return(
-    <section>
-      <div className="warning">
-        <div className="warning_header">
-          <svg className="" width="24" height="24" viewBox="0 0 24 24"><g fill="currentColor" fillRule="evenodd"><path fillRule="nonzero" d="M15.266 20.658A9.249 9.249 0 0112 21.25a9.25 9.25 0 010-18.5 9.21 9.21 0 016.54 2.71A9.217 9.217 0 0121.25 12a9.213 9.213 0 01-2.71 6.54.75.75 0 101.061 1.062A10.713 10.713 0 0022.75 12c0-2.89-1.146-5.599-3.149-7.601A10.717 10.717 0 0012 1.25C6.063 1.25 1.25 6.063 1.25 12S6.063 22.75 12 22.75c1.31 0 2.591-.235 3.794-.688a.75.75 0 10-.528-1.404z"></path><path d="M13 16a1 1 0 11-2 0 1 1 0 012 0"></path><path fillRule="nonzero" d="M11.25 7v5a.75.75 0 101.5 0V7a.75.75 0 10-1.5 0z"></path></g></svg>
-          <div className="warning_header_content">
-            <h5>
-                본 채용정보는 원티드랩의 동의없이 무단전재, 재배포, 재가공할 수 없으며, 구직활동 이외의<br />
-                용도로 사용할 수 없습니다.
-            </h5>
-            <button type="button" onClick={() => body ? setBody(false) : setBody(true)} className={body? "closeBtn" : ""}>
-              <img src="./img/check.png" alt="No img"/>
-            </button>
-          </div>
+      <section className="jobImage">
+        <button className="jobImage_arrow jobImage_arrow_left" onClick={toPrev}>&lt;</button>
+        <button className="jobImage_arrow jobImage_arrow_right" onClick={toNext}>&gt;</button>
+        <div className="jobImage_slides" style={style}>
+          {BlueBeakerData.jobImage.map(image => (
+            <div key={image.id} className="jobImage_slide">
+              <img src={image.src} alt={image.alt + image.id} />
+            </div>
+          ))}
         </div>
-        {body && (
-          <div className="warning_body">
-            <p>
-              본 채용 정보는&nbsp;
-              <strong>블루비커</strong>
-              에서 제공한 자료를 바탕으로 원티드랩에서 표현을 수정하고 이의 배열 및 구성을 편집하여 완성한 원티드랩의 저작자산이자 영업자산입니다. 본 정보 및 데이터베이스의 일부 내지는 전부에 대하여 원티드랩의 동의 없이 무단전재 또는 재배포, 재가공 및 크롤링할 수 없으며, 게재된 채용기업의 정보는 구직자의 구직활동 이외의 용도로 사용될 수 없습니다. 원티드랩은 
-              <strong>블루비커</strong>
-              에서 게재한 자료에 대한 오류나 그 밖에 원티드랩이 가공하지 않은 정보의 내용상 문제에 대하여 어떠한 보장도 하지 않으며, 사용자가 이를 신뢰하여 취한 조치에 대해 책임을 지지 않습니다.&nbsp;
-              <strong>&lt;저작권자 (주)원티드랩. 무단전재-재배포금지&gt;</strong>
-            </p>
-          </div>
-        )}
-      </div>
-    </section>
-  );
-}
-
-function JobProcess() {
-  function Liker({url}){
-    return(
-      <li style={{backgroundImage: `url(${url}), url(https://static.wanted.co.kr/images/userweb/profile_default.png})`}} />
+      </section>
     );
   }
   
-  return (
-    <aside className="jobProcessCnt">
-      <header>
-        <div className="rewardCnt">
-          <h3>채용보상금</h3>
-          <ul>
-            <li>
-              <h4>추천인</h4>
-              <p>500,000원</p>
-            </li>
-            <li>
-              <h4>지원자</h4>
-              <p>500,000원</p>
-            </li>
-          </ul>
-          <button className="shareBtn" type="button">
-            <svg xmlns="https://www.w3.org/2000/svg" xmlnsXlink="https://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 19 19"><defs><path id="shareIcon" d="M5.336 7.75c-.551-.703-1.418-1.136-2.365-1.136C1.337 6.614 0 7.898 0 9.494c0 1.596 1.336 2.879 2.971 2.879.93 0 1.785-.419 2.338-1.102l8.495 4.482c.128.068.276.092.42.068l.025-.004c.213-.036.395-.173.489-.367.101-.21.249-.393.437-.54.673-.526 1.643-.407 2.168.266.526.673.407 1.643-.265 2.167-.673.526-1.643.407-2.168-.266-.226-.29-.644-.34-.933-.115-.29.226-.34.644-.115.933.977 1.251 2.783 1.473 4.034.496 1.25-.976 1.472-2.782.495-4.033-.977-1.251-2.783-1.473-4.033-.496-.169.132-.32.28-.454.442L5.478 9.858c-.322-.241-.816-.145-1 .255-.259.558-.844.93-1.507.93-.913 0-1.642-.7-1.642-1.55 0-.849.73-1.55 1.642-1.55.636 0 1.2.343 1.473.863.107.368.526.64.954.413l9.026-4.762.118-.079.029-.024c.233-.197.303-.527.169-.8-.104-.212-.158-.442-.158-.68 0-.853.692-1.545 1.544-1.545.853 0 1.545.692 1.545 1.544 0 .854-.691 1.545-1.545 1.545-.367 0-.664.297-.664.664 0 .367.297.665.664.665C17.714 5.747 19 4.46 19 2.873 19 1.287 17.713 0 16.126 0c-1.586 0-2.873 1.287-2.873 2.873 0 .224.026.445.076.66L5.336 7.748z"></path></defs><g fill="none" fillRule="evenodd"><use fill="#36F" xlinkHref="#shareIcon"></use></g></svg>
-          </button>
+  function TagList(){
+    function Tag({href, content}){
+      return(
+        <li>
+          <a href={href}>
+            #{content}
+          </a>
+        </li>
+      );
+    }
+  
+    return(
+      <div className="tags">
+        <ul>
+          {BlueBeakerData.tagList.map(tag => (
+            <Tag key={tag.id} href={tag.href} content={tag.content} />
+          ))}
+        </ul>
+      </div>
+    );
+  }
+  
+  function Warning() {
+    const [body, setBody] = useState(false);
+  
+    return(
+      <section>
+        <div className="warning">
+          <div className="warning_header">
+            <svg className="" width="24" height="24" viewBox="0 0 24 24"><g fill="currentColor" fillRule="evenodd"><path fillRule="nonzero" d="M15.266 20.658A9.249 9.249 0 0112 21.25a9.25 9.25 0 010-18.5 9.21 9.21 0 016.54 2.71A9.217 9.217 0 0121.25 12a9.213 9.213 0 01-2.71 6.54.75.75 0 101.061 1.062A10.713 10.713 0 0022.75 12c0-2.89-1.146-5.599-3.149-7.601A10.717 10.717 0 0012 1.25C6.063 1.25 1.25 6.063 1.25 12S6.063 22.75 12 22.75c1.31 0 2.591-.235 3.794-.688a.75.75 0 10-.528-1.404z"></path><path d="M13 16a1 1 0 11-2 0 1 1 0 012 0"></path><path fillRule="nonzero" d="M11.25 7v5a.75.75 0 101.5 0V7a.75.75 0 10-1.5 0z"></path></g></svg>
+            <div className="warning_header_content">
+              <h5>
+                  본 채용정보는 원티드랩의 동의없이 무단전재, 재배포, 재가공할 수 없으며, 구직활동 이외의<br />
+                  용도로 사용할 수 없습니다.
+              </h5>
+              <button type="button" onClick={() => body ? setBody(false) : setBody(true)} className={body? "closeBtn" : ""}>
+                <img src="./img/check.png" alt="No img"/>
+              </button>
+            </div>
+          </div>
+          {body && (
+            <div className="warning_body">
+              <p>
+                본 채용 정보는&nbsp;
+                <strong>블루비커</strong>
+                에서 제공한 자료를 바탕으로 원티드랩에서 표현을 수정하고 이의 배열 및 구성을 편집하여 완성한 원티드랩의 저작자산이자 영업자산입니다. 본 정보 및 데이터베이스의 일부 내지는 전부에 대하여 원티드랩의 동의 없이 무단전재 또는 재배포, 재가공 및 크롤링할 수 없으며, 게재된 채용기업의 정보는 구직자의 구직활동 이외의 용도로 사용될 수 없습니다. 원티드랩은 
+                <strong>블루비커</strong>
+                에서 게재한 자료에 대한 오류나 그 밖에 원티드랩이 가공하지 않은 정보의 내용상 문제에 대하여 어떠한 보장도 하지 않으며, 사용자가 이를 신뢰하여 취한 조치에 대해 책임을 지지 않습니다.&nbsp;
+                <strong>&lt;저작권자 (주)원티드랩. 무단전재-재배포금지&gt;</strong>
+              </p>
+            </div>
+          )}
         </div>
-        <button className="bookmarkBtn" type="button">
-          <svg width="13" height="17" viewBox="0 0 13 17" style={{color: "RGB(51, 102, 255)"}}><defs><path id="bookmarkIconLine" d="M1.481 1.481h9.382v10.727c0 .409.331.74.74.74.41 0 .741-.331.741-.74V.74c0-.41-.331-.741-.74-.741H.74C.33 0 0 .332 0 .74v14.814c0 .568.614.925 1.108.643l5.18-2.873 5.104 2.873c.355.203.807.08 1.01-.276.203-.355.08-.808-.275-1.01l-5.471-3.083c-.228-.13-.507-.13-.735 0l-4.44 2.45V1.48z"></path></defs><g fill="none" fillRule="evenodd"><use fill="currentColor" xlinkHref="#bookmarkIconLine"></use></g></svg>
-            북마크하기
-        </button>
-        <button className="applyBtn" type="button">지원하기</button>
-        <div className="reaction">
-          <button className="likes" type="button">
-            <img src="./img/likes.png" alt="heart" style={{width: 16, height: 16}} />
-              <span>9</span>
-          </button>
-          <button className="liker" type="button">
+      </section>
+    );
+  }
+  
+  function JobProcess() {
+    function Liker({url}){
+      return(
+        <li style={{backgroundImage: `url(${url}), url(https://static.wanted.co.kr/images/userweb/profile_default.png})`}} />
+      );
+    }
+    
+    return (
+      <aside className="jobProcessCnt">
+        <header>
+          <div className="rewardCnt">
+            <h3>채용보상금</h3>
             <ul>
-              <Liker url="https://lh3.googleusercontent.com/a/AATXAJyptvBO9pOC55mAwO0IA3-llT_OIJ3QyPcS1-DN=s96-c"/>
-              <Liker url="https://k.kakaocdn.net/dn/chOGWm/btrJ7se3l3K/eeQiZuGgc7rBHKj9RBRFk1/img_110x110.jpg"/>
-              <Liker url="https://lh3.googleusercontent.com/a/ALm5wu2bYv18aK6_ahAXODnanhRHwCfEqvoUbqKJCBKA=s96-c"/>
+              <li>
+                <h4>추천인</h4>
+                <p>500,000원</p>
+              </li>
+              <li>
+                <h4>지원자</h4>
+                <p>500,000원</p>
+              </li>
             </ul>
+            <button className="shareBtn" type="button">
+              <svg xmlns="https://www.w3.org/2000/svg" xmlnsXlink="https://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 19 19"><defs><path id="shareIcon" d="M5.336 7.75c-.551-.703-1.418-1.136-2.365-1.136C1.337 6.614 0 7.898 0 9.494c0 1.596 1.336 2.879 2.971 2.879.93 0 1.785-.419 2.338-1.102l8.495 4.482c.128.068.276.092.42.068l.025-.004c.213-.036.395-.173.489-.367.101-.21.249-.393.437-.54.673-.526 1.643-.407 2.168.266.526.673.407 1.643-.265 2.167-.673.526-1.643.407-2.168-.266-.226-.29-.644-.34-.933-.115-.29.226-.34.644-.115.933.977 1.251 2.783 1.473 4.034.496 1.25-.976 1.472-2.782.495-4.033-.977-1.251-2.783-1.473-4.033-.496-.169.132-.32.28-.454.442L5.478 9.858c-.322-.241-.816-.145-1 .255-.259.558-.844.93-1.507.93-.913 0-1.642-.7-1.642-1.55 0-.849.73-1.55 1.642-1.55.636 0 1.2.343 1.473.863.107.368.526.64.954.413l9.026-4.762.118-.079.029-.024c.233-.197.303-.527.169-.8-.104-.212-.158-.442-.158-.68 0-.853.692-1.545 1.544-1.545.853 0 1.545.692 1.545 1.544 0 .854-.691 1.545-1.545 1.545-.367 0-.664.297-.664.664 0 .367.297.665.664.665C17.714 5.747 19 4.46 19 2.873 19 1.287 17.713 0 16.126 0c-1.586 0-2.873 1.287-2.873 2.873 0 .224.026.445.076.66L5.336 7.748z"></path></defs><g fill="none" fillRule="evenodd"><use fill="#36F" xlinkHref="#shareIcon"></use></g></svg>
+            </button>
+          </div>
+          <button className="bookmarkBtn" type="button">
+            <svg width="13" height="17" viewBox="0 0 13 17" style={{color: "RGB(51, 102, 255)"}}><defs><path id="bookmarkIconLine" d="M1.481 1.481h9.382v10.727c0 .409.331.74.74.74.41 0 .741-.331.741-.74V.74c0-.41-.331-.741-.74-.741H.74C.33 0 0 .332 0 .74v14.814c0 .568.614.925 1.108.643l5.18-2.873 5.104 2.873c.355.203.807.08 1.01-.276.203-.355.08-.808-.275-1.01l-5.471-3.083c-.228-.13-.507-.13-.735 0l-4.44 2.45V1.48z"></path></defs><g fill="none" fillRule="evenodd"><use fill="currentColor" xlinkHref="#bookmarkIconLine"></use></g></svg>
+              북마크하기
           </button>
-        </div>
-      </header>
-      <footer></footer>
-    </aside>
-  );
-}
-
-function JobCardList() {
-  return(
-    <ul className="jobCardList">
-      {JobCardListData.jobCardList.map(jobCard => (
-        <JobCard key={jobCard.id} href={jobCard.href} src={jobCard.src} position={jobCard.position} name={jobCard.name} label={jobCard.label} location={jobCard.location} country={jobCard.country} reward={jobCard.reward} />
-      ))}
-    </ul>
-);
-}
-
-function BlueBeaker() {
-
+          <button className="applyBtn" type="button">지원하기</button>
+          <div className="reaction">
+            <button className="likes" type="button">
+              <img src="./img/likes.png" alt="heart" style={{width: 16, height: 16}} />
+                <span>9</span>
+            </button>
+            <button className="liker" type="button">
+              <ul>
+                <Liker url="https://lh3.googleusercontent.com/a/AATXAJyptvBO9pOC55mAwO0IA3-llT_OIJ3QyPcS1-DN=s96-c"/>
+                <Liker url="https://k.kakaocdn.net/dn/chOGWm/btrJ7se3l3K/eeQiZuGgc7rBHKj9RBRFk1/img_110x110.jpg"/>
+                <Liker url="https://lh3.googleusercontent.com/a/ALm5wu2bYv18aK6_ahAXODnanhRHwCfEqvoUbqKJCBKA=s96-c"/>
+              </ul>
+            </button>
+          </div>
+        </header>
+        <footer></footer>
+      </aside>
+    );
+  }
+  
+  function JobCardList() {
+    return(
+      <ul className="jobCardList">
+        {JobCardListData.jobCardList.map(jobCard => (
+          <JobCard key={jobCard.id} href={jobCard.href} src={jobCard.src} position={jobCard.position} name={jobCard.name} label={jobCard.label} location={jobCard.location} country={jobCard.country} reward={jobCard.reward} />
+        ))}
+      </ul>
+    );
+  }
   return (
     <>
-      <div className="headerDummy" style={{height: 50}} />
-      <Header />
+      <Header searchOpen={searchOpen} setSearchOpen={setSearchOpen} />
       <div className="jobDetailCnt">
         <div className="jobDetailWrap">
           <div className="jobDetail_relativeWrap">
@@ -221,7 +219,7 @@ function BlueBeaker() {
                   <span className="content_header">근무지역</span>
                   <span className="content_body">서울 용산구 한강대로 366 트윈시티 남산 2 패스트파이브</span>
                 </div>
-                <a className="naverMap" href="https://map.naver.com/?dlevel=13&amp;pinTitle=서울특별시 용산구 한강대로 366 트윈시티 남산&amp;lat=37.5511247&amp;lng=126.9729133" rel="noopener noreferrer" target="_blank">
+                <a className="map" href="https://map.naver.com/?dlevel=13&amp;pinTitle=서울특별시 용산구 한강대로 366 트윈시티 남산&amp;lat=37.5511247&amp;lng=126.9729133" rel="noopener noreferrer" target="_blank">
                   <img alt="Map with company address" src="./img/wd91536.png" />
                 </a>
               </section>
@@ -263,4 +261,4 @@ function BlueBeaker() {
   );
 }
 
-export default BlueBeaker;
+export default WD;

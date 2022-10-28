@@ -241,12 +241,12 @@
   font-weight: 600;
   vertical-align: text-top;
 }
-.naverMap{
+.map{
   display: block;
   width: 100%;
   height: 100%;
 }
-.naverMap > img{
+.map > img{
   display: block;
   width: 100%;
   background-size: cover;
