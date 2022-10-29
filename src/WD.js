@@ -7,6 +7,7 @@ import JobCard from './JobCard';
 import Footer from './Footer';
 import JobCardListData from './data/JobCardList.json';
 import BlueBeakerData from './data/BlueBeaker.json';
+import api_key from './data/api_key.json';
 
 function WD() {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -198,7 +199,7 @@ function WD() {
 
     useEffect(() => {
       const script = window.document.getElementsByTagName('script')[0];
-      const API_KEY = "";
+      const API_KEY = api_key.API_KEY;
       const includeCheck = script.src.startsWith(
         'https://maps.googleapis.com/maps/api'
       );
