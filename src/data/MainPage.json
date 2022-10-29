@@ -152,14 +152,8 @@
             "href": "https://www.wanted.co.kr/events/wantedsalon221026",
             "src": "https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fevents%2F2421%2F7065bb13.jpg&w=1200&q=100",
             "tags": [
-                {
-                    "id": "Online",
-                    "content": "온라인"
-                },
-                {
-                    "id": "VOD",
-                    "content": "VOD"
-                }
+                {"id": "Online", "content": "온라인"},
+                {"id": "VOD", "content": "VOD"}
             ],
             "title": "10월 원티드살롱(평가보상편)",
             "date": ""
