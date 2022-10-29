@@ -21,8 +21,7 @@ function Search() {
         );
     }
     const filterData = () => {
-        return JobCardListData.jobCardList.filter((data) => data.position.includes(searchQuery)
-        );
+        return JobCardListData.jobCardList.filter((data) => data.position.includes(searchQuery));
     };
     return(
         <>
@@ -32,7 +31,7 @@ function Search() {
             </div>
             <div className="searchWrap">
                 <div className="searchSection">
-                    <h2 className="searchLabel">회사<span>1</span></h2>
+                    <h2 className="searchLabel">회사<span>0</span></h2>
                 </div>
                 <div className="searchSection">
                     <h2 className="searchLabel">포지션<span>{filterData().length}</span></h2>

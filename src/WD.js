@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
 import './css/WD.css';
@@ -11,6 +11,13 @@ import BlueBeakerData from './data/BlueBeaker.json';
 function WD() {
   const [searchOpen, setSearchOpen] = useState(false);
   const { companyName } = useParams();
+  
+  function Cash (num) {
+    const number = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+ 
+    return(`${number}원`);
+  }
+ 
   function JobImage(){
     const [slideX, setSlideX] = useState(0);
     const size = BlueBeakerData.jobImage.length - 1;
@@ -115,11 +122,11 @@ function WD() {
             <ul>
               <li>
                 <h4>추천인</h4>
-                <p>500,000원</p>
+                <p>{Cash(500000)}</p>
               </li>
               <li>
                 <h4>지원자</h4>
-                <p>500,000원</p>
+                <p>{Cash(500000)}</p>
               </li>
             </ul>
             <button className="shareBtn" type="button">
@@ -159,6 +166,54 @@ function WD() {
       </ul>
     );
   }
+
+  function GoogleMap() {
+    const mapElement = useRef(null);
+
+    const loadScript = useCallback((url) => {
+      const firstScript = window.document.getElementsByTagName('script')[0];
+      const newScript = window.document.createElement('script');
+      newScript.src = url;
+      newScript.async = true;
+      newScript.defer = true;
+      firstScript?.parentNode?.insertBefore(newScript, firstScript);
+    }, []);
+
+
+    const initMap = useCallback(() => {
+      const { google } = window;
+      if (!mapElement.current || !google) return;
+
+
+      const location = { lat: 37.55098257107409, lng: 126.97274923324585 };
+      const map = new google.maps.Map(mapElement.current, {
+        zoom: 17,
+        center: location,
+      });
+      new google.maps.Marker({
+        position: location,
+        map,
+      });
+    }, []);
+
+    useEffect(() => {
+      const script = window.document.getElementsByTagName('script')[0];
+      const API_KEY = "";
+      const includeCheck = script.src.startsWith(
+        'https://maps.googleapis.com/maps/api'
+      );
+
+      if (includeCheck) return initMap();
+
+      window.initMap = initMap;
+      loadScript(
+        `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=initMap&language=en`
+      );
+    }, [initMap, loadScript]);
+
+    return <div className="GoogleMap" ref={mapElement} />;
+  }
+
   return (
     <>
       <Header searchOpen={searchOpen} setSearchOpen={setSearchOpen} />
@@ -219,9 +274,7 @@ function WD() {
                   <span className="content_header">근무지역</span>
                   <span className="content_body">서울 용산구 한강대로 366 트윈시티 남산 2 패스트파이브</span>
                 </div>
-                <a className="map" href="https://map.naver.com/?dlevel=13&amp;pinTitle=서울특별시 용산구 한강대로 366 트윈시티 남산&amp;lat=37.5511247&amp;lng=126.9729133" rel="noopener noreferrer" target="_blank">
-                  <img alt="Map with company address" src="./img/wd91536.png" />
-                </a>
+                <GoogleMap />
               </section>
               <section className="companyInfo">
                 <button type="button" className="left">

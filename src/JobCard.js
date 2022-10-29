@@ -1,6 +1,12 @@
 import './css/JobCard.css';
 
 function JobCard({href, src, position, name, label, location, country, reward}){
+    function Cash (num) {
+        const number = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+     
+        return(`${number}원`);
+    }
+
     return(
         <li className="jobCard">
             <a href={href}>
@@ -18,7 +24,7 @@ function JobCard({href, src, position, name, label, location, country, reward}){
                         <div className="response_veryHigh">{label}</div>
                     </div>
                     <div className="jobLocation">{location}<span>.</span>{country}</div>
-                    <div className="jobReward">채용보상금 {reward}원</div>
+                    <div className="jobReward">채용보상금 {Cash(reward)}</div>
                 </div>
             </a>
         </li>
@@ -29,7 +35,7 @@ JobCard.defaultProps = {
     label: "응답률 매우 높음",
     location: "서울",
     country: "한국",
-    reward: "1,000,000"
+    reward: 1000000
 }
 
 export default JobCard;

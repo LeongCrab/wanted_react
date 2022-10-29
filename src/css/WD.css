@@ -241,16 +241,10 @@
   font-weight: 600;
   vertical-align: text-top;
 }
-.map{
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-.map > img{
-  display: block;
-  width: 100%;
-  background-size: cover;
-  background-position: 50%;
+
+.GoogleMap{
+  width: 700px;
+  height: 254px;
 }
 
 /*company info*/
