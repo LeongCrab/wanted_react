@@ -6,7 +6,7 @@ import Header from './Header';
 import JobCard from './JobCard';
 import Footer from './Footer';
 import JobCardListData from './data/JobCardList.json';
-import BlueBeakerData from './data/BlueBeaker.json';
+import WDData from './data/WD.json';
 import api_key from './data/api_key.json';
 
 function WD() {
@@ -21,7 +21,7 @@ function WD() {
  
   function JobImage(){
     const [slideX, setSlideX] = useState(0);
-    const size = BlueBeakerData.jobImage.length - 1;
+    const size = WDData.jobImage.length - 1;
     const style = {
       transform: `translateX(${slideX}px)`,
       transition: "0.5s ease",
@@ -41,7 +41,7 @@ function WD() {
         <button className="jobImage_arrow jobImage_arrow_left" onClick={toPrev}>&lt;</button>
         <button className="jobImage_arrow jobImage_arrow_right" onClick={toNext}>&gt;</button>
         <div className="jobImage_slides" style={style}>
-          {BlueBeakerData.jobImage.map(image => (
+          {WDData.jobImage.map(image => (
             <div key={image.id} className="jobImage_slide">
               <img src={image.src} alt={image.alt + image.id} />
             </div>
@@ -65,7 +65,7 @@ function WD() {
     return(
       <div className="tags">
         <ul>
-          {BlueBeakerData.tagList.map(tag => (
+          {WDData.tagList.map(tag => (
             <Tag key={tag.id} href={tag.href} content={tag.content} />
           ))}
         </ul>
