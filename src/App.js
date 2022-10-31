@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path='/' element={<MainPage />} />
         <Route path='/wdlist' element={<WDList />} />
-        <Route path='/wd/:companyName' element={<WD />} />
+        <Route path='/wd/:params' element={<WD />} />
         <Route path='/search' element={<Search />} />
         <Route path="/*" element={<h1>존재하지 않는 페이지입니다.</h1>} />
       </Routes>

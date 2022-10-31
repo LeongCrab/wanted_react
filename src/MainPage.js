@@ -176,7 +176,7 @@ function MainPage() {
               <div id="careerTitle">
                 <h2>나에게 필요한 커리어 인사이트</h2>
                 <button type="button">
-                  <img src="./img/questionMark.png" style={{width:24, height:24}} alt="No img" />
+                  <img src="/img/questionMark.png" style={{width:24, height:24}} alt="No img" />
                 </button>
               </div>
               <CareerTagList />
@@ -184,7 +184,7 @@ function MainPage() {
               <div id="careerMore">
                 <button type="button">
                   <p>더 많은 콘텐츠 보기</p>
-                  <img src="./img/check.png" alt="No Check" />
+                  <img src="/img/check.png" alt="No Check" />
                 </button>
               </div>
             </div>
@@ -254,10 +254,10 @@ function MainPage() {
             <div className="sectionWrap">
               <div id="infoTitle">채용 정보를 찾고 계셨나요?</div>
               <div id="infoContainer">
-                <InfoBtn href="https://www.wanted.co.kr/wdlist" src="./img/search.png" title="채용공고"/>
-                <InfoBtn href="https://www.wanted.co.kr/profile" src="./img/profile.png" title="내 프로필"/>
-                <InfoBtn href="https://www.wanted.co.kr/matchup/intro" src="./img/matchup.png" title="매치업"/>
-                <InfoBtn href="https://www.wanted.co.kr/salary" src="./img/earn.png" title="직군별 연봉"/>
+                <InfoBtn href="https://www.wanted.co.kr/wdlist" src="/img/search.png" title="채용공고"/>
+                <InfoBtn href="https://www.wanted.co.kr/profile" src="/img/profile.png" title="내 프로필"/>
+                <InfoBtn href="https://www.wanted.co.kr/matchup/intro" src="/img/matchup.png" title="매치업"/>
+                <InfoBtn href="https://www.wanted.co.kr/salary" src="/img/earn.png" title="직군별 연봉"/>
               </div>
             </div>
           </div>
