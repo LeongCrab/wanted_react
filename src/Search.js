@@ -21,7 +21,7 @@ function Search() {
         );
     }
     const filterData = () => {
-        return JobCardListData.jobCardList.filter((data) => data.position.includes(searchQuery));
+        return JobCardListData.jobCardList.filter((data) => data.position.toLowerCase().includes(searchQuery.toLowerCase()));
     };
     return(
         <>

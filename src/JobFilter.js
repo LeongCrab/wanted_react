@@ -3,6 +3,7 @@ import './css/JobFilter.css';
 import JobFilterData from './data/JobFilter.json'
 
 function JobFilter() {
+
     function JobTagSlider() {
         const [slideX, setSlideX] = useState(0);
         const [prevBtn, setPrevBtn] = useState(false);
@@ -48,9 +49,10 @@ function JobFilter() {
             </div>
         );
     }
+
     return(
-        <div id="filter">
-            <div id="filterWrap">
+        <div className="filter">
+            <div className="filterWrap">
                 <div className="buttonGroup">
                     <button className="filterButton">
                         <span className="buttonTitle">
@@ -80,7 +82,7 @@ function JobFilter() {
                         </button>
                     </div>
                 </div>
-                <select id="customSelect">
+                <select className="customSelect">
                     <option value="response">응답률순</option>
                     <option value="latest">최신순</option>
                     <option value="reward">보상금순</option>

@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './css/WDList.css';
 import Header from './Header';
 import JobCard from './JobCard';
-import JobFilter from './JobFilter'
+import JobFilter from './JobFilter';
 import WDListData from './data/WDList.json';
 import JobCardListData from './data/JobCardList.json';
 
 function WDList() {
+    const [scroll, setScroll] = useState(0);
     const [searchOpen, setSearchOpen] = useState(false);
     function FeaturedCardList() {
         function FeaturedCard({href, src, logo, header, body}){
@@ -46,7 +47,16 @@ function WDList() {
             </ul>
         );
     }
-    
+    const onScroll = () =>{
+        setScroll(window.scrollY);
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', onScroll);
+        return () => {
+            window.removeEventListener('scroll', onScroll);
+        }
+    }, [])
     return (
         <>
             <Header searchOpen={searchOpen} setSearchOpen={setSearchOpen} />
@@ -70,7 +80,9 @@ function WDList() {
                     </div>
                 </div>
                 <div id="jobListWrap">
-                    <JobFilter />
+                    <div className={'filterCnt_' + (scroll > 300? 'scrolled':'top')}>
+                        <JobFilter />
+                    </div>
                     <div id="jobList">
                         <div id="bookmark">
                             <button type="button">

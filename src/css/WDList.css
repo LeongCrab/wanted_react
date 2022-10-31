@@ -1,5 +1,5 @@
 #jobListCnt{
-    min-height: calc(100vh - 50px);
+    min-height: calc(100% - 50px);
 }
 #navBarCnt{
     padding-top: 40px;
@@ -63,8 +63,16 @@
     margin: 0 auto;
     padding: 20px 0 80px;
     width: 87.72%;
-    position: relative;
     max-width: 1060px;
+}
+.filterCnt_top{
+    position: static;
+}
+.filterCnt_scrolled{
+    position: fixed;
+    top: 50px;
+    z-index: 2;
+    width: 70%;
 }
 #bookmark{
     margin-bottom: 12px;

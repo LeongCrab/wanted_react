@@ -1,4 +1,5 @@
 import './css/JobCard.css';
+import { Link } from 'react-router-dom';
 
 function JobCard({href, src, position, name, label, location, country, reward}){
     function Cash (num) {
@@ -9,7 +10,7 @@ function JobCard({href, src, position, name, label, location, country, reward}){
 
     return(
         <li className="jobCard">
-            <a href={href}>
+            <Link to={href}>
                 <img src={src} alt={name}/>
                 <button className="bookmarkButton" type="button" >
                     <svg width="22" height="22" viewBox="0 0 18 18" fill="none" xmlns="https://www.w3.org/2000/svg">
@@ -26,7 +27,7 @@ function JobCard({href, src, position, name, label, location, country, reward}){
                     <div className="jobLocation">{location}<span>.</span>{country}</div>
                     <div className="jobReward">채용보상금 {Cash(reward)}</div>
                 </div>
-            </a>
+            </Link>
         </li>
     );
 }

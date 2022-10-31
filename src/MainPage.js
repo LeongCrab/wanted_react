@@ -49,7 +49,7 @@ function CareerTagList() {
     </div>
   );
 }
-function CareerCardList(){
+function CareerCardList({moreOpen}){
   function CareerCard({href, img, title, content, icon, author}) {
     return(
       <li>
@@ -73,6 +73,13 @@ function CareerCardList(){
        {MainPageData.careerCardList.map(card => (
           <CareerCard key={card.id} href={card.href} img={card.img} title={card.title} content={card.content} icon={card.icon} author={card.author} />
         ))}
+        {moreOpen && (
+          <>
+            {MainPageData.careerCardList.map(card => (
+              <CareerCard key={card.id} href={card.href} img={card.img} title={card.title} content={card.content} icon={card.icon} author={card.author} />
+            ))}
+          </>
+        )}
     </ul>
   );
 }
@@ -133,7 +140,7 @@ function EventCardList(){
       <img src={src} style={{width: 522, height: 273}} alt="No img"/>
       <div className="eventContent">
         <div className="eventTag">
-          {tags.map((tag,idx) => (
+          {tags.map((tag, idx) => (
             <span key={idx} className={`eventTag${tag.id}`}>{tag.content}</span>
           ))}
         </div>
@@ -165,6 +172,7 @@ function InfoBtn({href, src, title}) {
 
 function MainPage() {
   const [searchOpen, setSearchOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
   return (
     <>
       <Header searchOpen={searchOpen} setSearchOpen={setSearchOpen} />
@@ -180,9 +188,9 @@ function MainPage() {
                 </button>
               </div>
               <CareerTagList />
-              <CareerCardList />
+              <CareerCardList moreOpen={moreOpen} />
               <div id="careerMore">
-                <button type="button">
+                <button type="button" onClick={() => setMoreOpen(true)}>
                   <p>더 많은 콘텐츠 보기</p>
                   <img src="/img/check.png" alt="No Check" />
                 </button>

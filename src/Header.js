@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './css/Header.css';
 import Modal from './Modal';
 import SearchBar from './SearchBar';
@@ -51,9 +52,9 @@ function Header({searchOpen, setSearchOpen}) {
             <button className="hamburger" onMouseEnter={() => setMenuOpen(true)}>
               <img src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ficon-menu.png&w=undefined&q=75" alt="None" style={{height: 14, width1:17}} />
             </button>
-            <a href="https://www.wanted.co.kr/">
+            <Link to="/">
               <img src="/img/wanted_BI_logotype.png" alt="top Logo" style={{ height:17, width:74.38 }} />
-            </a>
+            </Link>
             {(menuOpen || submenuOpen) && <Menu />}
             {submenuOpen && <SubMenu />}
           </div>
