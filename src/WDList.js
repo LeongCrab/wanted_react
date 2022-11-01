@@ -83,6 +83,7 @@ function WDList() {
                     <div className={'filterCnt_' + (scroll > 300? 'scrolled':'top')}>
                         <JobFilter />
                     </div>
+                    <hr className={'wdlist_hr hr_'+(scroll > 300? 'scrolled':'top')}/>
                     <div id="jobList">
                         <div id="bookmark">
                             <button type="button">

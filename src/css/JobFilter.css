@@ -131,13 +131,6 @@
     height: 16px;
     margin-left: 5px;
 }
-filter hr:last-child{
-    height: 1px;
-    margin: 0;
-    border: none;
-    flex-shrink: 0;
-    background-color: #ececec;
-}
 
 .buttonGroup{
     display: flex;
