@@ -51,7 +51,7 @@ function Footer() {
                     <div>
                         <img className="countryFlag" src="https://static.wanted.co.kr/images/userweb/ico_KR.svg" style={{width: 24, height: 17}} alt="no img"/>
                         <select id="lang">
-                            <option defaultValue="Korea">한국 (한국어)</option>
+                            <option value="Korea">한국 (한국어)</option>
                             <option value="Japan">日本 (日本語)</option>
                             <option value="Worldwide">Worldwide (English)</option>
                             <option value="Singapore">Singapore (English)</option>
