@@ -2,14 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import "./css/Modal.css";
 
 const User = {
-  email: "test@example.com",
-  pw: "test2323@@@",
+  email: "1@1.1",
+  password: "111qqq!!!",
 };
 
 const LogIn = ({ setModalOpen, email, setEmail }) => {
-  const [emailValid, setEmailValid] = useState(false);
   const [password, setPassword] = useState("");
-
+  const [passwordOpen, setPasswordOpen] = useState(false);
+  const [emailValid, setEmailValid] = useState(false);
+  const [loginError, setLoginError] = useState(false);
   const handleEmail = (e) => {
     setEmail(e.target.value);
     const reg_email =
@@ -17,9 +18,28 @@ const LogIn = ({ setModalOpen, email, setEmail }) => {
     if (reg_email.test(e.target.value)) setEmailValid(true);
     else setEmailValid(false);
   };
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+    setLoginError(false);
+  };
   const onSubmitEmail = (e) => {
     e.preventDefault();
-    if (email && emailValid) setModalOpen(2);
+    if (email && emailValid) {
+      if (email === User.email) {
+        if (passwordOpen) {
+          if (User.email === email && User.password === password) {
+            alert(`환영합니다. ${email}님!`);
+            setModalOpen(0);
+          } else {
+            setLoginError(true);
+          }
+        } else {
+          setPasswordOpen(true);
+        }
+      } else {
+        setModalOpen(2);
+      }
+    }
   };
   return (
     <div className="inputPanel">
@@ -29,7 +49,9 @@ const LogIn = ({ setModalOpen, email, setEmail }) => {
           <div className="inputBody">
             <input
               type="text"
-              className={!emailValid && email ? "inputError" : "notError"}
+              className={
+                (!emailValid && email) || loginError ? "inputError" : "notError"
+              }
               placeholder="이메일을 입력해 주세요."
               value={email}
               onChange={handleEmail}
@@ -39,6 +61,25 @@ const LogIn = ({ setModalOpen, email, setEmail }) => {
             <div className="modalError">올바른 이메일 형식을 입력해주세요.</div>
           )}
         </div>
+        {passwordOpen && (
+          <div className="inputWrap">
+            <label>비밀번호</label>
+            <div className="inputBody">
+              <input
+                type="password"
+                className={loginError ? "inputError" : "notError"}
+                placeholder="비밀번호를 입력해 주세요."
+                value={password}
+                onChange={handlePassword}
+              />
+            </div>
+            {loginError && (
+              <div className="modalError">
+                이메일 주소 혹은 비밀번호가 일치하지 않습니다.
+              </div>
+            )}
+          </div>
+        )}
         <div id="inputPanelButtons">
           <button id="mailLogin" type="submit">
             <svg
@@ -233,11 +274,54 @@ const CheckBox = ({ agreePrivacy, setAgreePrivacy }) => {
     </div>
   );
 };
-
-function Modal({ modalOpen, setModalOpen }) {
-  const time = useRef(300);
+const Timer = ({ timeCount, setTimeCount, setGetCodeBtn }) => {
   const timer = useRef(null);
-  const timeCounter = useRef("5:00");
+  const time = useRef(5);
+
+  useEffect(() => {
+    console.log("useEffect start!!", timeCount);
+
+    timer.current = setInterval(() => {
+      if (timeCount !== "0:00") {
+        time.current -= 1;
+        setTimeCount(secToMin(time.current));
+      } else {
+        time.current = 5;
+        setGetCodeBtn(false);
+      }
+    }, 1000);
+    return () => {
+      console.log("useEffect return!!", timeCount);
+      clearInterval(timer.current);
+    };
+  }, [{ timeCount }]);
+
+  function secToMin(sec) {
+    const mm = parseInt(sec / 60);
+    const ss = sec % 60;
+    return ss < 10 ? `${mm}:0${ss}` : `${mm}:${ss}`;
+  }
+
+  return (
+    <>
+      {timeCount !== "0:00" && (
+        <div className="inputGuide valid">인증번호가 요청되었습니다.</div>
+      )}
+      {timeCount === "0:00" && (
+        <div className="inputGuide expired">
+          인증 시간이 만료됐어요. 다시 시도해 주세요.
+        </div>
+      )}
+      <span
+        className={"timeCode " + (timeCount === "0:00" ? "expired" : "valid")}
+      >
+        유효시간 {timeCount}
+      </span>
+    </>
+  );
+};
+function Modal({ modalOpen, setModalOpen }) {
+  const [timeCount, setTimeCount] = useState("5:00");
 
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -256,39 +340,13 @@ function Modal({ modalOpen, setModalOpen }) {
   const [KoreaOnly, setKoreaOnly] = useState(true);
   const [codeBtn, setCodeBtn] = useState(false);
   const [getCodeBtn, setGetCodeBtn] = useState(false);
+  const [inputMobile, setInputMobile] = useState(false);
 
   useEffect(() => {
     document.body.style = "overflow: hidden";
     return () => (document.body.style = "overflow: auto");
   }, []);
-  useEffect(() => {
-    if (codeBtn) {
-      console.log("useEffect start!!", timeCounter.current);
-      timer.current = setInterval(() => {
-        time.current -= 1;
-        timeCounter.current = secToMin(time.current);
-        if (time.current === 0) {
-          clearInterval(timer.current);
-        }
-      }, 1000);
-    } else {
-      console.log("useEffect return!!", timeCounter.current);
-      clearInterval(timer.current);
-    }
-    return () => {
-      console.log("useEffect return!!", timeCounter.current);
-      clearInterval(timer.current);
-    };
-  }, [codeBtn]);
 
-  function secToMin(num) {
-    let min = "";
-    let mm = parseInt(num / 60);
-    let ss = num % 60;
-    if (ss < 10) min = `0${mm}:0${ss}`;
-    else min = `0${mm}:${ss}`;
-    return min;
-  }
   const handleName = (e) => {
     setName(e.target.value);
     setNameCheck(true);
@@ -427,7 +485,6 @@ function Modal({ modalOpen, setModalOpen }) {
                     <div className="inputBody">
                       <div className="mobileInputSelect">
                         <select
-                          name="country"
                           onChange={(e) => {
                             if (e.target.value === "+82") setKoreaOnly(true);
                             else setKoreaOnly(false);
@@ -594,9 +651,7 @@ function Modal({ modalOpen, setModalOpen }) {
                           <option value="+993">+993 Turkmenistan</option>
                           <option value="+256">+256 Uganda</option>
                           <option value="+380">+380 Ukraine</option>
-                          <option value="+971">
-                            +971 United Arab Emirates
-                          </option>
+                          <option value="+971">+971 United Arab Emirates</option>
                           <option value="+44">+44 United Kingdom</option>
                           <option value="+1">+1 United States</option>
                           <option value="+598">+598 Uruguay</option>
@@ -618,6 +673,7 @@ function Modal({ modalOpen, setModalOpen }) {
                               ? "inputError"
                               : "notError"
                           }
+                          disabled={inputMobile}
                           onChange={handleMobile}
                           placeholder="(예시) 01034567890"
                         />
@@ -627,8 +683,10 @@ function Modal({ modalOpen, setModalOpen }) {
                             type="button"
                             disabled={!mobileValid || getCodeBtn}
                             onClick={() => {
+                              setTimeCount("5:00");
                               setCodeBtn(true);
                               setGetCodeBtn(true);
+                              setInputMobile(true);
                             }}
                           >
                             인증번호 받기
@@ -639,10 +697,9 @@ function Modal({ modalOpen, setModalOpen }) {
                         <div className="mobileCode">
                           <input
                             value={mobileCode}
-                            name="mobileCode"
                             placeholder="인증번호를 입력해 주세요."
                             onChange={(e) => setMobileCode(e.target.value)}
-                            disabled={codeBtn ? false : true}
+                            disabled={!codeBtn}
                           />
                           {codeBtn && (
                             <button
@@ -652,7 +709,7 @@ function Modal({ modalOpen, setModalOpen }) {
                                 setCodeBtn(false);
                                 setGetCodeBtn(true);
                               }}
-                              disabled={mobileCode ? false : true}
+                              disabled={!mobileCode}
                             >
                               확인
                             </button>
@@ -661,25 +718,11 @@ function Modal({ modalOpen, setModalOpen }) {
                       )}
                     </div>
                     {codeBtn && (
-                      <>
-                        {time.current > 0 && (
-                          <div className="inputGuide valid">
-                            인증번호가 요청되었습니다.
-                          </div>
-                        )}
-                        {time.current === 0 && (
-                          <div className="inputGuide expired">
-                            인증 시간이 만료됐어요. 다시 시도해 주세요.
-                          </div>
-                        )}
-                        <span
-                          className={
-                            "timeCode " + (time.current ? "valid" : "expired")
-                          }
-                        >
-                          유효시간 {timeCounter.current}
-                        </span>
-                      </>
+                      <Timer
+                        timeCount={timeCount}
+                        setTimeCount={setTimeCount}
+                        setGetCodeBtn={setGetCodeBtn}
+                      />
                     )}
                     {!mobileCheck && (
                       <div className="modalError">
