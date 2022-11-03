@@ -279,8 +279,6 @@ const Timer = ({ timeCount, setTimeCount, setGetCodeBtn }) => {
   const time = useRef(5);
 
   useEffect(() => {
-    console.log("useEffect start!!", timeCount);
-
     timer.current = setInterval(() => {
       if (timeCount !== "0:00") {
         time.current -= 1;
@@ -290,10 +288,7 @@ const Timer = ({ timeCount, setTimeCount, setGetCodeBtn }) => {
         setGetCodeBtn(false);
       }
     }, 1000);
-    return () => {
-      console.log("useEffect return!!", timeCount);
-      clearInterval(timer.current);
-    };
+    return () => clearInterval(timer.current);
   }, [{ timeCount }]);
 
   function secToMin(sec) {
@@ -346,7 +341,7 @@ function Modal({ modalOpen, setModalOpen }) {
     document.body.style = "overflow: hidden";
     return () => (document.body.style = "overflow: auto");
   }, []);
-
+  
   const handleName = (e) => {
     setName(e.target.value);
     setNameCheck(true);
