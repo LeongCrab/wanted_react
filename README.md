@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# Wanted를 React로 클론 코딩하는 프로젝트
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 파일 소개
+js파일 이름과 pathname을 넣어 설명함.
 
-## Available Scripts
+### MainPage.js(/)
 
-In the project directory, you can run:
+wanted 메인 페이지.
 
-### `npm start`
+### WDList.js(/wdlist)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+wanted 채용 페이지. 기업 목록을 클릭하면 채용 상세 페이지로 넘어간다.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### WD.js(WD/company_id)
 
-### `npm test`
+wanted 채용 상세 페이지.(company_id에 기업의 id number를 입력하면 된다. 구현된 id는 91536)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Search.js(/search)
 
-### `npm run build`
+검색 결과를 나타내주는 페이지. dummy data에서 채용 중인 포지션 검색이 가능한 상태이다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Header.js
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+wanted 사이트의 Header 부분으로 회원가입/로그인 버튼과 햄버거 모양 메뉴, 검색 기능이 구현된 상태이다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### SearchBar.js
 
-### `npm run eject`
+Header의 검색 아이콘을 누르면 뜨는 모달창으로, 검색 시, 쿼리 스트링으로 검색 페이지로 이동한다.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Modal.js
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+회원가입 기능과 로그인 기능이 있는 모달창이다.
