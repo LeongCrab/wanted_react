@@ -11,7 +11,7 @@ wanted 메인 페이지.
 
 wanted 채용 페이지. 기업 목록을 클릭하면 채용 상세 페이지로 넘어간다.
 
-### WD.js(WD/company_id)
+### WD.js(wd/company_id)
 
 wanted 채용 상세 페이지.(company_id에 기업의 id number를 입력하면 된다. 구현된 id는 91536)
 
