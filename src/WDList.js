@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 
 import "./css/WDList.css";
 import Header from "./Header";
@@ -50,51 +50,54 @@ function WDList() {
   }
 
   function JobCardList() {
-    const [bottom, setRef] = useState(null);
-	const bottomObserver = useRef(null);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const options ={
-        root: null,
-        threshold: 1
-    }
-	useEffect(() => {
-		const observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                console.log("pass");
-            }
-        }, options);
-		bottomObserver.current = observer;
-	}, []);
+    const bottom = useRef(null);
+    const cnt = useRef(null);
+    const [itemNumber, setItemNumber] = useState(4);
+    
+    const loadData = () => {
+      return JobCardListData.jobCardList.filter((data, i) => i <= itemNumber);
+    };
+    
+    const options = {
+      root: cnt.current,
+      rootMargin: '0px',
+      threshold: 1,
+    };
 
-	useEffect(() => {
-		const observer = bottomObserver.current;
-		if (bottom) {
-			observer.observe(bottom);
-		}
-		return () => {
-			if (bottom) {
-				observer.unobserve(bottom);
-			}
-		};
-	}, [bottom]);
+    useEffect(() => {
+      const observer = new IntersectionObserver(([entry], observer) => {
+        if(entry.isIntersecting) {
+          console.log("isIntersecting")
+          if(bottom.current) observer.unobserve(bottom.current);
+          setItemNumber(itemNumber + 4);
+        }
+      }, options);
+      observer.observe(bottom.current);
+      return () => {
+        console.log("useEffect end");
+        if(bottom.current) observer.unobserve(bottom.current);
+      }
+    }, [itemNumber]);
 
     return (
-      <ul className="jobCardList">
-        {JobCardListData.jobCardList.map((jobCard) => (
-          <JobCard
-            key={jobCard.id}
-            href={jobCard.href}
-            src={jobCard.src}
-            position={jobCard.position}
-            name={jobCard.name}
-            label={jobCard.label}
-            location={jobCard.location}
-            country={jobCard.country}
-            reward={jobCard.reward}
-          />
-        ))}
-        {isLoaded && <p ref={setRef}>Loading...</p>}
-      </ul>
+      <>
+        <ul className="jobCardList" ref={cnt}>
+          {loadData().map((jobCard) => (
+            <JobCard
+              key={jobCard.id}
+              href={jobCard.href}
+              src={jobCard.src}
+              position={jobCard.position}
+              name={jobCard.name}
+              label={jobCard.label}
+              location={jobCard.location}
+              country={jobCard.country}
+              reward={jobCard.reward}
+            />
+          ))}
+        </ul>
+        <div className="observer_bottom" ref={bottom} />
+      </>
     );
   }
   const onScroll = () => {

@@ -194,3 +194,8 @@
     display: flex;
     flex-flow: row wrap;
 }
+
+.observer_bottom{
+    border: 1px solid pink;
+    height: 0px;
+}
