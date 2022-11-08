@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { ModalContext } from './ModalStore';
 import "./css/Modal.css";
 
 const User = {
@@ -6,7 +7,8 @@ const User = {
   password: "111qqq!!!",
 };
 
-const LogIn = ({ setModalOpen, email, setEmail }) => {
+const LogIn = ({ email, setEmail }) => {
+  const {contextDispatch} = useContext(ModalContext);
   const [password, setPassword] = useState("");
   const [passwordOpen, setPasswordOpen] = useState(false);
   const [emailValid, setEmailValid] = useState(false);
@@ -29,7 +31,7 @@ const LogIn = ({ setModalOpen, email, setEmail }) => {
         if (passwordOpen) {
           if (User.email === email && User.password === password) {
             alert(`환영합니다. ${email}님!`);
-            setModalOpen(0);
+            contextDispatch({type: "MODAL_CLOSE"});
           } else {
             setLoginError(true);
           }
@@ -37,7 +39,7 @@ const LogIn = ({ setModalOpen, email, setEmail }) => {
           setPasswordOpen(true);
         }
       } else {
-        setModalOpen(2);
+        contextDispatch({type: "JOIN_OPEN"});
       }
     }
   };
@@ -315,7 +317,8 @@ const Timer = ({ timeCount, setTimeCount, setGetCodeBtn }) => {
     </>
   );
 };
-function Modal({ modalOpen, setModalOpen }) {
+function Modal() {
+  const { modalOpen, contextDispatch } = useContext(ModalContext);
   const [timeCount, setTimeCount] = useState("5:00");
 
   const [email, setEmail] = useState("");
@@ -379,7 +382,7 @@ function Modal({ modalOpen, setModalOpen }) {
       setMobileCheck(false);
     } else if (mobileValid && PWValid && PWAgainValid) {
       alert("회원가입이 완료되었습니다.");
-      setModalOpen(0);
+      contextDispatch({type: "MODAL_CLOSE"});
     }
   };
 
@@ -394,7 +397,7 @@ function Modal({ modalOpen, setModalOpen }) {
                 className="modalCloseButton"
                 id="signUpCloseButton"
                 type="button"
-                onClick={() => setModalOpen(0)}
+                onClick={() => contextDispatch({type: "MODAL_CLOSE"})}
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" color="#999">
                   <path
@@ -417,13 +420,12 @@ function Modal({ modalOpen, setModalOpen }) {
                 </h2>
               </div>
               <LogIn
-                setModalOpen={setModalOpen}
                 email={email}
                 setEmail={setEmail}
               />
             </div>
           </div>
-          <div className="modalOverlay" onClick={() => setModalOpen(0)}></div>
+          <div className="modalOverlay" onClick={() => contextDispatch({type: "MODAL_CLOSE"})}></div>
         </div>
       )}
       {modalOpen === 2 && (
@@ -435,7 +437,7 @@ function Modal({ modalOpen, setModalOpen }) {
                 className="modalCloseButton"
                 id="joinCloseButton"
                 type="button"
-                onClick={() => setModalOpen(0)}
+                onClick={() => contextDispatch({type: "MODAL_CLOSE"})}
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" color="#999">
                   <path

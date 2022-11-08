@@ -171,11 +171,10 @@ function InfoBtn({href, src, title}) {
 }
 
 function MainPage() {
-  const [searchOpen, setSearchOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   return (
     <>
-      <Header searchOpen={searchOpen} setSearchOpen={setSearchOpen} />
+      <Header />
       <div id="main">
         <div id="mainWrap">
           <TopBannerSlider />

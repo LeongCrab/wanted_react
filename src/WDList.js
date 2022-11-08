@@ -9,7 +9,6 @@ import JobCardListData from "./data/JobCardList.json";
 
 function WDList() {
   const [scroll, setScroll] = useState(0);
-  const [searchOpen, setSearchOpen] = useState(false);
 
   function FeaturedCardList() {
     function FeaturedCard({ href, src, logo, header, body }) {
@@ -112,7 +111,7 @@ function WDList() {
   }, []);
   return (
     <>
-      <Header searchOpen={searchOpen} setSearchOpen={setSearchOpen} />
+      <Header />
       <div id="jobListCnt">
         <div id="navBarCnt">
           <div id="navBar">

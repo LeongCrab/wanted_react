@@ -10,7 +10,6 @@ import WDData from './data/WD.json';
 import api_key from './data/api_key.json';
 
 function WD() {
-  const [searchOpen, setSearchOpen] = useState(false);
   const { params } = useParams();
   
   function Cash (num) {
@@ -225,7 +224,7 @@ function WD() {
   else {
     return (
       <>
-        <Header searchOpen={searchOpen} setSearchOpen={setSearchOpen} />
+        <Header />
         <div className="jobDetailCnt">
           <div className="jobDetailWrap">
             <div className="jobDetail_relativeWrap">
