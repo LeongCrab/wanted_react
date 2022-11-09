@@ -1,11 +1,12 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import ModalStore from "./ModalStore";
-import MainPage from "./MainPage";
-import WDList from "./WDList";
-import WD from "./WD";
-import Search from "./Search";
+import ModalStore from "./modules/ModalStore";
+import MainPage from "./components/MainPage";
+import WDList from "./components/WDList";
+import WD from "./components/WD";
+import Search from "./components/Search";
+import Bookmark from './components/Bookmark';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/wdlist" element={<WDList />} />
           <Route path="/wd/:params" element={<WD />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/bookmark" element={<Bookmark />} />
           <Route path="/*" element={<h1>존재하지 않는 페이지입니다.</h1>} />
         </Routes>
       </BrowserRouter>

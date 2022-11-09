@@ -1,14 +1,14 @@
 import React, { useState, useContext } from 'react';
-import { ModalContext } from './ModalStore';
+import { ModalContext } from '../modules/ModalStore';
 import { Link } from 'react-router-dom';
-import './css/Header.css';
+import '../css/Header.css';
 import Modal from './Modal';
 import SearchBar from './SearchBar';
-import HeaderData from "./data/Header.json";
+import HeaderData from "../data/Header.json";
 
 function NavBtn({href, category, tag}) {
   return(
-    <a href={href}>{category}<span>{tag}</span></a>
+    <Link to={href}>{category}<span>{tag}</span></Link>
   )
 }
 
@@ -60,13 +60,13 @@ function Header() {
             {submenuOpen && <SubMenu />}
           </div>
           <div className="headerItem navButton">
-            <NavBtn href="https://www.wanted.co.kr/jobsfeed" category="채용" />
-            <NavBtn href="https://www.wanted.co.kr/events" category="이벤트" />
-            <NavBtn href="https://www.wanted.co.kr/salary" category="직군별 연봉" />
-            <NavBtn href="https://www.wanted.co.kr/cv/list" category="이력서" />
-            <NavBtn href="https://www.wanted.co.kr/community" category="커뮤니티" tag="New" />
-            <NavBtn href="https://www.wanted.co.kr/gigs/experts" category="프리랜서" />
-            <NavBtn href="https://www.wanted.co.kr/aiscore/resume" category="AI 합격예측" tag="Beta" />
+            <NavBtn href="/jobsfeed" category="채용" />
+            <NavBtn href="/events" category="이벤트" />
+            <NavBtn href="/salary" category="직군별 연봉" />
+            <NavBtn href="/cv/list" category="이력서" />
+            <NavBtn href="/community" category="커뮤니티" tag="New" />
+            <NavBtn href="/gigs/experts" category="프리랜서" />
+            <NavBtn href="/aiscore/resume" category="AI 합격예측" tag="Beta" />
           </div>
           <div className="headerItem">
             <button type="button" className="searchButton" onClick={() => contextDispatch({type: "SEARCH_MODAL_OPEN"})}>

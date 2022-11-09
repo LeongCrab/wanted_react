@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { useSearchParams } from "react-router-dom";
-import { ModalContext } from './ModalStore';
+import { ModalContext } from '../modules/ModalStore';
 
-import "./css/Search.css";
+import "../css/Search.css";
 import Header from "./Header";
 import JobCard from "./JobCard";
 import JobFilter from "./JobFilter";
-import JobCardListData from "./data/JobCardList.json";
+import JobCardListData from "../data/JobCardList.json";
 
 function Search() {
   const { contextDispatch } = useContext(ModalContext);
@@ -18,6 +18,7 @@ function Search() {
         {filterData().map((jobCard) => (
           <JobCard
             key={jobCard.id}
+            id={jobCard.id}
             href={jobCard.href}
             src={jobCard.src}
             position={jobCard.position}

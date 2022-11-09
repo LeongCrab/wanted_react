@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./css/JobFilter.css";
-import JobFilterData from "./data/JobFilter.json";
+import "../css/JobFilter.css";
+import JobFilterData from "../data/JobFilter.json";
 
 function JobFilter() {
   function JobTagSlider() {

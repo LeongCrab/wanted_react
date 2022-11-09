@@ -1,13 +1,13 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
-import './css/WD.css';
+import '../css/WD.css';
 import Header from './Header';
 import JobCard from './JobCard';
 import Footer from './Footer';
-import JobCardListData from './data/JobCardList.json';
-import WDData from './data/WD.json';
-import api_key from './data/api_key.json';
+import JobCardListData from '../data/JobCardList.json';
+import WDData from '../data/WD.json';
+import api_key from '../data/api_key.json';
 
 function WD() {
   const { params } = useParams();
@@ -110,7 +110,7 @@ function WD() {
   function JobProcess() {
     function Liker({url}){
       return(
-        <li style={{backgroundImage: `url(${url}), url(https://static.wanted.co.kr/images/userweb/profile_default.png})`}} />
+        <li style={{backgroundImage: `url(${url})`}} />
       );
     }
     
@@ -161,7 +161,7 @@ function WD() {
     return(
       <ul className="jobCardList">
         {JobCardListData.jobCardList.map(jobCard => (
-          <JobCard key={jobCard.id} href={jobCard.href} src={jobCard.src} position={jobCard.position} name={jobCard.name} label={jobCard.label} location={jobCard.location} country={jobCard.country} reward={jobCard.reward} />
+          <JobCard key={jobCard.id} id={jobCard.id} href={jobCard.href} src={jobCard.src} position={jobCard.position} name={jobCard.name} label={jobCard.label} location={jobCard.location} country={jobCard.country} reward={jobCard.reward} />
         ))}
       </ul>
     );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { ModalContext } from './ModalStore';
-import "./css/Modal.css";
+import { ModalContext } from '../modules/ModalStore';
+import "../css/Modal.css";
 
 const User = {
   email: "1@1.1",

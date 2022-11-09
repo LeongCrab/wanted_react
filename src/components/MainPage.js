@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import Header from './Header';
 import TopBannerSlider from './TopBannerSlider';
 import Footer from './Footer';
-import './css/MainPage.css';
-import MainPageData from './data/MainPage.json';
+import '../css/MainPage.css';
+import MainPageData from '../data/MainPage.json';
 
 function CareerTagList() {
   const [clicked, setClicked] = useState(0);
@@ -163,10 +164,10 @@ function EventCardList(){
 
 function InfoBtn({href, src, title}) {
   return(
-    <a href={href}>
+    <Link to={href}>
       <div><img src={src} style={{width: 32, height: 32}} alt="No img" /></div>
       <div>{title} &gt;</div>
-    </a>
+    </Link>
   );
 }
 
@@ -218,14 +219,14 @@ function MainPage() {
               <div className="bannerHead">
                 <div className="bannerTitle">
                   <div>직장인을 위한 Wanted+ VOD</div>
-                  <a href="https://www.wanted.co.kr/wantedplus">VOD 전체 보기 &gt;</a>
+                  <Link to="/wantedplus">VOD 전체 보기 &gt;</Link>
                 </div>
               </div>
               <VODCardList />
             </div>
           </div>
           <div className="lineBanner">
-            <a href="https://www.wanted.co.kr/profile">직군/직무를 입력하면 관련 콘텐츠를 추천해 드려요. 👀 &gt;</a>
+            <Link to="/profile">직군/직무를 입력하면 관련 콘텐츠를 추천해 드려요. 👀 &gt;</Link>
           </div>
           <div className="section" id="event">
             <div className="sectionWrap" id="eventWrap">
@@ -234,7 +235,7 @@ function MainPage() {
               <div className="bannerHead">
                 <div className="bannerTitle">
                   <div>커리어 성장을 위한 맞춤 이벤트</div>
-                  <a href="https://www.wanted.co.kr/events">이벤트 전체 보기 &gt;</a>
+                  <Link to="/events">이벤트 전체 보기 &gt;</Link>
                 </div>
               </div>
               <EventCardList />
@@ -250,7 +251,7 @@ function MainPage() {
                   <div>구독해야하는 이유</div>
                 </div>
                 <p>구독자의 서류 합격률이 비구독자보다 1.5배 높아요!</p>
-                <a href="https://www.wanted.co.kr/events/wantedplus"> V 첫 구독 0원 신청하기</a>
+                <Link to="/events/wantedplus"> V 첫 구독 0원 신청하기</Link>
               </div>
               <div>
                 <img src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fimage.wanted.co.kr%2Fuserweb%2Fcareerhome%2Ffirst-wantedplus-subscribe.png&w=800&q=90" style={{width: 544.81, height: 158}} alt="No img"/>
@@ -261,10 +262,10 @@ function MainPage() {
             <div className="sectionWrap">
               <div id="infoTitle">채용 정보를 찾고 계셨나요?</div>
               <div id="infoContainer">
-                <InfoBtn href="https://www.wanted.co.kr/wdlist" src="/img/search.png" title="채용공고"/>
-                <InfoBtn href="https://www.wanted.co.kr/profile" src="/img/profile.png" title="내 프로필"/>
-                <InfoBtn href="https://www.wanted.co.kr/matchup/intro" src="/img/matchup.png" title="매치업"/>
-                <InfoBtn href="https://www.wanted.co.kr/salary" src="/img/earn.png" title="직군별 연봉"/>
+                <InfoBtn href="/wdlist" src="/img/search.png" title="채용공고"/>
+                <InfoBtn href="/profile" src="/img/profile.png" title="내 프로필"/>
+                <InfoBtn href="/matchup/intro" src="/img/matchup.png" title="매치업"/>
+                <InfoBtn href="/salary" src="/img/earn.png" title="직군별 연봉"/>
               </div>
             </div>
           </div>

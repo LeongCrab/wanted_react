@@ -1,0 +1,23 @@
+.bookmarkWrap{
+    margin: 0 auto;
+    padding-bottom: 100%;
+    width: 87.72%;
+    position: relative;
+    max-width: 1060px;
+}
+.bookmarkLabel{
+    line-height: 1.1;
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+    padding: 50px 0 20px;
+}
+.emptyMessage{
+    padding: 60px 0;
+    text-align: center;
+}
+.customMessage{
+    margin: 240px 0;
+    color: #d1d1d1;
+    font-size: 24px;
+}

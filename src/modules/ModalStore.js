@@ -5,7 +5,8 @@ export const ModalContext = createContext(null);
 const initialStates = {
   modalOpen: 0,
   searchOpen: false
-}
+};
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN_OPEN":

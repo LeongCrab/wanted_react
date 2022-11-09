@@ -1,7 +1,11 @@
-import "./css/JobCard.css";
+import React from 'react';
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+
+import "../css/JobCard.css";
 
 function JobCard({
+  id,
   href,
   src,
   position,
@@ -11,6 +15,14 @@ function JobCard({
   country,
   reward,
 }) {
+  const dispatch = useDispatch();
+  const bookmarkList = useSelector(state => state.bookmark.bookmarkList);
+
+  const onClick = () => {
+    if (bookmarkList.includes(id)) dispatch({type: 'REMOVE_BOOKMARK', item: id});
+    else dispatch({type: 'ADD_BOOKMARK', item: id});
+  }
+  
   function Cash(num) {
     const number = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
@@ -19,9 +31,7 @@ function JobCard({
 
   return (
     <li className="jobCard">
-      <Link to={href}>
-        <img src={src} alt={name} />
-        <button className="bookmarkButton" type="button">
+      <button className="bookmarkButton" type="button" onClick={onClick}>
           <svg
             width="22"
             height="22"
@@ -37,11 +47,13 @@ function JobCard({
             ></path>
             <path
               d="M9.28812 12.7838C9.10961 12.681 8.89046 12.681 8.71195 12.7838L4.1613 15.4052V2.17067H9.00004H13.8387V15.4052L9.28812 12.7838Z"
-              fill="black"
-              fillOpacity="0.25"
+              fill={bookmarkList.includes(id)? "#3366FF":"black"}
+              fillOpacity={bookmarkList.includes(id)? 1:0.25 }
             ></path>
           </svg>
         </button>
+      <Link to={href}>
+        <img src={src} alt={name} />
         <div className="jobCardBody">
           <div className="jobPosition">{position}</div>
           <div className="jobCompany">{name}</div>

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
-import { ModalContext } from './ModalStore';
-import { useNavigate } from "react-router-dom";
-import "./css/SearchBar.css";
+import { ModalContext } from '../modules/ModalStore';
+import { Link, useNavigate } from "react-router-dom";
+import "../css/SearchBar.css";
 
 function SearchBar() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -61,9 +61,9 @@ function SearchBar() {
           <div className="result">
             <div className="resultWrap">
               <h4 className="resultLabel">추천태그로 검색해보세요</h4>
-              <a href="https://www.wanted.co.kr/tag_search">
+              <Link to="/tag_search">
                 기업태그 홈 이동하기 &gt;
-              </a>
+              </Link>
               <div className="tagList">
                 <button type="button">#단체보험</button>
                 <button type="button">#연봉상위2~5%</button>

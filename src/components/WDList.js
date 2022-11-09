@@ -1,14 +1,16 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { useNavigate } from 'react-router-dom';
 
-import "./css/WDList.css";
+import "../css/WDList.css";
 import Header from "./Header";
 import JobCard from "./JobCard";
 import JobFilter from "./JobFilter";
-import WDListData from "./data/WDList.json";
-import JobCardListData from "./data/JobCardList.json";
+import WDListData from "../data/WDList.json";
+import JobCardListData from "../data/JobCardList.json";
 
 function WDList() {
   const [scroll, setScroll] = useState(0);
+  const navigate = useNavigate();
 
   function FeaturedCardList() {
     function FeaturedCard({ href, src, logo, header, body }) {
@@ -68,7 +70,7 @@ function WDList() {
         if(entry.isIntersecting) {
           console.log("isIntersecting")
           if(bottom.current) observer.unobserve(bottom.current);
-          setItemNumber(itemNumber + 4);
+          setItemNumber(itemNumber => itemNumber + 4);
         }
       }, options);
       observer.observe(bottom.current);
@@ -84,6 +86,7 @@ function WDList() {
           {loadData().map((jobCard) => (
             <JobCard
               key={jobCard.id}
+              id={jobCard.id}
               href={jobCard.href}
               src={jobCard.src}
               position={jobCard.position}
@@ -149,7 +152,7 @@ function WDList() {
           />
           <div id="jobList">
             <div id="bookmark">
-              <button type="button">
+              <button type="button" onClick={() => navigate('/bookmark')}>
                 <svg
                   width="13"
                   height="17"
