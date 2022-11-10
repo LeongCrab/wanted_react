@@ -6,7 +6,7 @@ import JobCard from './JobCard';
 import JobCardListData from "../data/JobCardList.json";
 import { useSelector } from 'react-redux';
 
-const Bookmark = () => {
+function Bookmark() {
   const bookmarkList = useSelector(state => state.bookmark.bookmarkList);
   function JobCardList() {
     return (
