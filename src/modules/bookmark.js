@@ -1,5 +1,5 @@
-const ADD_BOOKMARK = "ADD_BOOKMARK";
-const REMOVE_BOOKMARK = "REMOVE_BOOKMARK";
+const ADD_BOOKMARK = "bookmark/ADD_BOOKMARK";
+const REMOVE_BOOKMARK = "bookmark/REMOVE_BOOKMARK";
 
 export const addBookmark = (item) => ({
   type: ADD_BOOKMARK,

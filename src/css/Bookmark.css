@@ -4,6 +4,7 @@
     width: 87.72%;
     position: relative;
     max-width: 1060px;
+    border: 1px solid red;
 }
 .bookmarkLabel{
     line-height: 1.1;

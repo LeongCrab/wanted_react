@@ -1,18 +1,19 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
+import { useDispatch } from "react-redux";
 import { ModalContext } from '../modules/ModalStore';
-import "../css/Modal.css";
 
-const User = {
-  email: "1@1.1",
-  password: "111qqq!!!",
-};
+import "../css/Modal.css";
 
 const LogIn = ({ email, setEmail }) => {
   const {contextDispatch} = useContext(ModalContext);
+
   const [password, setPassword] = useState("");
   const [passwordOpen, setPasswordOpen] = useState(false);
   const [emailValid, setEmailValid] = useState(false);
   const [loginError, setLoginError] = useState(false);
+
+  const dispatch = useDispatch();
+
   const handleEmail = (e) => {
     setEmail(e.target.value);
     const reg_email =
@@ -27,10 +28,11 @@ const LogIn = ({ email, setEmail }) => {
   const onSubmitEmail = (e) => {
     e.preventDefault();
     if (email && emailValid) {
-      if (email === User.email) {
+      if (localStorage.getItem(email) !== null) {
         if (passwordOpen) {
-          if (User.email === email && User.password === password) {
-            alert(`환영합니다. ${email}님!`);
+          if (localStorage.getItem(email) !== null && JSON.parse(localStorage.getItem(email)).password === password) {
+            alert(`환영합니다. ${JSON.parse(localStorage.getItem(email)).name}님!`);
+            dispatch({type:'LOG_IN', email});
             contextDispatch({type: "MODAL_CLOSE"});
           } else {
             setLoginError(true);
@@ -327,6 +329,7 @@ function Modal() {
   const [mobileCode, setMobileCode] = useState("");
   const [PW, setPW] = useState("");
   const [PWAgain, setPWAgain] = useState("");
+  const [country, setCountry] = useState("+82");
 
   const [nameCheck, setNameCheck] = useState(true);
   const [mobileCheck, setMobileCheck] = useState(true);
@@ -335,7 +338,6 @@ function Modal() {
   const [PWAgainValid, setPWAgainValid] = useState(false);
 
   const [agreePrivacy, setAgreePrivacy] = useState(false);
-  const [KoreaOnly, setKoreaOnly] = useState(true);
   const [codeBtn, setCodeBtn] = useState(false);
   const [getCodeBtn, setGetCodeBtn] = useState(false);
   const [inputMobile, setInputMobile] = useState(false);
@@ -381,6 +383,13 @@ function Modal() {
     } else if (!mobile) {
       setMobileCheck(false);
     } else if (mobileValid && PWValid && PWAgainValid) {
+      const joinUserInfo = {
+        name: name,
+        country: country,
+        password: PW,
+        mobile: mobile,
+      };
+      window.localStorage.setItem(email, JSON.stringify(joinUserInfo));
       alert("회원가입이 완료되었습니다.");
       contextDispatch({type: "MODAL_CLOSE"});
     }
@@ -482,10 +491,8 @@ function Modal() {
                     <div className="inputBody">
                       <div className="mobileInputSelect">
                         <select
-                          onChange={(e) => {
-                            if (e.target.value === "+82") setKoreaOnly(true);
-                            else setKoreaOnly(false);
-                          }}
+                          value={country}
+                          onChange={(e) => setCountry(e.target.value)}
                         >
                           <option value="+82">+82 South Korea</option>
                           <option value="+81">+81 Japan</option>
@@ -674,7 +681,7 @@ function Modal() {
                           onChange={handleMobile}
                           placeholder="(예시) 01034567890"
                         />
-                        {KoreaOnly && (
+                        {country === "+82" && (
                           <button
                             className="mobileCodeButton"
                             type="button"
@@ -690,7 +697,7 @@ function Modal() {
                           </button>
                         )}
                       </div>
-                      {KoreaOnly && (
+                      {country === "+82" && (
                         <div className="mobileCode">
                           <input
                             value={mobileCode}

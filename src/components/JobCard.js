@@ -6,7 +6,6 @@ import "../css/JobCard.css";
 
 function JobCard({
   id,
-  href,
   src,
   position,
   name,
@@ -19,8 +18,8 @@ function JobCard({
   const bookmarkList = useSelector(state => state.bookmark.bookmarkList);
 
   const onClick = () => {
-    if (bookmarkList.includes(id)) dispatch({type: 'REMOVE_BOOKMARK', item: id});
-    else dispatch({type: 'ADD_BOOKMARK', item: id});
+    if (bookmarkList.includes(id)) dispatch({type: 'bookmark/REMOVE_BOOKMARK', item: id});
+    else dispatch({type: 'bookmark/ADD_BOOKMARK', item: id});
   }
   
   function Cash(num) {
@@ -52,7 +51,7 @@ function JobCard({
             ></path>
           </svg>
         </button>
-      <Link to={href}>
+      <Link to={`../wd/${id}`}>
         <img src={src} alt={name} />
         <div className="jobCardBody">
           <div className="jobPosition">{position}</div>

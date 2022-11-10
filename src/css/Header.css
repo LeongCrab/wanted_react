@@ -164,3 +164,32 @@
     font-weight: 400;
     text-align: left;
 }
+.logOutBox{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 0 10px;
+}
+.noticeBtn{
+    margin-right: 10px;
+    margin-top: 5px;
+}
+.avatarBtn{
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    vertical-align: top;
+    padding: 0;
+    margin-right: 11px;
+}
+.avatarImage{
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-position: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
