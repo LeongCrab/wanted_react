@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
 import "../css/WDList.css";
@@ -9,9 +9,12 @@ import WDListData from "../data/WDList.json";
 import JobCardListData from "../data/JobCardList.json";
 
 function WDList() {
-  const [scroll, setScroll] = useState(0);
   const navigate = useNavigate();
 
+  const [data, setData] = useState([]);
+  const [dataLen, setDataLen] = useState(0);
+  const [throttle, setThrottle] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   function FeaturedCardList() {
     function FeaturedCard({ href, src, logo, header, body }) {
       return (
@@ -51,39 +54,10 @@ function WDList() {
   }
 
   function JobCardList() {
-    const bottom = useRef(null);
-    const cnt = useRef(null);
-    const [itemNumber, setItemNumber] = useState(4);
-    
-    const loadData = () => {
-      return JobCardListData.jobCardList.filter((data, i) => i <= itemNumber);
-    };
-    
-    const options = {
-      root: cnt.current,
-      rootMargin: '0px',
-      threshold: 1,
-    };
-
-    useEffect(() => {
-      const observer = new IntersectionObserver(([entry], observer) => {
-        if(entry.isIntersecting) {
-          console.log("isIntersecting")
-          if(bottom.current) observer.unobserve(bottom.current);
-          setItemNumber(itemNumber => itemNumber + 4);
-        }
-      }, options);
-      observer.observe(bottom.current);
-      return () => {
-        console.log("useEffect end");
-        if(bottom.current) observer.unobserve(bottom.current);
-      }
-    }, [itemNumber]);
-
     return (
       <>
-        <ul className="jobCardList" ref={cnt}>
-          {loadData().map((jobCard) => (
+        <ul className="jobCardList">
+          {data && data.map((jobCard) => (
             <JobCard
               key={jobCard.id}
               id={jobCard.id}
@@ -98,20 +72,39 @@ function WDList() {
             />
           ))}
         </ul>
-        <div className="observer_bottom" ref={bottom} />
       </>
     );
   }
-  const onScroll = () => {
-    setScroll(window.scrollY);
+
+  const handleScroll = () => {
+    setScrollY(document.documentElement.scrollTop);
+    if (throttle) return;
+    else {
+      setThrottle(true);
+      setTimeout(() => {
+        const scrollHeight = document.documentElement.scrollHeight;
+        const scrollTop = document.documentElement.scrollTop;
+        const clientHeight = document.documentElement.clientHeight;
+        if (scrollTop + clientHeight >= scrollHeight - 100) {
+          setDataLen((prev) => prev + 4);
+        }
+        setThrottle(false);
+      }, 300);
+    }
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", onScroll);
+    const next = JobCardListData.jobCardList.filter((data, idx) => idx >= dataLen && idx < dataLen + 4);
+    setData((prev) => prev.concat(next));
+  }, [dataLen]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   return (
     <>
       <Header />
@@ -144,12 +137,10 @@ function WDList() {
           </div>
         </div>
         <div id="jobListWrap">
-          <div className={"filterCnt_" + (scroll > 300 ? "scrolled" : "top")}>
+          <div className={"filterCnt_"+(scrollY?"scrolled":"top")}>
             <JobFilter />
           </div>
-          <hr
-            className={"wdlist_hr hr_" + (scroll > 300 ? "scrolled" : "top")}
-          />
+          <hr className={"wdlist_hr hr_"+(scrollY?"scrolled":"top")}/>
           <div id="jobList">
             <div id="bookmark">
               <button type="button" onClick={() => navigate('/bookmark')}>

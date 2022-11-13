@@ -319,6 +319,7 @@ const Timer = ({ timeCount, setTimeCount, setGetCodeBtn }) => {
     </>
   );
 };
+
 function Modal() {
   const { modalOpen, contextDispatch } = useContext(ModalContext);
   const [timeCount, setTimeCount] = useState("5:00");
