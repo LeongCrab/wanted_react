@@ -20,7 +20,7 @@ const reducer = (state, action) => {
     case "SEARCH_MODAL_CLOSE":
       return {...state, searchOpen: false};
     default:
-      throw new Error();
+      return state;
   }
 };
 

@@ -18,8 +18,8 @@ function JobCard({
   const bookmarkList = useSelector(state => state.bookmark.bookmarkList);
 
   const onClick = () => {
-    if (bookmarkList.includes(id)) dispatch({type: 'bookmark/REMOVE_BOOKMARK', item: id});
-    else dispatch({type: 'bookmark/ADD_BOOKMARK', item: id});
+    if (bookmarkList.includes(id)) dispatch({type: 'bookmark/REMOVE_BOOKMARK', id: id});
+    else dispatch({type: 'bookmark/ADD_BOOKMARK', id: id});
   }
   
   function Cash(num) {

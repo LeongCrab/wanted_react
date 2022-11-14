@@ -1,16 +1,6 @@
 const ADD_BOOKMARK = "bookmark/ADD_BOOKMARK";
 const REMOVE_BOOKMARK = "bookmark/REMOVE_BOOKMARK";
 
-export const addBookmark = (item) => ({
-  type: ADD_BOOKMARK,
-  item
-});
-
-export const removeBookmark = (item) => ({
-  type: REMOVE_BOOKMARK,
-  item
-});
-
 const initialState = {
   bookmarkList: []
 };
@@ -20,12 +10,12 @@ export default function bookmark(state = initialState, action) {
     case ADD_BOOKMARK:
       return {
         ...state,
-        bookmarkList: state.bookmarkList.concat(action.item)
+        bookmarkList: state.bookmarkList.concat(action.id)
       };
     case REMOVE_BOOKMARK:
       return {
         ...state,
-        bookmarkList: state.bookmarkList.filter(item => item !== action.item)
+        bookmarkList: state.bookmarkList.filter(id => id !== action.id)
       };
     default:
       return state;

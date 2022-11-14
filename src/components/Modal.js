@@ -7,12 +7,17 @@ import "../css/Modal.css";
 const LogIn = ({ email, setEmail }) => {
   const {contextDispatch} = useContext(ModalContext);
 
+  const emailInput = useRef(null);
   const [password, setPassword] = useState("");
   const [passwordOpen, setPasswordOpen] = useState(false);
   const [emailValid, setEmailValid] = useState(false);
   const [loginError, setLoginError] = useState(false);
 
   const dispatch = useDispatch();
+  
+  useEffect(() => {
+    emailInput.current.focus();
+  }, []);
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -56,6 +61,7 @@ const LogIn = ({ email, setEmail }) => {
               className={
                 (!emailValid && email) || loginError ? "inputError" : "notError"
               }
+              ref = {emailInput}
               placeholder="이메일을 입력해 주세요."
               value={email}
               onChange={handleEmail}
@@ -239,9 +245,7 @@ const CheckBox = ({ agreePrivacy, setAgreePrivacy }) => {
         <div className="labelStyle">
           <input
             type="checkbox"
-            onChange={(e) =>
-              e.target.checked ? setAgreePrivacy(true) : setAgreePrivacy(false)
-            }
+            onChange={(e) => setAgreePrivacy(e.target.checked)}
             checked={agreePrivacy}
           />{" "}
           개인정보 수집 및 이용 동의 (필수)
@@ -280,7 +284,7 @@ const CheckBox = ({ agreePrivacy, setAgreePrivacy }) => {
 };
 const Timer = ({ timeCount, setTimeCount, setGetCodeBtn }) => {
   const timer = useRef(null);
-  const time = useRef(5);
+  const time = useRef(300);
 
   useEffect(() => {
     timer.current = setInterval(() => {
@@ -288,7 +292,7 @@ const Timer = ({ timeCount, setTimeCount, setGetCodeBtn }) => {
         time.current -= 1;
         setTimeCount(secToMin(time.current));
       } else {
-        time.current = 5;
+        time.current = 300;
         setGetCodeBtn(false);
       }
     }, 1000);

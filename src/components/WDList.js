@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from 'react-router-dom';
 
 import "../css/WDList.css";
@@ -13,6 +13,7 @@ function WDList() {
 
   const [data, setData] = useState([]);
   const [dataLen, setDataLen] = useState(0);
+  const [isFetching, setFetching] = useState(false);
   const [throttle, setThrottle] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   function FeaturedCardList() {
@@ -57,9 +58,9 @@ function WDList() {
     return (
       <>
         <ul className="jobCardList">
-          {data && data.map((jobCard) => (
+          {data && data.map((jobCard, i) => (
             <JobCard
-              key={jobCard.id}
+              key={jobCard.id + i}
               id={jobCard.id}
               href={jobCard.href}
               src={jobCard.src}
@@ -75,35 +76,38 @@ function WDList() {
       </>
     );
   }
-
-  const handleScroll = () => {
-    setScrollY(document.documentElement.scrollTop);
-    if (throttle) return;
-    else {
-      setThrottle(true);
-      setTimeout(() => {
-        const scrollHeight = document.documentElement.scrollHeight;
-        const scrollTop = document.documentElement.scrollTop;
-        const clientHeight = document.documentElement.clientHeight;
-        if (scrollTop + clientHeight >= scrollHeight - 100) {
-          setDataLen((prev) => prev + 4);
-        }
-        setThrottle(false);
-      }, 300);
-    }
-  };
-
-  useEffect(() => {
-    const next = JobCardListData.jobCardList.filter((data, idx) => idx >= dataLen && idx < dataLen + 4);
-    setData((prev) => prev.concat(next));
+  const fetchData = useCallback(() => {
+    console.log(dataLen);
+    const next = JobCardListData.jobCardList.filter((data, idx) => idx >= dataLen && idx < dataLen + 8);
+    setData(prev => prev.concat(next));
+    setDataLen(prev => prev + 8);
+    setFetching(false);
   }, [dataLen]);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      setScrollY(document.documentElement.scrollTop);
+      if (throttle) return;
+      else {
+        setThrottle(true);
+        setTimeout(() => {
+          const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
+          if (scrollTop + clientHeight >= scrollHeight - 100) {
+            setFetching(true);
+          }
+          setThrottle(false);
+        }, 300);
+      }
     };
+    setFetching(true);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    if(dataLen >= JobCardListData.jobCardList.length) setFetching(false);
+    else if(isFetching) fetchData();
+  }, [isFetching]);
 
   return (
     <>
