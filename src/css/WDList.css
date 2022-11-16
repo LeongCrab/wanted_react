@@ -141,7 +141,6 @@
     object-fit: contain;
     width: 197px;
     height: 147px;
-
 }
 .featuredFooter{
     width: 197px;
@@ -152,19 +151,6 @@
     border-top: none;
     border-radius: 0 0 3px 3px;
     position: relative;
-}
-.featuredLogo{
-    position: absolute;
-    top: -25px;
-    left: 16px;
-    width: 50px;
-    height: 50px;
-    background-position: 50%;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-color: #fff;
-    z-index: 0;
-    box-shadow: inset 0 0 0 1px rgb(0 0 0 / 10%);
 }
 .featuredFooter h4{
     text-overflow: ellipsis;

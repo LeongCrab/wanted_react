@@ -2,11 +2,21 @@ import React, { useState, useContext } from "react";
 import { ModalContext } from "../modules/ModalStore";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import styled, { css } from "styled-components";
 
 import "../css/Header.css";
 import Modal from "./Modal";
 import SearchBar from "./SearchBar";
 import HeaderData from "../data/Header.json";
+
+const SubmenuList = styled.ul`
+  ${props => {
+    if (props.size === 'zero') css`width: 0px;`
+    else if (props.size === 'small') css`width: 200px;`
+    else if (props.size === 'medium') css`width: 400px;`
+    else css`width:600px;`
+  }}
+`;
 
 function NavBtn({ href, category, tag }) {
   return (
@@ -23,7 +33,6 @@ function Header() {
   const [menu, setMenu] = useState("");
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const userEmail = useSelector((state) => state.login.email);
-  const User = JSON.parse(localStorage.getItem(userEmail));
   const dispatch = useDispatch();
 
   function Menu() {
@@ -54,21 +63,25 @@ function Header() {
 
   function SubMenu() {
     const mainCategory = HeaderData.category.find((cat) => cat.id === menu);
+    const [size, setSize] = useState("zero");
 
+    const onMouseOver = () => {
+      setSubmenuOpen(true);
+      if (mainCategory.num === 0) {
+        setSize('zero');
+      } else if (mainCategory.num < 17) {
+        setSize('small');
+      } else if (mainCategory.num < 34) {
+        setSize('medium');
+      } else {
+        setSize('large');
+      }
+    }
     return (
       <div className="submenuWrap">
-        <ul
-          className={
-            "width-" +
-            (mainCategory.num === 0
-              ? "0px"
-              : mainCategory.num < 17
-              ? "200px"
-              : mainCategory.num < 34
-              ? "400px"
-              : "600px")
-          }
-          onMouseOver={() => setSubmenuOpen(true)}
+        <SubmenuList
+          size={size}
+          onMouseOver={onMouseOver}
           onMouseLeave={() => setSubmenuOpen(false)}
         >
           {[...Array(parseInt(mainCategory.num))].map((n, idx) => (
@@ -76,7 +89,7 @@ function Header() {
               {mainCategory.id + (idx + 1)}
             </li>
           ))}
-        </ul>
+        </SubmenuList>
       </div>
     );
   }

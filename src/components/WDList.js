@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import "../css/WDList.css";
 import Header from "./Header";
@@ -7,6 +7,22 @@ import JobCard from "./JobCard";
 import JobFilter from "./JobFilter";
 import WDListData from "../data/WDList.json";
 import JobCardListData from "../data/JobCardList.json";
+import styled from "styled-components";
+
+const FeaturedLogo = styled.div`
+  position: absolute;
+  top: -25px;
+  left: 16px;
+  width: 50px;
+  height: 50px;
+  background-position: 50%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  z-index: 0;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 10%);
+  background-image: url(${props => props.logo});
+`;
 
 function WDList() {
   const navigate = useNavigate();
@@ -17,21 +33,18 @@ function WDList() {
   const [throttle, setThrottle] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   function FeaturedCardList() {
-    function FeaturedCard({ href, src, logo, header, body }) {
+    function FeaturedCard({ id, src, logo, header, body }) {
       return (
-        <a className="featuredCard" href={href}>
+        <Link className="featuredCard" to={`../company/${id}`}>
           <div className="featuredHeader">
             <img src={src} alt={header} />
           </div>
           <div className="featuredFooter">
-            <div
-              className="featuredLogo"
-              style={{ backgroundImage: `url(${logo})` }}
-            />
+            <FeaturedLogo logo={logo} />
             <h4>{header}</h4>
             <h5>{body}개 포지션</h5>
           </div>
-        </a>
+        </Link>
       );
     }
 
@@ -42,7 +55,7 @@ function WDList() {
           {WDListData.featuredList.map((featured) => (
             <FeaturedCard
               key={featured.id}
-              href={featured.href}
+              id={featured.id}
               src={featured.src}
               logo={featured.logo}
               header={featured.header}
@@ -58,9 +71,9 @@ function WDList() {
     return (
       <>
         <ul className="jobCardList">
-          {data && data.map((jobCard, i) => (
+          {data && data.map((jobCard) => (
             <JobCard
-              key={jobCard.id + i}
+              key={jobCard.id}
               id={jobCard.id}
               href={jobCard.href}
               src={jobCard.src}
@@ -77,7 +90,6 @@ function WDList() {
     );
   }
   const fetchData = useCallback(() => {
-    console.log(dataLen);
     const next = JobCardListData.jobCardList.filter((data, idx) => idx >= dataLen && idx < dataLen + 8);
     setData(prev => prev.concat(next));
     setDataLen(prev => prev + 8);

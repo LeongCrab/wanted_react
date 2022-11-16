@@ -1,7 +1,7 @@
 # Wanted를 React로 클론 코딩하는 프로젝트
 
 ## 파일 소개
-data 폴더에는 json 파일, css 폴더에는 CSS 파일, modules에는 Redux와 useReducer + useContext와 관련된 js파일, components 폴더에는 컴포넌트 js파일들이 있다.
+data 폴더에는 json 파일, css 폴더에는 CSS 파일, modules에는 Redux, Context와 관련된 js파일, components 폴더에는 컴포넌트 js파일들이 있다.
 컴포넌트는 js파일 이름과 pathname을 넣어 설명한다.
 
 ### MainPage.js(/)

@@ -6,6 +6,12 @@ import TopBannerSlider from './TopBannerSlider';
 import Footer from './Footer';
 import '../css/MainPage.css';
 import MainPageData from '../data/MainPage.json';
+import styled from 'styled-components';
+
+const CardImg = styled.img`
+  width: 250px;
+  height: 175px;
+`;
 
 function CareerTagList() {
   const [clicked, setClicked] = useState(0);
@@ -90,7 +96,7 @@ function ArticleCardList() {
     return(
       <li>
         <a href={href}>
-          <img src={src} style={{width: 250, height: 175}} alt="No img"/>
+          <CardImg src={src} alt="No img"/>
           <p className="articleTitle">{title}</p>
           <p className="articleCategory">{tags}</p>
         </a>
@@ -114,7 +120,7 @@ function VODCardList() {
       <li>
         <a href={href}>
           <div className="thumbnail">
-            <img src={src} style={{width: 250, height: 175}} alt="No img"/>
+            <CardImg src={src} alt="No img"/>
             <span>{time}</span>
           </div>
           <p className="vodAuthor">{author}</p>
