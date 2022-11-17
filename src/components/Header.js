@@ -94,28 +94,34 @@ function Header() {
       <div className="headerDummy" />
       <div className="header">
         <div className="headerWrap">
-          <div className="headerItem">
-            <button
-              className="hamburger"
-              onMouseEnter={() => setMenuOpen(true)}
-            >
-              <img
-                src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ficon-menu.png&w=undefined&q=75"
-                alt="None"
-                style={{ height: 14, width1: 17 }}
-              />
+          <div className="headerItem nav_top">
+            <div>
+              <button
+                className="hamburger"
+                onMouseEnter={() => setMenuOpen(true)}
+              >
+                <img
+                  src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Ficon-menu.png&w=undefined&q=75"
+                  alt="None"
+                  style={{ height: 14, width1: 17 }}
+                />
+              </button>
+              <Link to="/">
+                <img
+                  src="/img/wanted_BI_logotype.png"
+                  alt="top Logo"
+                  style={{ height: 17, width: 74.38 }}
+                />
+              </Link>
+              {(menuOpen || submenuOpen) && <Menu />}
+              {submenuOpen && <SubMenu />}
+            </div>
+            <button className="joinBtn" onClick={() => contextDispatch({ type: "LOGIN_OPEN" })}>
+              회원가입하기
             </button>
-            <Link to="/">
-              <img
-                src="/img/wanted_BI_logotype.png"
-                alt="top Logo"
-                style={{ height: 17, width: 74.38 }}
-              />
-            </Link>
-            {(menuOpen || submenuOpen) && <Menu />}
-            {submenuOpen && <SubMenu />}
           </div>
-          <div className="headerItem navButton">
+          <div className="headerItem navBtn">
+            <NavBtn href="/" category="홈" />
             <NavBtn href="/wdlist" category="채용" />
             <NavBtn href="/events" category="이벤트" />
             <NavBtn href="/salary" category="직군별 연봉" />
@@ -127,7 +133,7 @@ function Header() {
           <div className="headerItem">
             <button
               type="button"
-              className="searchButton"
+              className="menuBtn"
               onClick={() => contextDispatch({ type: "SEARCH_MODAL_OPEN" })}
             >
               <svg
@@ -154,60 +160,67 @@ function Header() {
                 </g>
               </svg>
             </button>
-            {!userEmail && (
-              <button
-                type="button"
-                className="signUpButton"
-                onClick={() => contextDispatch({ type: "LOGIN_OPEN" })}
-              >
-                회원가입/로그인
-              </button>
-            )}
-            {userEmail && (
-              <div className="logOutBox">
-                <button type="button" className="noticeBtn">
-                  <svg
-                    xmlns="https://www.w3.org/2000/svg"
-                    xmlnsXlink="https://www.w3.org/1999/xlink"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                  >
-                    <defs>
-                      <path
-                        id="bpnpn3yn0a"
-                        d="M7.554 14.813h3.183a1.689 1.689 0 01-3.183 0zm1.592 2.25a2.813 2.813 0 002.812-2.813.563.563 0 00-.562-.563h-7.5c-.31 0-.541-.014-.699-.04.018-.036.04-.077.066-.123.036-.065.354-.605.46-.8.477-.875.735-1.676.735-2.599V6.75c0-2.656 2.057-4.688 4.688-4.688 2.63 0 4.687 2.032 4.687 4.688v3.375c0 .923.258 1.724.736 2.6.106.194.424.734.46.799.026.046.047.087.065.123-.157.026-.389.04-.698.04a.564.564 0 000 1.126c1.263 0 1.896-.221 1.896-1.002 0-.26-.092-.494-.28-.833-.045-.083-.361-.619-.456-.792-.395-.724-.598-1.355-.598-2.061V6.75c0-3.28-2.563-5.813-5.812-5.813S3.333 3.47 3.333 6.75v3.375c0 .706-.203 1.337-.598 2.06-.094.174-.41.71-.456.793-.188.339-.279.572-.279.833 0 .78.632 1.002 1.896 1.002H6.39a2.813 2.813 0 002.756 2.25z"
-                      ></path>
-                    </defs>
-                    <g fill="none" fill-rule="evenodd">
-                      <g transform="translate(-1079 -16) translate(224 7) translate(855 9)">
-                        <mask id="1dencd96ob" fill="#fff">
-                          <use xlinkHref="#bpnpn3yn0a"></use>
-                        </mask>
-                        <use
-                          fill-rule="nonzero"
-                          stroke="currentColor"
-                          strokeWidth=".3"
-                          xlinkHref="#bpnpn3yn0a"
-                        ></use>
-                        <g fill="currentColor" mask="url(#1dencd96ob)">
-                          <path d="M0 0H18V18H0z"></path>
+            <div className="header_visible">
+              {!userEmail && (
+                <button
+                  type="button"
+                  className="signUpButton"
+                  onClick={() => contextDispatch({ type: "LOGIN_OPEN" })}
+                >
+                  회원가입/로그인
+                </button>
+              )}
+              {userEmail && (
+                <div className="logOutBox">
+                  <button type="button" className="noticeBtn">
+                    <svg
+                      xmlns="https://www.w3.org/2000/svg"
+                      xmlnsXlink="https://www.w3.org/1999/xlink"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                    >
+                      <defs>
+                        <path
+                          id="bpnpn3yn0a"
+                          d="M7.554 14.813h3.183a1.689 1.689 0 01-3.183 0zm1.592 2.25a2.813 2.813 0 002.812-2.813.563.563 0 00-.562-.563h-7.5c-.31 0-.541-.014-.699-.04.018-.036.04-.077.066-.123.036-.065.354-.605.46-.8.477-.875.735-1.676.735-2.599V6.75c0-2.656 2.057-4.688 4.688-4.688 2.63 0 4.687 2.032 4.687 4.688v3.375c0 .923.258 1.724.736 2.6.106.194.424.734.46.799.026.046.047.087.065.123-.157.026-.389.04-.698.04a.564.564 0 000 1.126c1.263 0 1.896-.221 1.896-1.002 0-.26-.092-.494-.28-.833-.045-.083-.361-.619-.456-.792-.395-.724-.598-1.355-.598-2.061V6.75c0-3.28-2.563-5.813-5.812-5.813S3.333 3.47 3.333 6.75v3.375c0 .706-.203 1.337-.598 2.06-.094.174-.41.71-.456.793-.188.339-.279.572-.279.833 0 .78.632 1.002 1.896 1.002H6.39a2.813 2.813 0 002.756 2.25z"
+                        ></path>
+                      </defs>
+                      <g fill="none" fill-rule="evenodd">
+                        <g transform="translate(-1079 -16) translate(224 7) translate(855 9)">
+                          <mask id="1dencd96ob" fill="#fff">
+                            <use xlinkHref="#bpnpn3yn0a"></use>
+                          </mask>
+                          <use
+                            fill-rule="nonzero"
+                            stroke="currentColor"
+                            strokeWidth=".3"
+                            xlinkHref="#bpnpn3yn0a"
+                          ></use>
+                          <g fill="currentColor" mask="url(#1dencd96ob)">
+                            <path d="M0 0H18V18H0z"></path>
+                          </g>
                         </g>
                       </g>
-                    </g>
-                  </svg>
+                    </svg>
+                  </button>
+                  <button type="button" className="avatarBtn" onClick={() => dispatch({ type: "LOG_OUT" })}>
+                    <div className="avatarImage" style={{backgroundImage:`url("https://static.wanted.co.kr/images/profile_default.png")`}} />
+                  </button>
+                </div>
+              )}
+              <div className="verticalLine"></div>
+              <Link to="/dashboard">
+                <button type="button" className="enterpriseButton">
+                  기업 서비스
                 </button>
-                <button type="button" className="avatarBtn" onClick={() => dispatch({ type: "LOG_OUT" })}>
-                  <div className="avatarImage" style={{backgroundImage:`url("https://static.wanted.co.kr/images/profile_default.png")`}} />
-                </button>
-              </div>
-            )}
-            <div className="verticalLine"></div>
-            <Link to="/dashboard">
-              <button type="button" className="enterpriseButton">
-                기업 서비스
+              </Link>
+            </div>
+            <div className="header_hidden">
+              <button type="button" className="menuBtn">
+              <svg width="18" height="18" xmlns="https://www.w3.org/2000/svg"><defs><path d="M9 7.5a1.5 1.5 0 1 1-.001 3.001A1.5 1.5 0 0 1 9 7.5zm5.05 0a1.5 1.5 0 1 1-.001 3.001A1.5 1.5 0 0 1 14.05 7.5zM4 7.5a1.5 1.5 0 1 1-.001 3.001A1.5 1.5 0 0 1 4 7.5z" id="a"></path></defs><g fill="none" fillRule="evenodd"><mask id="b" fill="#fff"><use xlinkHref="#a"></use></mask><use fill="#333" xlinkHref="#a"></use><g mask="url(#b)" fill="#333"><path d="M0 0h18v18H0z"></path></g></g></svg>
               </button>
-            </Link>
+            </div>
           </div>
         </div>
       </div>

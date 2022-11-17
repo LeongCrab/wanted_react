@@ -27,51 +27,61 @@
 .headerItem{
     display: flex;
     flex-flow: row nowrap;
+    justify-content: space-between;
     align-items: center;
 }
 .headerItem *{
     white-space: nowrap;
 }
-.headerItem button{
-    background-color: white;
-    border: none;
-}
+
 .hamburger{
     height: 17px;
     width: 23px;
     margin: -2px 15px 0px 0px;
 }
+.joinBtn{
+    display: none;
+    color: #36f;
+    font-size: 14px;
+    line-height: 32px;
+    height: 34px;
+    border: 1px solid #36f;
+    border-radius: 17px;
+    padding: 0 14px;
+}
 .header img, .modalHeader img{
     object-fit: contain;
 }
-
-.navButton a{
+.navBtn a{
     position: relative;
     line-height: 20px;
     font-size: 14px;
     color: #333333;
     padding: 15px;
 }
-.navButton a > span{
+.navBtn a:first-child{
+    display: none;
+}
+.navBtn a > span{
     position: absolute;
     top: 3px;
     font-size: 9px; 
     font-weight: 500;
     color: blue;
 }
-.navButton a:hover{
+.navBtn a:hover{
     height: 48px;
     padding-top: 14px;
     border-bottom: 3px solid #e1e2e3;
 }
-.navButton a:hover > span{
+.navBtn a:hover > span{
     position: absolute;
     top: 2px;
     font-size: 9px; 
     font-weight: 500;
     color: blue;
 }
-.searchButton{
+.menuBtn{
     height: 30px;
     width: 38px;
     margin: 5px 0px 0px;
@@ -83,7 +93,7 @@
     padding: 0px 15px;
 }
 .verticalLine{
-    margin: 10px;
+    margin: 7px;
     height: 10px;
     border-right: 1px solid #bbbbbb;
 }
@@ -179,7 +189,12 @@
     background-size: cover;
     background-repeat: no-repeat;
 }
-
+.header_visible{
+    display: flex;
+}
+.header_hidden{
+    display: none;
+}
 @media (max-width: 991px){
     .headerDummy{
         height: 110px;
@@ -187,19 +202,65 @@
     .headerWrap{
         height: 110px;
     }
+    .nav_top{
+        width: 100%;
+    }
+    .joinBtn{
+        display: inline-block;
+    }
+    .navBtn{
+        justify-content: space-evenly;
+    }
+    .navBtn a{
+        font-size: 13px;
+        padding: 11px 10px 19px;
+    }
+    .header_visible{
+        display: none;
+    }
 }
 @media (min-width: 992px) and (max-width: 1199px){
     .headerWrap{
         width: 90%;
+    }
+    .navBtn{
+        flex: 1 1;
+        justify-content: space-evenly;
+    }
+    .navBtn a{
+        font-size: 13px;
+        padding: 15px 0;
     }
 }
 @media (min-width: 768px) and (max-width: 991px){
     .headerWrap{
         width: 90%;
     }
+    .navBtn{
+        justify-content: flex-start;
+        margin-right: 30px;
+    }
 }
 @media (max-width: 767px){
     .headerWrap{
-
+        width: 100%;
+    }
+    .headerItem:first-child{
+        height: 60px;
+        width: 100%;
+        padding: 15px 20px;
+    }
+    .navBtn{
+        margin-left: 15px;
+    }
+    .navBtn a{
+        font-size: 13px;
+        padding: 11px 10px 19px;
+    }
+    .navBtn a:nth-child(n + 4){
+        display: none;
+    }
+    .navBtn a:first-child{
+        display: block;
     }
 }
