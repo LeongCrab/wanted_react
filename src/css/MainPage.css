@@ -61,58 +61,7 @@
     display: flex;
     overflow: hidden;
 }
-.scroll_slides{
-    gap: 8px;
-    display: flex;
-    padding-bottom: 0.5px;
-    flex-direction: row;
-    align-items: center;
-    z-index: 1;
-}
-.careerTag{
-    background: #fff;
-    padding: 9px 22px;
-    font-weight: 600;
-    font-size: 15px;
-    color: #888;
-    border: 1px solid #e1e2e3;
-    height: 40px;
-    border-radius: 25px;
-    min-width: 64px;
-    scroll-snap-align: start;
-    flex-shrink: 0;
-    line-height: 146.7%;
-    display: flex;
-    outline: none;
-    position: relative;
-    cursor: pointer;
-}
-.careerTag_selected{
-    background: #fff;
-    padding: 9px 22px;
-    font-weight: 600;
-    font-size: 15px;
-    color: #36f;
-    border: 1px solid #36f;
-    height: 40px;
-    border-radius: 25px;
-    min-width: 64px;
-    scroll-snap-align: start;
-    flex-shrink: 0;
-    line-height: 146.7%;
-    display: flex;
-    outline: none;
-    position: relative;
-    cursor: pointer;
-}
-.tagSelected:hover{
-    background-color: #fff;
-}
-.careerTag:hover{
-    background-color: #f2f4f7;
-}
-.arrowButton{
-    top: 5px;
+.arrowBtn{
     width: 40px;
     height: 40px;
     position: absolute;

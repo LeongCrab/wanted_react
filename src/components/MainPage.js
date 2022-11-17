@@ -6,11 +6,62 @@ import TopBannerSlider from './TopBannerSlider';
 import Footer from './Footer';
 import '../css/MainPage.css';
 import MainPageData from '../data/MainPage.json';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const CardImg = styled.img`
   width: 250px;
   height: 175px;
+`;
+
+const CareerTag = styled.button.attrs({
+  type: 'button',
+})`
+  background: #fff;
+  padding: 9px 22px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #888;
+  border: 1px solid #e1e2e3;
+  height: 40px;
+  border-radius: 25px;
+  min-width: 64px;
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  line-height: 146.7%;
+  display: flex;
+  outline: none;
+  position: relative;
+  cursor: pointer;
+  ${props => {
+    if(props.clicked === props.tag){
+      return css`
+        color: #36f;
+        border: 1px solid #36f;  
+        &:hover{
+          background-color: #fff;
+        }
+      `;
+    } else {
+      return css`
+        color: #888;
+        border: 1px solid #e1e2e3;
+        &:hover{
+          background-color: #f2f4f7;
+        }
+      `;
+    }
+  }};
+`;
+
+const Slides = styled.div`
+  gap: 8px;
+  display: flex;
+  padding-bottom: 0.5px;
+  flex-direction: row;
+  align-items: center;
+  z-index: 1;
+  transform: translateX(${props=> props.slideX}px);
+  transition: 0.5s ease;
 `;
 
 function CareerTagList() {
@@ -19,10 +70,6 @@ function CareerTagList() {
   const [prevBtn, setPrevBtn] = useState(false);
   const [nextBtn, setNextBtn] = useState(true);
   
-  const style = {
-    transform: `translateX(${slideX}px)`,
-    transition: "0.5s ease",
-  };
   const toPrev = () => {
     setNextBtn(true);
     setSlideX(slideX + 300);
@@ -43,13 +90,13 @@ function CareerTagList() {
     <div id="careerTagList">
       <div className="scrollWrap">
         <div className="scrollSnap">
-          <div className="scroll_slides" style={style}>
-            {MainPageData.tagList.map((tag, i) => (
-              <button type="button" key={tag + i} onClick={() => setClicked(i)} className={"careerTag" + (clicked === i ? "_selected" : "")}>{tag}</button>
+          <Slides slideX={slideX}>
+            {MainPageData.tagList.map((tag) => (
+              <CareerTag key={tag} clicked={clicked} tag={tag} onClick={() => setClicked(tag)}>{tag}</CareerTag>
             ))}
-          </div>
-          {prevBtn && (<button type="button" onClick={toPrev} className="arrowButton arrowLeft">&lt;</button>)}
-          {nextBtn && (<button type="button" onClick={toNext} className="arrowButton arrowRight">&gt;</button>)}
+          </Slides>
+          {prevBtn && (<button type="button" onClick={toPrev} className="arrowBtn arrowLeft">&lt;</button>)}
+          {nextBtn && (<button type="button" onClick={toNext} className="arrowBtn arrowRight">&gt;</button>)}
         </div>
         <button type="button" className="tagMoreButton">. . .</button>
       </div>

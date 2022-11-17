@@ -7,7 +7,47 @@ import JobCard from "./JobCard";
 import JobFilter from "./JobFilter";
 import WDListData from "../data/WDList.json";
 import JobCardListData from "../data/JobCardList.json";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+const FilterCnt = styled.div`
+  ${props => {
+    if (props.scrollY > 300){
+      return css`
+        position: fixed;
+        top: 50px;
+        z-index: 2;
+        max-width: 1060px;
+      `;
+    } else {
+      return css`
+        position: static;
+      `;
+    }
+  }}
+  .styledHr{
+    height: 1px;
+    z-index: 2;
+    max-width: 100%;
+    width: 100%;
+    ${props => {
+      if (props.scrollY > 300){
+        return css`
+          position: fixed;
+          left: 0;
+          top: 208px;
+          background-color: #36f;
+        `;
+      } else {
+        return css`
+          position: absolute;
+          background-color: #ececec;
+          left: 0;
+          top: 300px;
+        `;
+      }
+    }}
+  }
+`;
 
 const FeaturedLogo = styled.div`
   position: absolute;
@@ -23,6 +63,7 @@ const FeaturedLogo = styled.div`
   box-shadow: inset 0 0 0 1px rgb(0 0 0 / 10%);
   background-image: url(${props => props.logo});
 `;
+
 
 function WDList() {
   const navigate = useNavigate();
@@ -153,10 +194,10 @@ function WDList() {
           </div>
         </div>
         <div id="jobListWrap">
-          <div className={"filterCnt_"+(scrollY?"scrolled":"top")}>
+          <FilterCnt scrollY={scrollY}>
             <JobFilter />
-          </div>
-          <hr className={"wdlist_hr hr_"+(scrollY?"scrolled":"top")}/>
+            <hr className="styledHr" />
+          </FilterCnt>
           <div id="jobList">
             <div id="bookmark">
               <button type="button" onClick={() => navigate('/bookmark')}>

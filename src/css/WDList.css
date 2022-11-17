@@ -74,24 +74,6 @@
     z-index: 2;
     max-width: 1060px;
 }
-.wdlist_hr{
-    height: 1px;
-    z-index: 2;
-    max-width: 100%;
-    width: 100%;
-}
-.hr_top{
-    position: absolute;
-    background-color: #ececec;
-    left: 0;
-    top: 300px;
-}
-.hr_scrolled{
-    position: fixed;
-    left: 0;
-    top: 208px;
-    background-color: #36f;
-}
 #bookmark{
     margin-bottom: 12px;
 }
@@ -179,9 +161,4 @@
     padding: 0;
     display: flex;
     flex-flow: row wrap;
-}
-
-.observer_bottom{
-    border: 1px solid pink;
-    height: 0px;
 }

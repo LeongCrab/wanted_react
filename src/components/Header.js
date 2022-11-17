@@ -10,11 +10,19 @@ import SearchBar from "./SearchBar";
 import HeaderData from "../data/Header.json";
 
 const SubmenuList = styled.ul`
+  position: inherit;
+  height: calc(100vh - 90px);
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: #e8f6fd;
+  flex-grow: 1;
   ${props => {
-    if (props.size === 'zero') css`width: 0px;`
-    else if (props.size === 'small') css`width: 200px;`
-    else if (props.size === 'medium') css`width: 400px;`
-    else css`width:600px;`
+    if (props.num === 0) return css`width: 0px;`;
+    else if (props.num < 17) return css`width: 200px;`;
+    else if (props.num < 34) return css`width: 400px;`;
+    else return css`width:600px;`;
   }}
 `;
 
@@ -63,25 +71,12 @@ function Header() {
 
   function SubMenu() {
     const mainCategory = HeaderData.category.find((cat) => cat.id === menu);
-    const [size, setSize] = useState("zero");
 
-    const onMouseOver = () => {
-      setSubmenuOpen(true);
-      if (mainCategory.num === 0) {
-        setSize('zero');
-      } else if (mainCategory.num < 17) {
-        setSize('small');
-      } else if (mainCategory.num < 34) {
-        setSize('medium');
-      } else {
-        setSize('large');
-      }
-    }
     return (
       <div className="submenuWrap">
         <SubmenuList
-          size={size}
-          onMouseOver={onMouseOver}
+          num={mainCategory.num}
+          onMouseOver={() => setSubmenuOpen(true)}
           onMouseLeave={() => setSubmenuOpen(false)}
         >
           {[...Array(parseInt(mainCategory.num))].map((n, idx) => (

@@ -124,23 +124,13 @@
     color:#36f;
     background-color: #e8f6fd;
 }
-.menuWrap li >span, .submenuWrap li >span{
+.menuWrap li > span, .submenuWrap li > span{
     margin: 0 5px;
     top: -3px;
     position: relative;
 }
 .submenuWrap{
     left: 180px;
-}
-.submenuWrap  ul{
-    position: inherit;
-    height: calc(100vh - 90px);
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: flex-start;
-    align-items: flex-start;
-    background-color: #e8f6fd;
-    flex-grow: 1;
 }
 .submenuWrap li{
     width: 200px;

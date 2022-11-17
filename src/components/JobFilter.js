@@ -1,16 +1,64 @@
 import React, { useState } from "react";
 import "../css/JobFilter.css";
 import JobFilterData from "../data/JobFilter.json";
+import styled from "styled-components";
+
+const JobSlide = styled.div`
+  width: inherit;
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+  align-items: center;
+  transform: translateX(${props => props.slideX}px);
+  transition: 0.5s ease;
+`;
+
+const StyledJobTag = styled.button.attrs({
+  type: "button",
+})`
+  position: relative;
+  height: 32px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  display: inline-flex; 
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 400;
+  color: #333;
+  border: 1px solid transparent;
+  flex-shrink: 0;
+  background-color: RGB(${props => props.backgroundColor});
+  &:hover{
+    border-color: #36f;
+  }
+  img{
+    width: 16px;
+    height: 16px;
+    margin-left: 5px;
+  }
+`;
+const StyledHr = styled.hr`
+  height: 1px;
+  flex-shrink: 0;
+  border: none;
+  background-color: #ececec;
+  width: 100%;
+  max-width: 1060px;
+  &:not(:last-child){
+    margin: 25px auto;
+  }
+  &:last-child{
+    margin: 25px 0 38px;
+  }
+`;
 
 function JobFilter() {
   function JobTagSlider() {
     const [slideX, setSlideX] = useState(0);
     const [prevBtn, setPrevBtn] = useState(false);
     const [nextBtn, setNextBtn] = useState(true);
-    const style = {
-      transform: `translateX(${slideX}px)`,
-      transition: "0.5s ease",
-    };
     const toPrev = () => {
       setNextBtn(true);
       setSlideX(slideX + 300);
@@ -29,10 +77,10 @@ function JobFilter() {
     };
     function JobTag({ content, src, backgroundColor }) {
       return (
-        <button className="jobTag" style={{ backgroundColor: backgroundColor }}>
+        <StyledJobTag backgroundColor={backgroundColor}>
           {content}
           <img src={src} alt={content} />
-        </button>
+        </StyledJobTag>
       );
     }
 
@@ -56,7 +104,7 @@ function JobFilter() {
             &gt;
           </button>
         )}
-        <div className="tagFilter" style={style}>
+        <JobSlide slideX={slideX}>
           {JobFilterData.jobTagList.map((tag) => (
             <JobTag
               key={tag.id}
@@ -65,7 +113,7 @@ function JobFilter() {
               backgroundColor={tag.backgroundColor}
             />
           ))}
-        </div>
+        </JobSlide>
       </div>
     );
   }
@@ -74,7 +122,7 @@ function JobFilter() {
     <div className="filter">
       <div className="filterWrap">
         <div className="buttonGroup">
-          <button className="filterButton">
+          <button type="button" className="filterButton">
             <span className="buttonTitle">
               지역
               <span className="filterCount">1</span>
@@ -82,7 +130,7 @@ function JobFilter() {
             <span className="buttonDisplay">한국</span>
           </button>
           <div>
-            <button className="filterButton">
+            <button type="button" className="filterButton">
               <span className="buttonTitle">경력</span>
               <span className="buttonDisplay">신입</span>
               <svg
@@ -100,7 +148,7 @@ function JobFilter() {
             </button>
           </div>
           <div>
-            <button className="filterButton">
+            <button type="button" className="filterButton">
               <span className="buttonTitle">기술스택</span>
               <span className="buttonDisplay"></span>
               <svg
@@ -125,9 +173,9 @@ function JobFilter() {
           <option value="popular">인기순</option>
         </select>
       </div>
-      <hr />
+      <StyledHr />
       <JobTagSlider />
-      <hr className="filter_lastHr" />
+      <StyledHr />
     </div>
   );
 }

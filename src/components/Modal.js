@@ -1,8 +1,55 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { useDispatch } from "react-redux";
 import { ModalContext } from '../modules/ModalStore';
-
+import styled, { css } from "styled-components";
 import "../css/Modal.css";
+
+const Input = styled.input`
+  outline: none;
+  width: 100%;
+  height: 50px;
+  padding-right: 15px;
+  padding-left: 15px;
+  border-radius: 5px;
+  border: 1px solid #e1e2e3;
+  background-color: #fff;
+  font-size: 15px;
+  color: #333;
+  &:disabled{
+    background-color: #f2f4f7;
+    color: #ccc;
+  }
+  ${props => {
+    if(props.error){
+      return css`
+        border-color: #fe415c;
+      `;
+    } else {
+      return css`
+        &:focus{
+          border-color: #36f;
+        }
+      `;
+    }
+  }}
+`;
+
+const TimeCode = styled.span`
+  font-weight: 700;
+  margin-top: 3px;
+  font-size: 13px;
+  ${props => {
+    if(props.validity){
+      return css`
+        color: #36f;
+      `;
+    } else {
+      return css`
+        color: #fe415c;
+      `;
+    }
+  }}
+`;
 
 const LogIn = ({ email, setEmail }) => {
   const {contextDispatch} = useContext(ModalContext);
@@ -56,11 +103,9 @@ const LogIn = ({ email, setEmail }) => {
         <div className="inputWrap">
           <label>이메일</label>
           <div className="inputBody">
-            <input
+            <Input 
               type="text"
-              className={
-                (!emailValid && email) || loginError ? "inputError" : "notError"
-              }
+              error={(!emailValid && email) || loginError}
               ref = {emailInput}
               placeholder="이메일을 입력해 주세요."
               value={email}
@@ -75,9 +120,9 @@ const LogIn = ({ email, setEmail }) => {
           <div className="inputWrap">
             <label>비밀번호</label>
             <div className="inputBody">
-              <input
+              <Input
                 type="password"
-                className={loginError ? "inputError" : "notError"}
+                error={loginError}
                 placeholder="비밀번호를 입력해 주세요."
                 value={password}
                 onChange={handlePassword}
@@ -233,7 +278,7 @@ const CheckBox = ({ agreePrivacy, setAgreePrivacy }) => {
     <div className="agreeWrap">
       <div className="allCheckWrap">
         <div className="labelStyle">
-          <input
+          <Input
             type="checkbox"
             onChange={handleAllAgree}
             checked={agreePrivacy && agreeEvent}
@@ -243,7 +288,7 @@ const CheckBox = ({ agreePrivacy, setAgreePrivacy }) => {
       </div>
       <div className="checkWrap">
         <div className="labelStyle">
-          <input
+          <Input
             type="checkbox"
             onChange={(e) => setAgreePrivacy(e.target.checked)}
             checked={agreePrivacy}
@@ -261,7 +306,7 @@ const CheckBox = ({ agreePrivacy, setAgreePrivacy }) => {
       </div>
       <div className="checkWrap">
         <div className="labelStyle">
-          <input
+          <Input
             type="checkbox"
             onChange={(e) =>
               e.target.checked ? setAgreeEvent(true) : setAgreeEvent(false)
@@ -315,11 +360,9 @@ const Timer = ({ timeCount, setTimeCount, setGetCodeBtn }) => {
           인증 시간이 만료됐어요. 다시 시도해 주세요.
         </div>
       )}
-      <span
-        className={"timeCode " + (timeCount === "0:00" ? "expired" : "valid")}
-      >
+      <TimeCode validity={timeCount !== "0:00"}>
         유효시간 {timeCount}
-      </span>
+      </TimeCode>
     </>
   );
 };
@@ -467,9 +510,8 @@ function Modal() {
                   <div className="inputWrap">
                     <label>이메일</label>
                     <div className="inputBody">
-                      <input
+                      <Input
                         value={email}
-                        className="notError"
                         type="text"
                         placeholder={email}
                         disabled
@@ -479,9 +521,9 @@ function Modal() {
                   <div className="inputWrap">
                     <label>이름</label>
                     <div className="inputBody">
-                      <input
+                      <Input
                         value={name}
-                        className={!nameCheck ? "inputError" : "notError"}
+                        error={!nameCheck}
                         type="text"
                         placeholder="이름을 입력해 주세요."
                         onChange={handleName}
@@ -675,13 +717,9 @@ function Modal() {
                         <span>&gt;</span>
                       </div>
                       <div className="mobileInput">
-                        <input
+                        <Input
                           value={mobile}
-                          className={
-                            !mobileCheck || (mobile && !mobileValid)
-                              ? "inputError"
-                              : "notError"
-                          }
+                          error={!mobileCheck || (mobile && !mobileValid)}
                           disabled={inputMobile}
                           onChange={handleMobile}
                           placeholder="(예시) 01034567890"
@@ -704,7 +742,7 @@ function Modal() {
                       </div>
                       {country === "+82" && (
                         <div className="mobileCode">
-                          <input
+                          <Input
                             value={mobileCode}
                             placeholder="인증번호를 입력해 주세요."
                             onChange={(e) => setMobileCode(e.target.value)}
@@ -747,10 +785,10 @@ function Modal() {
                   <div className="inputWrap">
                     <label>비밀번호</label>
                     <div className="inputBody">
-                      <input
+                      <Input
                         name="password"
                         value={PW}
-                        className={PW && !PWValid ? "inputError" : "notError"}
+                        error={PW && !PWValid}
                         type="password"
                         onChange={handlePW}
                         placeholder="비밀번호를 입력해 주세요."
@@ -769,11 +807,9 @@ function Modal() {
                   <div className="inputWrap">
                     <label>비밀번호 확인</label>
                     <div className="inputBody">
-                      <input
+                      <Input
                         value={PWAgain}
-                        className={
-                          PWAgain && !PWAgainValid ? "inputError" : "notError"
-                        }
+                        error={PWAgain && !PWAgainValid}
                         type="password"
                         onChange={handlePWAgain}
                         placeholder="비밀번호를 다시 한번 입력해 주세요."
