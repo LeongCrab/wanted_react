@@ -15,6 +15,9 @@ const FilterCnt = styled.div`
       return css`
         position: fixed;
         top: 50px;
+        @media (max-width: 991px){
+          top: 110px;
+        }
         z-index: 2;
         max-width: 1060px;
       `;
@@ -35,6 +38,9 @@ const FilterCnt = styled.div`
           position: fixed;
           left: 0;
           top: 208px;
+          @media (max-width: 991px){
+            top: 268px;
+          }
           background-color: #36f;
         `;
       } else {

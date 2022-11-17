@@ -196,7 +196,7 @@
     display: none;
 }
 @media (max-width: 991px){
-    .headerDummy{
+    .headerDummy{ 
         height: 110px;
     }
     .headerWrap{
@@ -217,6 +217,9 @@
     }
     .header_visible{
         display: none;
+    }
+    .header_hidden{
+        display: inline-block;
     }
 }
 @media (min-width: 992px) and (max-width: 1199px){
