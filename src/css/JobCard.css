@@ -1,17 +1,8 @@
-.jobCard{
-    position: relative;
-    width: 25%;
-    padding: 10px;
-    list-style: none;
-}
-.jobCard > a{
+li > a{
     display: block;
 }
-li > a > img{
-    width: 250px;
-    height: 187.5px;
-}
-.jobCard > button{
+
+li > button{
     position: absolute;
     background: none;
     border: none;
@@ -22,6 +13,7 @@ li > a > img{
     right: 5px;
     z-index: 1;
 }
+
 .jobCardBody{
     padding: 14px 0;
 }
@@ -53,7 +45,6 @@ li > a > img{
     overflow: hidden;
     margin-top: 10px;
 }
-
 .jobLabel > .response_veryHigh{
     border: 1px solid #00aead;
     color: #00aead;
@@ -63,15 +54,30 @@ li > a > img{
     font-size: 10px;
     font-weight: 600;
     height: 19px;
-    line-height: 19px;
+    line-height: 18px;
     margin-top: 4px;
     padding: 0 5px;
-    vertical-align: middle;
 }
 .jobLabel{
     position: relative;
 }
-
+.jobLabel_tooltip{
+    color: #333;
+    font-size: 12px;
+    font-weight: 400;
+    min-height: 40px;
+    height: auto;
+    line-height: normal;
+    position: absolute;
+    padding: 11px 12px;
+    background: #fff;
+    border: 1px solid #999;
+    z-index: 1;
+    white-space: nowrap;
+    top: calc(100% + 4px);
+    left: 20%;
+    transform: translateX(-50%);
+}
 .jobLocation{
     font-weight: 400;
     color: #999;
@@ -101,4 +107,10 @@ li > a > img{
     margin: 0 3px;
     top: -4px;
     position: relative;
+}
+
+@media (max-width: 991px) {
+    .jobCard{
+        width: 50%;
+    }
 }

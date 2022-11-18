@@ -1,6 +1,5 @@
 .filter{
-    margin-bottom: 25px;
-    padding-top: 10px;
+    padding: 25px 0;
     background-color: #fff;
 }
 .filterWrap{
@@ -175,4 +174,27 @@
     padding: 0 16px;
     position: relative;
     text-align: left;
+}
+.arrow_hidden{
+    display: none;
+}
+@media (max-width: 767px){
+    .filter{
+        padding-top: 0;
+    }
+    .arrow_hidden{
+        display: inline-block;
+    }
+    .tagWrap{
+        overflow: scroll hidden;
+        padding-top: 25px;
+        padding-bottom: 10px;
+        padding-right: 20px;
+    }
+    .filterButton{
+        padding: 0 14px!important;
+    }
+    .arrowButton, .filterCount, .customSelect{
+        display: none;
+    }
 }

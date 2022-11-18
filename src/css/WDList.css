@@ -2,6 +2,7 @@
     min-height: calc(100% - 50px);
 }
 #navBarCnt{
+    background: #fff;
     padding-top: 40px;
 }
 #navBar{
@@ -112,20 +113,16 @@
     display: flex;
     flex-direction: row;
 }
+.featuredWrap > a{
+    width: 20%;
+}
 .featuredHeader{
     z-index: 1;
     border-radius: 3px 3px 0 0;
     overflow: hidden;
     margin: 0 9px;
-    height: 147px;
-}
-.featuredHeader img{
-    object-fit: contain;
-    width: 197px;
-    height: 147px;
 }
 .featuredFooter{
-    width: 197px;
     margin: 0 9px;
     padding: 34px 16px 0;
     height: 124px;
@@ -161,4 +158,68 @@
     padding: 0;
     display: flex;
     flex-flow: row wrap;
+}
+
+@media (max-width: 767px){
+    .featuredWrap > a{
+        width: 140px;
+    }
+    #navBarCnt{
+        padding-top: 17px;
+        width: 95%;
+    }
+    #navBar{
+        width: 100%;
+    }
+    #jobListWrap{
+        width: 95%;
+        padding-bottom: 20px;
+    }
+    #jobVertical{
+        font-size: 20px;
+        line-height: 22px;
+        padding: 3px 14px;
+    }
+    .jobGroupTitle{
+        max-width: 120px;
+        font-size: 16px;
+        padding-top: 1px;
+        line-height: 19.2px;
+        padding-left: 20px;
+        margin-right: 9.5px;
+        width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .jobCategoryTitle{
+        font-size: 13px;
+        line-height: 22px;
+    }
+    .featured{
+        font-size: 18px;
+    }
+    .featuredWrap{
+        overflow: scroll hidden;
+    }
+    .featuredHeader{
+        height: 0;
+        padding-bottom: 65%;
+        margin: 0 5px;
+    }
+    .featuredFooter{
+        margin: 0 5px;
+    }
+    .featuredWrap > a:first-child{
+        margin-left: 20px;
+    }
+    .featuredWrap > a:last-child{
+        margin-right: 20px;
+    }
+}
+
+@media (max-width:991px){
+    .featuredFooter{
+        height: 110px;
+    }
 }

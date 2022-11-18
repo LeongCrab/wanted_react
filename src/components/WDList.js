@@ -24,6 +24,7 @@ const FilterCnt = styled.div`
     } else {
       return css`
         position: static;
+        margin-bottom: 40px;
       `;
     }
   }}
@@ -32,14 +33,14 @@ const FilterCnt = styled.div`
     z-index: 2;
     max-width: 100%;
     width: 100%;
+    left: 0;
     ${props => {
       if (props.scrollY > 300){
         return css`
           position: fixed;
-          left: 0;
-          top: 208px;
+          top: 222px;
           @media (max-width: 991px){
-            top: 268px;
+            top: 282px;
           }
           background-color: #36f;
         `;
@@ -47,11 +48,29 @@ const FilterCnt = styled.div`
         return css`
           position: absolute;
           background-color: #ececec;
-          left: 0;
-          top: 300px;
+
         `;
       }
     }}
+  }
+`;
+
+const FeaturedHeader = styled.div`
+  height: 147px;
+  border-radius: 3px 3px 0 0;
+  background-position: 50%;
+  background-size: cover;
+  background-color: #f2f2f2;
+  background-repeat: no-repeat;
+  transition: all .5s ease-in-out;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 10%);
+  background-image: url(${props => props.src});
+  @media (min-width: 768px) and (max-width: 991px) {
+    height: 120px;
+  }
+  @media (max-width: 767px){
+    width: 140px;
+    height: 100px;
   }
 `;
 
@@ -68,6 +87,18 @@ const FeaturedLogo = styled.div`
   z-index: 0;
   box-shadow: inset 0 0 0 1px rgb(0 0 0 / 10%);
   background-image: url(${props => props.logo});
+  @media (min-width: 768px) and (max-width: 991px) {
+    top: -21px;
+    left: 15px;
+    width: 42px;
+    height: 42px;
+  }
+  @media (max-width: 767px){
+    top: -18px;
+    left: 15px;
+    width: 36px;
+    height: 36px;
+  }
 `;
 
 
@@ -84,7 +115,7 @@ function WDList() {
       return (
         <Link className="featuredCard" to={`../company/${id}`}>
           <div className="featuredHeader">
-            <img src={src} alt={header} />
+            <FeaturedHeader src={src} />
           </div>
           <div className="featuredFooter">
             <FeaturedLogo logo={logo} />
@@ -195,7 +226,7 @@ function WDList() {
             </div>
             <div className="jobCategory">
               <div id="jobVertical">|</div>
-              <div className="jobCategoryTitle">직군을 선택해주세요.</div>
+              <span className="jobCategoryTitle">직군을 선택해주세요.</span>
             </div>
           </div>
         </div>
