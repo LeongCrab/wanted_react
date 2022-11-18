@@ -20,6 +20,11 @@ const FilterCnt = styled.div`
         }
         z-index: 2;
         max-width: 1060px;
+        & > div{
+          @media (max-width: 767px){
+            padding-top: 25px;
+          }
+        }
       `;
     } else {
       return css`
