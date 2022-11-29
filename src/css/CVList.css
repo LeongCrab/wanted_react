@@ -1,0 +1,93 @@
+.resumeList{
+    margin: 0 auto;
+}
+.resumeList_header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 25px;
+    margin-bottom: 5px;
+}
+.resumeList_header > h4{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 0;
+    padding: 15px 0;
+    color: #333;
+    word-wrap: break-word;
+}
+.resumeList_header > a{
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    padding: 15px 0;
+    color: #36f!important;
+    display: flex;
+    align-items: center;
+}
+.resumeList_header > a > .icon-info{
+    width: 20px;
+    height: 20px;
+    margin-left: 8px;
+    bottom: 1px;
+}
+.resumeList_wrap{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: calc(100% + 20px);
+    flex-wrap: wrap;
+}
+.resumeItem{
+    height: 190px;
+    width: calc(25% - 20px);
+    margin-bottom: 20px;
+    margin-right: 20px;
+    position: relative;
+    border: 1px solid #dbdbdb;
+    background-color: #fff;
+}
+.resumeIcon{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.resumeIcon > .icon{
+    cursor: pointer;
+    width: 74px;
+    height: 74px;
+    margin: 0 auto;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 26px;
+}
+.resumeIcon > .add{
+    background-color: #36f;
+    color: #fff;
+}
+.resumeIcon > .upload{
+    background-color: #e1e2e3;
+    color: #666;
+}
+.resumeIcon > p{
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: normal;
+    text-align: center;
+    color: #333;
+    margin: 20px 0 0;
+
+}
+@media (min-width: 1200px) {
+    .resumeList{
+        width: 87.72%;
+        max-width : 1060px;
+    }
+}

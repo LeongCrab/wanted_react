@@ -125,7 +125,7 @@ function Header() {
             <NavBtn href="/wdlist" category="채용" />
             <NavBtn href="/events" category="이벤트" />
             <NavBtn href="/salary" category="직군별 연봉" />
-            <NavBtn href="/cv/list" category="이력서" />
+            <NavBtn href="/cvlist" category="이력서" />
             <NavBtn href="/community" category="커뮤니티" tag="New" />
             <NavBtn href="/gigs/experts" category="프리랜서" />
             <NavBtn href="/aiscore/resume" category="AI 합격예측" tag="Beta" />

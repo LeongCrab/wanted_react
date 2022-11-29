@@ -7,6 +7,7 @@ import WDList from "./components/WDList";
 import WD from "./components/WD";
 import Search from "./components/Search";
 import Bookmark from './components/Bookmark';
+import CVList from './components/CVList';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/wd/:params" element={<WD />} />
           <Route path="/search" element={<Search />} />
           <Route path="/bookmark" element={<Bookmark />} />
+          <Route path="/cvlist" element={<CVList />} />
           <Route path="/*" element={<h1>존재하지 않는 페이지입니다.</h1>} />
         </Routes>
       </BrowserRouter>
