@@ -7,7 +7,8 @@ import JobCard from './JobCard';
 import Footer from './Footer';
 import JobCardListData from '../data/JobCardList.json';
 import WDData from '../data/WD.json';
-import api_key from '../data/api_key.json';
+
+const GOOGLE_MAPS_KEY = process.env.REACT_APP_GOOGLE_MAPS_KEY;
 
 function WD() {
   const { params } = useParams();
@@ -168,7 +169,7 @@ function WD() {
   }
 
   function GoogleMap() {
-    const mapElement = useRef(null);
+    const mapRef = useRef(null);
 
     const loadScript = useCallback((url) => {
       const firstScript = window.document.getElementsByTagName('script')[0];
@@ -182,12 +183,12 @@ function WD() {
 
     const initMap = useCallback(() => {
       const { google } = window;
-      if (!mapElement.current || !google) return;
-
+      if (!mapRef.current || !google) return;
 
       const location = { lat: 37.55098257107409, lng: 126.97274923324585 };
-      const map = new google.maps.Map(mapElement.current, {
+      const map = new google.maps.Map(mapRef.current, {
         zoom: 17,
+        disableDefaultUI: true,
         center: location,
       });
       new google.maps.Marker({
@@ -198,7 +199,6 @@ function WD() {
 
     useEffect(() => {
       const script = window.document.getElementsByTagName('script')[0];
-      const API_KEY = api_key.API_KEY;
       const includeCheck = script.src.startsWith(
         'https://maps.googleapis.com/maps/api'
       );
@@ -207,11 +207,11 @@ function WD() {
 
       window.initMap = initMap;
       loadScript(
-        `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=initMap&language=en`
+        `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_KEY}&callback=initMap&language=ko`
       );
     }, [initMap, loadScript]);
 
-    return <div className="GoogleMap" ref={mapElement} />;
+    return <div className="GoogleMap" ref={mapRef} />;
   }
 
   if (params !== WDData.id) {
