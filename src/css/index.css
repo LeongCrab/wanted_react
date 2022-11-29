@@ -73,6 +73,10 @@ button{
     background: none;
     outline: none;
 }
+button:disabled{
+    background-color: #f2f4f7;
+    color: #ccc;
+}
 img{
     object-fit: cover;
 
@@ -90,7 +94,6 @@ hr{
     flex-shrink: 0;
     background-color: #ececec;
 }
-
 select{
     outline: none;
 }

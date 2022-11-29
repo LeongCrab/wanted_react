@@ -82,7 +82,7 @@ function WD() {
             <svg className="" width="24" height="24" viewBox="0 0 24 24"><g fill="currentColor" fillRule="evenodd"><path fillRule="nonzero" d="M15.266 20.658A9.249 9.249 0 0112 21.25a9.25 9.25 0 010-18.5 9.21 9.21 0 016.54 2.71A9.217 9.217 0 0121.25 12a9.213 9.213 0 01-2.71 6.54.75.75 0 101.061 1.062A10.713 10.713 0 0022.75 12c0-2.89-1.146-5.599-3.149-7.601A10.717 10.717 0 0012 1.25C6.063 1.25 1.25 6.063 1.25 12S6.063 22.75 12 22.75c1.31 0 2.591-.235 3.794-.688a.75.75 0 10-.528-1.404z"></path><path d="M13 16a1 1 0 11-2 0 1 1 0 012 0"></path><path fillRule="nonzero" d="M11.25 7v5a.75.75 0 101.5 0V7a.75.75 0 10-1.5 0z"></path></g></svg>
             <div className="warning_header_content">
               <h5>
-                  본 채용정보는 원티드랩의 동의없이 무단전재, 재배포, 재가공할 수 없으며, 구직활동 이외의<br />
+              본 채용정보는 원티드랩의 동의없이 무단전재, 재배포, 재가공할 수 없으며, 구직활동 이외의<br />
                   용도로 사용할 수 없습니다.
               </h5>
               <button type="button" onClick={() => body ? setBody(false) : setBody(true)} className={body? "closeBtn" : ""}>
@@ -93,7 +93,7 @@ function WD() {
           {body && (
             <div className="warning_body">
               <p>
-                본 채용 정보는&nbsp;
+              본 채용 정보는&nbsp;
                 <strong>블루비커</strong>
                 에서 제공한 자료를 바탕으로 원티드랩에서 표현을 수정하고 이의 배열 및 구성을 편집하여 완성한 원티드랩의 저작자산이자 영업자산입니다. 본 정보 및 데이터베이스의 일부 내지는 전부에 대하여 원티드랩의 동의 없이 무단전재 또는 재배포, 재가공 및 크롤링할 수 없으며, 게재된 채용기업의 정보는 구직자의 구직활동 이외의 용도로 사용될 수 없습니다. 원티드랩은 
                 <strong>블루비커</strong>
@@ -262,13 +262,13 @@ function WD() {
                     <p><span>【복지 및 혜택】<br /><br />• 여름 방학, 겨울 방학<br />▶여름방학 3일, 겨울방학 3일 연차에 따른 휴가비를 추가 지원합니다.<br /><br />• 자율출퇴근제<br />▶자율적인 출퇴근 시간 및 원격근무가 가능 합니다.<br /><br />• 자기계발비 지원<br />▶세미나, 워크샵, 컨퍼런스, 업무 관련 도서구입비 등 팀원의 성장을 응원합니다.<br /><br />• 건강검진비 지원<br />▶ 연 1회 종합건강검진 비용을 지원해 드립니다.<br /><br />• 최고 사양의 개인장비 지원<br />▶ iMac, Macbook Pro, 데스크탑, 노트북 등 원하는 개인별 맞춤 디바이스 제공하여 최고의 업무환경을 제공해 드립니다.<br /><br />•편리한 교통<br />▶ 1,4호선 서울역과 연결된 오피스 빌딩<br /><br />•공유오피스<br />▶커뮤니티 매니저가 상시 관리하는 최신 시설의 오피스에서 근무합니다.<br />(에스프레소 머신, Tea, 간식 무제한 제공)<br /><br />•청년내일채움공제<br />▶ 지원 대상인 모든 분들께 청년내일채움공제 가입<br /><br />• 경조사비 지원<br />▶ 구성원 경조사 발생 시 근조화 및 경조비 지원해 드립니다.<br /><br />• 자유로운 연차/반차 사용<br />▶ 업무 스케쥴만 괜찮다면 언제든지 사용 가능합니다.<br /><br />• 스톡옵션 부여<br />▶ 기여한 만큼 인정받아요. 성과에 따라 스톡옵션 부여해 드립니다.<br /><br />• 리프레쉬 휴가<br />▶3년, 5년, 7년 근속 시 리프레쉬 휴가를 제공합니다. <br /><br /><br />＜블루비커 개발팀 소개＞<br /><br />✓ 저희 개발팀은 팀원 모두 새로운 기술과 방법을 도입하는데 주저하지 않고, 신기술에 대한 스터디와 공유를 즐기며 일하고 있습니다. 합류하시면 자율성과 소통을 바탕으로 좋은 동료들과 함께 일하는 기쁨을 느끼실 수 있을 것이라 확신합니다.<br />현재 개발팀은 백엔드, 프론트엔드, 그래픽스, Hololens 2, 네이티브 앱, 클라우드, 데이터베이스 파트로 구성되어 있습니다. 개발 팀은 내부 기획 파트, 디자인 파트, 그래픽스, 아티스트 파트와 협업 하여 바이오 메디컬 분야의 서비스 개발을 끊임없이 진행하고 있습니다.<br /><br />【블루비커 기술 스택】<br />• React, WebGL, Unity, Spring Boot, .Net Core, Kotlin, Swift, Stored Procedure : 개발팀에서 서비스에 적용하고 있는 기술 스택입니다.<br /><br />• MS Azure Cloud, Netlify : 우리는 마이크로소프트의 Azure Cloud 의 기술들을 서비스에 활용하고 있습니다. PaaS App 및 Serverless Functions 와 Static Web App 을 이용한 웹앱, Blob Storage 및 CDN 을 이용한 대용량 스토리지, Traffic Manager 와 FrontDoor를 이용한 분산처리, Notification Hub 와 PubSub 을 이용한 소켓통신 등을 사용합니다. 부하분산 처리가 필요하지 않은 단순한 웹 앱들은 Netlify 클라우드 서비스를 사용합니다.<br /><br />• 그래픽스 : 자체적으로 개발한 국내 최고 수준의 WebGL 뷰어와, 마이크로소프트 Hololens2 의 서비스들을 개발합니다. Blender를 이용해서 모델링한 3D 에셋들을 활용하여 웹과 Hololens2에서 사용하기 위한 최적화를 진행하여 개발하고 있습니다.<br /><br />【블루비커 개발 문화】<br />• CI/CD 파이프라인을 이용하며, 중요 서비스는 모두 스테이징 서버와 프로덕션 서버가 분리되어 있습니다.<br />• 초기 스타트업 특성상 다양한 아이디어를 빠르고 린하게 적용해야 하기 때문에 효율적인 개발 문화를 추구합니다.<br />• 개발 스택의 결정과 프로젝트의 설계는 모든 개발 팀원들의 토론을 통해 결정합니다.<br />• 코드 리뷰는 모든 개발 팀원들이 참가하여 본인이 개발하는 분야가 아닐지라도 함께 논의하고 분석합니다.<br />• 우리는 최신 기술 스택의 도입에 두려움을 가지지 않습니다. 새로운 기술에 대해 조사하고, 비교하고, 적용하는 과정을 통해 개발자는 한 단계 더 성장할 수 있다고 생각합니다.<br />• 주기적으로 일정 시간을 할애하여 외부 온/오프라인 교육을 받을 수 있도록 회사 차원에서 지원합니다. 교육을 통해서 서비스에 접목하고자 하는 아이디어가 떠오른다면 토론을 통해서 결정하고 진행합니다.<br />• 명확한 Task를 설정한 뒤 업무를 진행합니다. 상황에 따른 우선순위를 정하고 Teams Planner를 기반으로 1주 혹은 2주 단위의 느슨한 스프린트 방식으로 개발하고 있습니다.<br />• 개발자들은 중요한 기획안에 자신들의 아이디어를 제안하고, 기술적인 의견을 공유합니다.<br /><br />【주요 협업 툴】<br />• 모든 소스코드들은 깃허브를 통해 관리되고, 통신 협업을 위해서 Postman 을 사용하고 있으며, 모든 기술 문서는 Notion으로 정리합니다.<br />• 전사적으로 마이크로소프트 Teams, Notion, Microsoft 365 서비스와 같은 SaaS 서비스를 적극 사용해서 구성원 개인 분들의 업무 효율을 높이는데 도움 드리고 있습니다.<br />• 모든 팀들은 Teams Planner를 통해 업무 및 일정 관리를 하고 있습니다.<br />• 프로덕트팀, 서비스개발팀, 마케팅팀과의 디자인 관련 업무는 Figma를 통해 협업하고 있습니다.<br /><br /><br />＜채용절차 및 유의사항＞<br /><br />✓ 채용절차는 이렇게 진행됩니다.<br /><br />1. 서류전형<br />• 블루비커는 자유양식의 지원서를 받고 있습니다. 본인의 강점이 잘 드러나는 다양한 정보를 알려주세요.<br />• 지원 시 본인의 이력서 또는 포트폴리오와 함께, 포지션과 유관하며 직접 작성한 “깃허브 주소” 혹은 “소스코드”를 첨부 및 제출해 주시기 바랍니다.<br />• 직접 운영 중인 개발 블로그나 서비스가 있다면 함께 보내주시면 적극 검토하겠습니다!<br />• 만약 제출이 어려운 경우, 개발팀에서 전달해드리는 과제를 수행해주시면 됩니다.<br /><br />2. 1차 기술 인터뷰(온라인)<br />• 개발팀과 진행하는 직무 관련 인터뷰로, 지원서 상의 경력과 소스코드 및 과제 내용을 중심으로 진행됩니다.<br />• 1시간 가량 온라인 면접으로 진행됩니다.<br /><br />3. 2차 임원 인터뷰(오프라인)<br />• 다른 직군의 팀원 및 경영진과 서로에 대해 조금 더 알아가는 시간입니다.<br />• 서로 추구하는 가치관과 생각 등에 대해 이야기하는 시간으로 약 1시간 가량 진행됩니다.<br /><br />4. 최종합격<br />• 처우에 대해 최종적으로 협의 후, 입사 일자를 결정합니다.<br /><br />✓ 블루비커에 관심을 갖고 지원해 주신 모든 분들의 서류를 정말 감사한 마음으로 읽어 보고 있습니다. 채용의 모든 전형에서 가능한 빠른 피드백을 드리고자 노력하겠습니다.</span></p>
                     <h6>기술스택 ・ 툴</h6>
                     <div className="description_skill_wrap">
-                        <div className="skillItem">Git</div>
-                        <div className="skillItem">Azure</div>
-                        <div className="skillItem">React</div>
-                        <div className="skillItem">JavaScript</div>
-                        <div className="skillItem">TypeScript</div>
-                        <div className="skillItem">Redux</div>
-                        <div className="skillItem">Next.js</div>
+                      <div className="skillItem">Git</div>
+                      <div className="skillItem">Azure</div>
+                      <div className="skillItem">React</div>
+                      <div className="skillItem">JavaScript</div>
+                      <div className="skillItem">TypeScript</div>
+                      <div className="skillItem">Redux</div>
+                      <div className="skillItem">Next.js</div>
                     </div>
                   </section>
                 </div>
@@ -286,7 +286,7 @@ function WD() {
                 </section>
                 <section className="companyInfo">
                   <button type="button" className="left">
-                    <div className="companyLogo" style={{backgroundImage:`url(https://static.wanted.co.kr/images/wdes/0_5.0852ff23.jpg)` }}></div>
+                    <div className="companyLogo" style={{backgroundImage:"url(https://static.wanted.co.kr/images/wdes/0_5.0852ff23.jpg)" }}></div>
                     <div>
                         <h5>블루비커</h5>
                         <h6>IT, 컨텐츠</h6>

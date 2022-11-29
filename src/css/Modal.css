@@ -1,8 +1,4 @@
 /*modal*/
- button:disabled{
-    background-color: #f2f4f7;
-    color: #ccc;
-}
 .modal{
     position: relative;
     top: 0;
