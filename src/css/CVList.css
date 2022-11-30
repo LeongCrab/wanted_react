@@ -48,6 +48,7 @@
     position: relative;
     border: 1px solid #dbdbdb;
     background-color: #fff;
+    cursor: pointer;
 }
 .resumeIcon{
     height: 100%;
@@ -55,8 +56,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
-
 .resumeIcon > .icon{
     cursor: pointer;
     width: 74px;
@@ -83,7 +84,9 @@
     text-align: center;
     color: #333;
     margin: 20px 0 0;
-
+}
+.resumeIcon > input.upload{
+    display: none;
 }
 @media (min-width: 1200px) {
     .resumeList{

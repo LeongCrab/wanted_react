@@ -1,35 +1,17 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "../css/CVList.css";
 import styled from "styled-components";
 import Header from "./Header";
+import { storage } from '../firebase';
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { ImFilesEmpty } from 'react-icons/im';
-import { BiInfoCircle, BiUpload, BiDotsVerticalRounded } from 'react-icons/bi';
+import { BiInfoCircle, BiUpload, BiFile } from 'react-icons/bi';
+import { MdClose } from 'react-icons/md';
 
-const Badge = styled.div`
-  padding-left: 18px;
-  padding-top: 15px;
-  display: flex;
-  flex-wrap: wrap;
-  grid-gap: 5px;
-  gap: 5px;
-  div{
-    height: 24px;
-    background-color: #f3f9fe;
-    color: #36f;
-    font-size: 11px;
-    font-weight: 700;
-    line-height: 13.2px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px;
-    padding: 6px;
-  }
-`;
 const Title = styled.div`
-  padding: 6px 20px;
+  padding: 20px 20px 6px;
   font-size: 16px;
   font-weight: 500;
   letter-spacing: normal;
@@ -42,7 +24,7 @@ const Title = styled.div`
     max-width: 100%;
     letter-spacing: normal;
     text-align: left;
-    color: #999;
+    color: #333;
     overflow: hidden;
     word-break: break-all;
     display: -webkit-box;
@@ -65,16 +47,10 @@ const Info = styled.div`
     padding: 0 12px 0 20px;
     align-items: center;
     border-top: 1px solid #e0e0e0;
-    .lang{
-      color: #999;
+    .icon{
       width: 20px;
       height: 20px;
-      border-radius: 2px;
-      border: 1px solid #999;
       text-align: center;
-      font-size: 12px;
-      line-height: 20px;
-      font-weight: 600;
       margin-right: 10px;
     }
     span{
@@ -83,7 +59,7 @@ const Info = styled.div`
       line-height: 20px;
       letter-spacing: normal;
       text-align: left;
-      color: #999;
+      color: #333;
     }
     & > div:last-child{
       display: flex;
@@ -98,28 +74,45 @@ const Info = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+        cursor: pointer;
       }
     }
     
 `;
-const ResumeItem = ({badge, name, date, lang, state}) => {
+const ResumeItem = ({name, date}) => {
+  const deleteItem = (e) => {
+    e.stopPropagation();
+    console.log("delete");
+  };
+
+  const download = () => {
+    getDownloadURL(ref(storage, `resume/${name}`))
+      .then((url) => {
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = (event) => {
+          const blob = xhr.response;
+        };
+        xhr.open('GET', url);
+        xhr.send();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return(
-    <div className="resumeItem">
-      <Badge>
-        <div>
-          <p>{badge}</p>
-        </div>
-      </Badge>
+    <div className="resumeItem" onClick={download}>
       <Title>
         <h3>{name}</h3>
         <p>{date}</p>
       </Title>
       <Info>
-        <div className="lang">{lang}</div>
-        <span>{state}</span>
+        <BiFile className="icon"/>
+        <span>첨부 완료</span>
         <div>
-          <button>
-            <BiDotsVerticalRounded />
+          <button onClick={deleteItem}>
+            <MdClose />
           </button>
         </div>
       </Info>
@@ -128,6 +121,40 @@ const ResumeItem = ({badge, name, date, lang, state}) => {
 }
 
 const CVList = () => {
+  const inputRef = useRef(null);
+  const [percent, setPercent] = useState(0);
+  const [fileInfo, setFileInfo] = useState([]);
+
+  const handleClick = () => {
+    inputRef.current.click();
+  }
+
+  const handleChange = (e) => {
+    const file = e.target.files[0];
+
+    if(file) {
+      const storageRef = ref(storage, `/resume/${file.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+  
+      uploadTask.on(
+        "파일 업로드 중...",
+        (snapshot) => {
+          const percent = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+          setPercent(percent);
+        },
+        (err) => console.log(err),
+        () => {
+          const date = new Date();
+          const info = {
+            name: file.name,
+            date: `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`
+          };
+          setFileInfo(prev => prev.concat(info));
+        }
+      );
+    }
+  };
+
   return(
     <>
       <Header />
@@ -149,14 +176,15 @@ const CVList = () => {
             </div>
           </div>
           <div className="resumeItem">
-            <div className="resumeIcon">
+            <div className="resumeIcon" onClick={handleClick}>
+              <input type="file" className="upload" ref={inputRef} onChange={handleChange}/>
               <div className="icon upload">
                 <BiUpload />
               </div>
               <p>파일 업로드</p>
             </div>
           </div>
-          <ResumeItem badge="매치업 이력서" name="이름" date="날짜" lang="한" state="작성 중"/>
+          {fileInfo.map((info,idx) => <ResumeItem key={idx+info.name} name={info.name} date={info.date} />)}
         </div>
       </div>
     </>
