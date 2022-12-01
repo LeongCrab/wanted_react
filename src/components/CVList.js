@@ -5,7 +5,7 @@ import "../css/CVList.css";
 import styled from "styled-components";
 import Header from "./Header";
 import { storage } from '../firebase';
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL, deleteObject, listAll, getMetadata } from "firebase/storage";
 import { ImFilesEmpty } from 'react-icons/im';
 import { BiInfoCircle, BiUpload, BiFile } from 'react-icons/bi';
 import { MdClose } from 'react-icons/md';
@@ -37,6 +37,7 @@ const Title = styled.div`
     margin-top: 5px;
   }
 `;
+
 const Info = styled.div`
     position: absolute;
     bottom: 0;
@@ -79,51 +80,74 @@ const Info = styled.div`
     }
     
 `;
-const ResumeItem = ({name, date}) => {
-  const deleteItem = (e) => {
-    e.stopPropagation();
-    console.log("delete");
-  };
-
-  const download = () => {
-    getDownloadURL(ref(storage, `resume/${name}`))
-      .then((url) => {
-        const xhr = new XMLHttpRequest();
-        xhr.responseType = 'blob';
-        xhr.onload = (event) => {
-          const blob = xhr.response;
-        };
-        xhr.open('GET', url);
-        xhr.send();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  return(
-    <div className="resumeItem" onClick={download}>
-      <Title>
-        <h3>{name}</h3>
-        <p>{date}</p>
-      </Title>
-      <Info>
-        <BiFile className="icon"/>
-        <span>첨부 완료</span>
-        <div>
-          <button onClick={deleteItem}>
-            <MdClose />
-          </button>
-        </div>
-      </Info>
-    </div>
-  );
-}
 
 const CVList = () => {
   const inputRef = useRef(null);
   const [percent, setPercent] = useState(0);
   const [fileInfo, setFileInfo] = useState([]);
+  // const listRef = ref(storage, 'resume/');
+
+  // listAll(listRef)
+  //   .then((res) => {
+  //     res.items.forEach((itemRef) => {
+  //       getMetadata(itemRef)
+  //         .then((metadata) => {
+  //           const info = {
+  //             name: metadata.name,
+  //             date: metadata.timeCreated,
+  //           }
+  //           console.log("display")
+  //           setFileInfo(prev => prev.concat(info))
+  //         })
+  //         .catch((error) => {
+  //           console.log(error.message);
+  //         });
+  //     })
+  //   }).catch((error) => {
+  //     console.log(error.message);
+  // });
+
+  const ResumeItem = ({name, date}) => {
+    const deleteItem = (e) => {
+      e.stopPropagation();
+      
+      const desertRef = ref(storage, `resume/${name}`);
+
+      deleteObject(desertRef).then(() => {
+        setFileInfo(prev => prev.filter(info => info.name !== name));
+      }).catch((error) => {
+        console.log(error.message);
+      });
+    };
+  
+    const download = () => {
+      getDownloadURL(ref(storage, `resume/${name}`))
+        .then((url) => {
+          window.open(url, '_blank');
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+  
+    return(
+      <div className="resumeItem" onClick={download}>
+        <Title>
+          <h3>{name}</h3>
+          <p>{date}</p>
+        </Title>
+        <Info>
+          <BiFile className="icon"/>
+          <span>첨부 완료</span>
+          <div>
+            <button onClick={deleteItem}>
+              <MdClose />
+            </button>
+          </div>
+        </Info>
+      </div>
+    );
+  }
 
   const handleClick = () => {
     inputRef.current.click();
@@ -132,7 +156,7 @@ const CVList = () => {
   const handleChange = (e) => {
     const file = e.target.files[0];
 
-    if(file) {
+    //if(file) {
       const storageRef = ref(storage, `/resume/${file.name}`);
       const uploadTask = uploadBytesResumable(storageRef, file);
   
@@ -152,7 +176,7 @@ const CVList = () => {
           setFileInfo(prev => prev.concat(info));
         }
       );
-    }
+    //}
   };
 
   return(
