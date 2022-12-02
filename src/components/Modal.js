@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
+
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { auth } from "../firebase";
 import { useDispatch } from "react-redux";
 import { ModalContext } from '../modules/ModalStore';
 import styled, { css } from "styled-components";
@@ -52,6 +55,8 @@ const TimeCode = styled.span`
 `;
 
 const LogIn = ({ email, setEmail }) => {
+  const provider = new GoogleAuthProvider();
+
   const {contextDispatch} = useContext(ModalContext);
 
   const emailInput = useRef(null);
@@ -65,6 +70,16 @@ const LogIn = ({ email, setEmail }) => {
   useEffect(() => {
     emailInput.current.focus();
   }, []);
+
+  const loginGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        contextDispatch({type: "MODAL_CLOSE"});
+        dispatch({type:'LOG_IN', email:user.email});
+        alert(`환영합니다. ${user.displayName}님!`);
+      });
+  }
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -84,7 +99,7 @@ const LogIn = ({ email, setEmail }) => {
         if (passwordOpen) {
           if (localStorage.getItem(email) !== null && JSON.parse(localStorage.getItem(email)).password === password) {
             alert(`환영합니다. ${JSON.parse(localStorage.getItem(email)).name}님!`);
-            dispatch({type:'LOG_IN', email});
+            dispatch({type:'LOG_IN', email: email});
             contextDispatch({type: "MODAL_CLOSE"});
           } else {
             setLoginError(true);
@@ -189,7 +204,7 @@ const LogIn = ({ email, setEmail }) => {
             </div>
             <div className="modalSocial">
               <button id="google">
-                <svg
+                <svg onClick={loginGoogle}
                   xmlns="http://www.w3.org/2000/svg"
                   width="23"
                   height="23"

@@ -99,9 +99,7 @@ const CVList = () => {
                 name: metadata.name,
                 date: metadata.timeCreated,
               };
-              if (!fileInfo.includes(info)) {
-                setFileInfo(prev => [...prev, info]);
-              }
+              setFileInfo(prev => [...prev, info]);
             })
             .catch((error) => {
               console.log(error.message);
