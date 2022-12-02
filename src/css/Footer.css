@@ -61,8 +61,11 @@
     position: relative;
 }
 .countryFlag{
+    width: 24px;
+    height: 17px;
     position: absolute;
     left: 20px;
     top: 11.5px;
     display: inline;
+    
 }

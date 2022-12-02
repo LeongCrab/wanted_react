@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 import styled, { css } from "styled-components";
 
 import { auth } from "../firebase";
@@ -55,10 +55,9 @@ const TimeCode = styled.span`
 `;
 
 const LogIn = ({ email, setEmail }) => {
-  const provider = new GoogleAuthProvider();
-
+  const GoogleProvider = new GoogleAuthProvider();
+  const FacebookProvider = new FacebookAuthProvider();
   const dispatch = useDispatch();
-  const modalOpen = useSelector((state) => state.modal.modalOpen);
   const emailInput = useRef(null);
   const [password, setPassword] = useState("");
   const [passwordOpen, setPasswordOpen] = useState(false);
@@ -70,12 +69,24 @@ const LogIn = ({ email, setEmail }) => {
   }, []);
 
   const loginWithGoogle = () => {
-    signInWithPopup(auth, provider)
+    signInWithPopup(auth, GoogleProvider)
       .then((result) => {
         const user = result.user;
         dispatch({type: "MODAL_CLOSE"});
         dispatch({type:'LOG_IN', email:user.email});
-        alert(`환영합니다. ${user.displayName}님!`);
+        alert(`환영합니다. ${user.displayName}님! 이메일 주소는 ${user.email}이군요!`
+        );
+      });
+  }
+  const loginWithFacebook = () => {
+    signInWithPopup(auth, FacebookProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        dispatch({type: "MODAL_CLOSE"});
+        dispatch({type:'LOG_IN', email:user.email});
+        alert(`환영합니다. ${user.displayName}님! 이메일 주소는 ${user.email}이군요!`
+        );
       });
   }
 
@@ -185,7 +196,7 @@ const LogIn = ({ email, setEmail }) => {
             </div>
             <div className="modalSocial">
               <button id="facebook">
-                <svg
+                <svg onClick={loginWithFacebook}
                   xmlns="http://www.w3.org/2000/svg"
                   width="12"
                   height="23"

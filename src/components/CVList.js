@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ref, uploadBytesResumable, getDownloadURL, deleteObject, listAll, getMetadata } from "firebase/storage";
-
+import { ref, uploadBytes, getDownloadURL, deleteObject, listAll, getMetadata } from "firebase/storage";
 import styled from "styled-components";
+
 import Header from "./Header";
 import { storage } from '../firebase';
 
@@ -84,31 +84,34 @@ const Info = styled.div`
 
 const CVList = () => {
   const inputRef = useRef(null);
-  const [percent, setPercent] = useState(0);
   const [fileInfo, setFileInfo] = useState([]);
   const [state, setState] = useState("");
   const listRef = ref(storage, 'resume/');
 
   useEffect(() => {
     setFileInfo([]);
-    listAll(listRef)
-      .then((res) => {
-        res.items.forEach((itemRef) => {
-          getMetadata(itemRef)
-            .then((metadata) => {
-              const info = {
-                name: metadata.name,
-                date: metadata.timeCreated,
-              };
-              setFileInfo(prev => [...prev, info]);
-            })
-            .catch((error) => {
-              console.log(error.message);
-            });
-        })
-      }).catch((error) => {
-        console.log(error.message);
-    });
+    const listFiles = () => {
+      listAll(listRef)
+        .then((res) => {
+          res.items.forEach((itemRef) => {
+            getMetadata(itemRef)
+              .then((metadata) => {
+                const info = {
+                  name: metadata.name,
+                  date: metadata.timeCreated,
+                };
+                setFileInfo(prev => [...prev, info]);
+              })
+              .catch((error) => {
+                console.log(error.message);
+              });
+          })
+        }).catch((error) => {
+          console.log(error.message);
+      });
+    };
+    
+    listFiles();
   }, [state]);
 
   const ResumeItem = ({name, date}) => {
@@ -159,21 +162,8 @@ const CVList = () => {
 
   const handleChange = (e) => {
     const file = e.target.files[0];
-
-      const storageRef = ref(storage, `/resume/${file.name}`);
-      const uploadTask = uploadBytesResumable(storageRef, file);
-  
-      uploadTask.on(
-        "파일 업로드 중...",
-        (snapshot) => {
-          const percent = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-          setPercent(percent);
-        },
-        (error) => console.log(error.message),
-        () => {
-          setState(`upload ${file.name}`);
-        }
-      );
+    const storageRef = ref(storage, `/resume/${file.name}`);
+    uploadBytes(storageRef, file).then(() => setState(`upload ${file.name}`));
   };
 
   return(
@@ -198,7 +188,7 @@ const CVList = () => {
           </div>
           <div className="resumeItem">
             <div className="resumeIcon" onClick={handleClick}>
-              <input type="file" className="upload" ref={inputRef} onChange={handleChange}/>
+              <input type="file" className="upload" ref={inputRef} onChange={handleChange} />
               <div className="icon upload">
                 <BiUpload />
               </div>
