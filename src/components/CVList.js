@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "../css/CVList.css";
@@ -85,27 +85,32 @@ const CVList = () => {
   const inputRef = useRef(null);
   const [percent, setPercent] = useState(0);
   const [fileInfo, setFileInfo] = useState([]);
-  // const listRef = ref(storage, 'resume/');
+  const [state, setState] = useState("");
+  const listRef = ref(storage, 'resume/');
 
-  // listAll(listRef)
-  //   .then((res) => {
-  //     res.items.forEach((itemRef) => {
-  //       getMetadata(itemRef)
-  //         .then((metadata) => {
-  //           const info = {
-  //             name: metadata.name,
-  //             date: metadata.timeCreated,
-  //           }
-  //           console.log("display")
-  //           setFileInfo(prev => prev.concat(info))
-  //         })
-  //         .catch((error) => {
-  //           console.log(error.message);
-  //         });
-  //     })
-  //   }).catch((error) => {
-  //     console.log(error.message);
-  // });
+  useEffect(() => {
+    setFileInfo([]);
+    listAll(listRef)
+      .then((res) => {
+        res.items.forEach((itemRef) => {
+          getMetadata(itemRef)
+            .then((metadata) => {
+              const info = {
+                name: metadata.name,
+                date: metadata.timeCreated,
+              };
+              if (!fileInfo.includes(info)) {
+                setFileInfo(prev => [...prev, info]);
+              }
+            })
+            .catch((error) => {
+              console.log(error.message);
+            });
+        })
+      }).catch((error) => {
+        console.log(error.message);
+    });
+  }, [state]);
 
   const ResumeItem = ({name, date}) => {
     const deleteItem = (e) => {
@@ -114,7 +119,7 @@ const CVList = () => {
       const desertRef = ref(storage, `resume/${name}`);
 
       deleteObject(desertRef).then(() => {
-        setFileInfo(prev => prev.filter(info => info.name !== name));
+        setState(`delete ${name}`);
       }).catch((error) => {
         console.log(error.message);
       });
@@ -156,7 +161,6 @@ const CVList = () => {
   const handleChange = (e) => {
     const file = e.target.files[0];
 
-    //if(file) {
       const storageRef = ref(storage, `/resume/${file.name}`);
       const uploadTask = uploadBytesResumable(storageRef, file);
   
@@ -168,15 +172,9 @@ const CVList = () => {
         },
         (err) => console.log(err),
         () => {
-          const date = new Date();
-          const info = {
-            name: file.name,
-            date: `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`
-          };
-          setFileInfo(prev => prev.concat(info));
+          setState(`upload ${file.name}`);
         }
       );
-    //}
   };
 
   return(
@@ -208,7 +206,7 @@ const CVList = () => {
               <p>파일 업로드</p>
             </div>
           </div>
-          {fileInfo.map((info,idx) => <ResumeItem key={idx+info.name} name={info.name} date={info.date} />)}
+          {fileInfo.map((info) => <ResumeItem key={info.name + info.date} name={info.name} date={info.date} />)}
         </div>
       </div>
     </>
