@@ -1,10 +1,11 @@
 import React from "react";
+import { useSelector } from 'react-redux';
 
-import "../css/Bookmark.css";
 import Header from "./Header";
 import JobCard from './JobCard';
+
 import JobCardListData from "../data/JobCardList.json";
-import { useSelector } from 'react-redux';
+import "../css/Bookmark.css";
 
 function Bookmark() {
   const bookmarkList = useSelector(state => state.bookmark.bookmarkList);

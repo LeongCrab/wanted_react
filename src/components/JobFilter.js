@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import "../css/JobFilter.css";
-import JobFilterData from "../data/JobFilter.json";
 import styled from "styled-components";
+
+import JobFilterData from "../data/JobFilter.json";
+import "../css/JobFilter.css";
 
 const Arrow = () => {
   return(

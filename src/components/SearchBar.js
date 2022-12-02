@@ -1,12 +1,13 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
-import { ModalContext } from '../modules/ModalStore';
+import React, { useState, useRef, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+
 import "../css/SearchBar.css";
 
 function SearchBar() {
   const [searchQuery, setSearchQuery] = useState("");
-  const { contextDispatch } = useContext(ModalContext);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const searchInput = useRef(null);
 
   useEffect(() => {
@@ -18,7 +19,7 @@ function SearchBar() {
     if (!searchQuery) alert("검색어를 입력해주세요");
     else {
       navigate(`/search?query=${searchQuery}`);
-      contextDispatch({type: "SEARCH_MODAL_CLOSE"});
+      dispatch({type: "SEARCH_MODAL_CLOSE"});
     }
   };
   return (
@@ -75,7 +76,7 @@ function SearchBar() {
           </div>
         </div>
       </div>
-      <div className="searchOverlay" onClick={() => contextDispatch({type: "SEARCH_MODAL_CLOSE"})}></div>
+      <div className="searchOverlay" onClick={() => dispatch({type: "SEARCH_MODAL_CLOSE"})}></div>
     </>
   );
 }

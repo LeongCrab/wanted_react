@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { ref, uploadBytesResumable, getDownloadURL, deleteObject, listAll, getMetadata } from "firebase/storage";
 
-import "../css/CVList.css";
 import styled from "styled-components";
 import Header from "./Header";
 import { storage } from '../firebase';
-import { ref, uploadBytesResumable, getDownloadURL, deleteObject, listAll, getMetadata } from "firebase/storage";
+
 import { ImFilesEmpty } from 'react-icons/im';
 import { BiInfoCircle, BiUpload, BiFile } from 'react-icons/bi';
 import { MdClose } from 'react-icons/md';
+import "../css/CVList.css";
 
 const Title = styled.div`
   padding: 20px 20px 6px;
@@ -168,7 +169,7 @@ const CVList = () => {
           const percent = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
           setPercent(percent);
         },
-        (err) => console.log(err),
+        (error) => console.log(error.message),
         () => {
           setState(`upload ${file.name}`);
         }

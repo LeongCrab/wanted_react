@@ -1,14 +1,15 @@
-import React, { useState, useContext } from "react";
-import { ModalContext } from "../modules/ModalStore";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
-import "../css/Header.css";
+
 import Modal from "./Modal";
 import SearchBar from "./SearchBar";
 import HeaderData from "../data/Header.json";
+
+import "../css/Header.css";
 
 const SubmenuList = styled.ul`
   position: inherit;
@@ -37,11 +38,11 @@ function NavBtn({ href, category, tag }) {
 }
 
 function Header() {
-  const { modalOpen, searchOpen, contextDispatch } = useContext(ModalContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const [menu, setMenu] = useState("");
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const userEmail = useSelector((state) => state.login.email);
+  const { modalOpen, searchOpen } = useSelector((state) => state.modal);
   const dispatch = useDispatch();
   const logOutClick = () => {
     alert("로그아웃합니다.");
@@ -125,7 +126,7 @@ function Header() {
               {(menuOpen || submenuOpen) && <Menu />}
               {submenuOpen && <SubMenu />}
             </div>
-            <button className="joinBtn" onClick={() => contextDispatch({ type: "LOGIN_OPEN" })}>
+            <button className="joinBtn" onClick={() => dispatch({ type: "LOGIN_OPEN" })}>
               회원가입하기
             </button>
           </div>
@@ -143,7 +144,7 @@ function Header() {
             <button
               type="button"
               className="menuBtn"
-              onClick={() => contextDispatch({ type: "SEARCH_MODAL_OPEN" })}
+              onClick={() => dispatch({ type: "SEARCH_MODAL_OPEN" })}
             >
               <svg
                 xmlns="https://www.w3.org/2000/svg"
@@ -174,7 +175,7 @@ function Header() {
                 <button
                   type="button"
                   className="signUpButton"
-                  onClick={() => contextDispatch({ type: "LOGIN_OPEN" })}
+                  onClick={() => dispatch({ type: "LOGIN_OPEN" })}
                 >
                   회원가입/로그인
                 </button>

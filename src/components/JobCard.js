@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import "../css/JobCard.css";
+
 const JobCardStyle = styled.li`
     position: relative;
     width: 25%;

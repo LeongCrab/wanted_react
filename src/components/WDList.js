@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate } from 'react-router-dom';
+import styled, { css } from "styled-components";
 
-import "../css/WDList.css";
 import Header from "./Header";
 import JobCard from "./JobCard";
 import JobFilter from "./JobFilter";
+
 import WDListData from "../data/WDList.json";
 import JobCardListData from "../data/JobCardList.json";
-import styled, { css } from "styled-components";
+import "../css/WDList.css";
 
 const FilterCnt = styled.div`
   ${props => {

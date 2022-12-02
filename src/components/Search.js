@@ -1,15 +1,16 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useSearchParams } from "react-router-dom";
-import { ModalContext } from '../modules/ModalStore';
+import { useDispatch } from "react-redux";
 
-import "../css/Search.css";
 import Header from "./Header";
 import JobCard from "./JobCard";
 import JobFilter from "./JobFilter";
+
 import JobCardListData from "../data/JobCardList.json";
+import "../css/Search.css";
 
 function Search() {
-  const { contextDispatch } = useContext(ModalContext);
+  const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get("query");
   function JobCardList() {
@@ -44,7 +45,7 @@ function Search() {
         <button
           type="button"
           className="searchQuery"
-          onClick={() => contextDispatch({type: "SEARCH_MODAL_OPEN"})}
+          onClick={() => dispatch({type: "SEARCH_MODAL_OPEN"})}
         >
           {searchQuery}
         </button>

@@ -1,12 +1,13 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
-import '../css/WD.css';
 import Header from './Header';
 import JobCard from './JobCard';
 import Footer from './Footer';
+
 import JobCardListData from '../data/JobCardList.json';
 import WDData from '../data/WD.json';
+import '../css/WD.css';
 
 const GOOGLE_MAPS_KEY = process.env.REACT_APP_GOOGLE_MAPS_KEY;
 

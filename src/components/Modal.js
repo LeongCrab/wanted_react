@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
-
+import React, { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from "../firebase";
-import { useDispatch } from "react-redux";
-import { ModalContext } from '../modules/ModalStore';
 import styled, { css } from "styled-components";
+
+import { auth } from "../firebase";
+
 import "../css/Modal.css";
 
 const Input = styled.input`
@@ -57,25 +57,23 @@ const TimeCode = styled.span`
 const LogIn = ({ email, setEmail }) => {
   const provider = new GoogleAuthProvider();
 
-  const {contextDispatch} = useContext(ModalContext);
-
+  const dispatch = useDispatch();
+  const modalOpen = useSelector((state) => state.modal.modalOpen);
   const emailInput = useRef(null);
   const [password, setPassword] = useState("");
   const [passwordOpen, setPasswordOpen] = useState(false);
   const [emailValid, setEmailValid] = useState(false);
   const [loginError, setLoginError] = useState(false);
-
-  const dispatch = useDispatch();
   
   useEffect(() => {
     emailInput.current.focus();
   }, []);
 
-  const loginGoogle = () => {
+  const loginWithGoogle = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
-        contextDispatch({type: "MODAL_CLOSE"});
+        dispatch({type: "MODAL_CLOSE"});
         dispatch({type:'LOG_IN', email:user.email});
         alert(`환영합니다. ${user.displayName}님!`);
       });
@@ -100,7 +98,7 @@ const LogIn = ({ email, setEmail }) => {
           if (localStorage.getItem(email) !== null && JSON.parse(localStorage.getItem(email)).password === password) {
             alert(`환영합니다. ${JSON.parse(localStorage.getItem(email)).name}님!`);
             dispatch({type:'LOG_IN', email: email});
-            contextDispatch({type: "MODAL_CLOSE"});
+            dispatch({type: "MODAL_CLOSE"});
           } else {
             setLoginError(true);
           }
@@ -108,7 +106,7 @@ const LogIn = ({ email, setEmail }) => {
           setPasswordOpen(true);
         }
       } else {
-        contextDispatch({type: "JOIN_OPEN"});
+        dispatch({type: "JOIN_OPEN"});
       }
     }
   };
@@ -204,7 +202,7 @@ const LogIn = ({ email, setEmail }) => {
             </div>
             <div className="modalSocial">
               <button id="google">
-                <svg onClick={loginGoogle}
+                <svg onClick={loginWithGoogle}
                   xmlns="http://www.w3.org/2000/svg"
                   width="23"
                   height="23"
@@ -280,13 +278,8 @@ const LogIn = ({ email, setEmail }) => {
 const CheckBox = ({ agreePrivacy, setAgreePrivacy }) => {
   const [agreeEvent, setAgreeEvent] = useState(false);
   const handleAllAgree = (e) => {
-    if (e.target.checked) {
-      setAgreePrivacy(true);
-      setAgreeEvent(true);
-    } else {
-      setAgreePrivacy(false);
-      setAgreeEvent(false);
-    }
+    setAgreePrivacy(e.target.checked);
+    setAgreeEvent(e.target.checked);
   };
 
   return (
@@ -383,7 +376,9 @@ const Timer = ({ timeCount, setTimeCount, setGetCodeBtn }) => {
 };
 
 function Modal() {
-  const { modalOpen, contextDispatch } = useContext(ModalContext);
+  const dispatch = useDispatch();
+  const modalOpen = useSelector((state) => state.modal.modalOpen);
+  
   const [timeCount, setTimeCount] = useState("5:00");
 
   const [email, setEmail] = useState("");
@@ -454,7 +449,7 @@ function Modal() {
       };
       window.localStorage.setItem(email, JSON.stringify(joinUserInfo));
       alert("회원가입이 완료되었습니다.");
-      contextDispatch({type: "MODAL_CLOSE"});
+      dispatch({type: "MODAL_CLOSE"});
     }
   };
 
@@ -469,7 +464,7 @@ function Modal() {
                 className="modalCloseButton"
                 id="signUpCloseButton"
                 type="button"
-                onClick={() => contextDispatch({type: "MODAL_CLOSE"})}
+                onClick={() => dispatch({type: "MODAL_CLOSE"})}
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" color="#999">
                   <path
@@ -497,7 +492,7 @@ function Modal() {
               />
             </div>
           </div>
-          <div className="modalOverlay" onClick={() => contextDispatch({type: "MODAL_CLOSE"})}></div>
+          <div className="modalOverlay" onClick={() => dispatch({type: "MODAL_CLOSE"})}></div>
         </div>
       )}
       {modalOpen === 2 && (
@@ -509,7 +504,7 @@ function Modal() {
                 className="modalCloseButton"
                 id="joinCloseButton"
                 type="button"
-                onClick={() => contextDispatch({type: "MODAL_CLOSE"})}
+                onClick={() => dispatch({type: "MODAL_CLOSE"})}
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" color="#999">
                   <path

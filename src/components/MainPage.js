@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import styled, { css } from 'styled-components';
 
 import Header from './Header';
 import TopBannerSlider from './TopBannerSlider';
 import Footer from './Footer';
-import '../css/MainPage.css';
+
 import MainPageData from '../data/MainPage.json';
-import styled, { css } from 'styled-components';
+import '../css/MainPage.css';
 
 const CardImg = styled.img`
   width: 250px;
